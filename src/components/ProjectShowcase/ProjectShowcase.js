@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { Reveal, ScrollBlock } from "../Motion/Reveal";
 
 const projects = [
   {
@@ -43,17 +44,19 @@ export default function ProjectShowcase() {
     <Box component="section" id="projects" sx={{ py: { xs: 7, md: 10 } }}>
       <Container maxWidth="xl">
         <Stack spacing={3.5}>
-          <Box sx={{ maxWidth: 760 }}>
-            <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.16em" }}>
-              Selected Work
-            </Typography>
-            <Typography variant="h2" sx={{ mt: 1, fontSize: { xs: "2.25rem", md: "3.5rem" } }}>
-              A few things I&apos;ve made.
-            </Typography>
-            <Typography sx={{ mt: 2, color: "text.secondary", fontSize: "1.05rem", lineHeight: 1.8 }}>
-              Projects that show the kind of problems I like.
-            </Typography>
-          </Box>
+          <Reveal y={30}>
+            <Box sx={{ maxWidth: 760 }}>
+              <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.16em" }}>
+                Selected Work
+              </Typography>
+              <Typography variant="h2" sx={{ mt: 1, fontSize: { xs: "2.25rem", md: "3.5rem" } }}>
+                A few things I&apos;ve made.
+              </Typography>
+              <Typography sx={{ mt: 2, color: "text.secondary", fontSize: "1.05rem", lineHeight: 1.8 }}>
+                Projects that show the kind of problems I like.
+              </Typography>
+            </Box>
+          </Reveal>
 
           <Box
             sx={{
@@ -62,89 +65,96 @@ export default function ProjectShowcase() {
               gap: 2.5,
             }}
           >
-            {projects.map((project) => (
-              <Paper
+            {projects.map((project, index) => (
+              <ScrollBlock
                 key={project.title}
-                elevation={0}
-                sx={{
-                  p: { xs: 3, md: 3.5 },
-                  border: "1px solid rgba(148, 163, 184, 0.16)",
-                  backgroundColor: "rgba(15, 23, 42, 0.72)",
-                  minHeight: 320,
-                  display: "flex",
-                  flexDirection: "column",
-                  gridColumn: { lg: project.emphasis ? "span 2" : "span 1" },
-                }}
+                delay={0.1 * index}
+                sx={{ height: "100%", gridColumn: { lg: project.emphasis ? "span 2" : "span 1" } }}
               >
-                <Stack spacing={2.25} sx={{ height: "100%" }}>
-                  <Chip
-                    label={project.label}
-                    sx={{
-                      width: "fit-content",
-                      backgroundColor: project.accent,
-                      color: "text.primary",
-                      fontWeight: 600,
-                    }}
-                  />
-
-                  <Box
-                    sx={{
-                      flexGrow: 1,
-                      p: 2.25,
-                      borderRadius: 4,
-                      background:
-                        "linear-gradient(180deg, rgba(18, 28, 52, 0.82), rgba(15, 23, 42, 0.78))",
-                      border: "1px solid rgba(148, 163, 184, 0.14)",
-                    }}
-                  >
-                    <Typography variant="h4" sx={{ fontSize: { xs: "1.5rem", md: "2rem" } }}>
-                      {project.title}
-                    </Typography>
-                    <Typography sx={{ mt: 1.5, color: "text.secondary", lineHeight: 1.8 }}>
-                      {project.description}
-                    </Typography>
-
-                    <Divider sx={{ my: 2.5, borderColor: "rgba(148, 163, 184, 0.14)" }} />
-
-                    <Paper
-                      elevation={0}
+                <Paper
+                  elevation={0}
+                  sx={{
+                    p: { xs: 3, md: 3.5 },
+                    border: "1px solid rgba(148, 163, 184, 0.16)",
+                    backgroundColor: "rgba(15, 23, 42, 0.72)",
+                    minHeight: 320,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                  }}
+                >
+                  <Stack spacing={2.25} sx={{ height: "100%" }}>
+                    <Chip
+                      label={project.label}
                       sx={{
-                        p: 2,
-                        borderRadius: 3,
-                        backgroundColor: "rgba(15, 23, 42, 0.64)",
+                        width: "fit-content",
+                        backgroundColor: project.accent,
+                        color: "text.primary",
+                        fontWeight: 600,
+                      }}
+                    />
+
+                    <Box
+                      sx={{
+                        flexGrow: 1,
+                        p: 2.25,
+                        borderRadius: 1,
+                        background:
+                          "linear-gradient(180deg, rgba(18, 28, 52, 0.82), rgba(15, 23, 42, 0.78))",
                         border: "1px solid rgba(148, 163, 184, 0.14)",
                       }}
                     >
-                      <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
-                        What I liked
+                      <Typography variant="h4" sx={{ fontSize: { xs: "1.5rem", md: "2rem" } }}>
+                        {project.title}
                       </Typography>
-                      <Typography sx={{ mt: 0.8, color: "text.secondary", lineHeight: 1.7 }}>
-                        {project.note}
+                      <Typography sx={{ mt: 1.5, color: "text.secondary", lineHeight: 1.8 }}>
+                        {project.description}
                       </Typography>
-                    </Paper>
 
-                    <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 2.5 }}>
-                      {project.tags.map((tag) => (
-                        <Chip key={tag} label={tag} variant="outlined" />
-                      ))}
+                      <Divider sx={{ my: 2.5, borderColor: "rgba(148, 163, 184, 0.14)" }} />
+
+                      <Reveal delay={0.12}>
+                        <Paper
+                          elevation={0}
+                          sx={{
+                            p: 2,
+                            borderRadius: 1,
+                            backgroundColor: "rgba(15, 23, 42, 0.64)",
+                            border: "1px solid rgba(148, 163, 184, 0.14)",
+                          }}
+                        >
+                          <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
+                            What I liked
+                          </Typography>
+                          <Typography sx={{ mt: 0.8, color: "text.secondary", lineHeight: 1.7 }}>
+                            {project.note}
+                          </Typography>
+                        </Paper>
+                      </Reveal>
+
+                      <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 2.5 }}>
+                        {project.tags.map((tag) => (
+                          <Chip key={tag} label={tag} variant="outlined" />
+                        ))}
+                      </Stack>
+                    </Box>
+
+                    <Stack direction={{ xs: "column", sm: "row" }} spacing={1.25}>
+                      <Button
+                        variant="contained"
+                        endIcon={<ArrowOutwardRoundedIcon />}
+                        component="a"
+                        href="#"
+                      >
+                        See project
+                      </Button>
+                      <Button variant="text" component="a" href="#">
+                        Read the story
+                      </Button>
                     </Stack>
-                  </Box>
-
-                  <Stack direction={{ xs: "column", sm: "row" }} spacing={1.25}>
-                    <Button
-                      variant="contained"
-                      endIcon={<ArrowOutwardRoundedIcon />}
-                      component="a"
-                      href="#"
-                    >
-                      See project
-                    </Button>
-                    <Button variant="text" component="a" href="#">
-                      Read the story
-                    </Button>
                   </Stack>
-                </Stack>
-              </Paper>
+                </Paper>
+              </ScrollBlock>
             ))}
           </Box>
         </Stack>
