@@ -1,0 +1,36 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 138, 104, 0.18), transparent 24%),
+    radial-gradient(circle at 84% 18%, rgba(94, 167, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, #050816 0%, #081021 48%, #0b1328 100%);
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 28% 32%, rgba(94, 167, 255, 0.12), transparent 20%),
+    radial-gradient(circle at 72% 68%, rgba(255, 255, 255, 0.06), transparent 22%);
+  filter: blur(28px);
+}
+
+.page::after {
+  content: "";
+  position: fixed;
+  right: -10rem;
+  top: 22%;
+  width: min(40rem, 56vw);
+  height: 40rem;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(94, 167, 255, 0.18), transparent 68%);
+  filter: blur(56px);
+}
