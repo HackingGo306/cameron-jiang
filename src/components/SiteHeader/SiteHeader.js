@@ -29,19 +29,24 @@ export default function SiteHeader() {
       color="transparent"
       sx={{
         top: 0,
-        backdropFilter: "blur(18px)",
-        borderBottom: "1px solid rgba(148, 163, 184, 0.14)",
-        backgroundColor: "rgba(5, 10, 24, 0.72)",
+        backgroundColor: "transparent",
+        boxShadow: "none",
       }}
     >
       <Reveal y={-18} duration={0.7} amount={0.01}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ py: { xs: 1.5, md: 2 } }}>
           <Toolbar
             disableGutters
             sx={{
-              minHeight: { xs: 72, md: 84 },
+              minHeight: { xs: 64, md: 72 },
               justifyContent: "space-between",
               gap: 2,
+              px: { xs: 2.25, md: 3 },
+              borderRadius: 999,
+              border: "1px solid var(--surface-border)",
+              background:
+                "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.03))",
+              backdropFilter: "blur(20px)",
             }}
           >
             <Stack direction="row" spacing={1.5} alignItems="center">
@@ -49,12 +54,13 @@ export default function SiteHeader() {
                 sx={{
                   display: "grid",
                   placeItems: "center",
-                  width: 42,
-                  height: 42,
-                  borderRadius: "14px",
+                  width: 44,
+                  height: 44,
+                  borderRadius: "999px",
+                  border: "1px solid var(--surface-border)",
                   background:
-                    "linear-gradient(135deg, rgba(15, 111, 255, 0.92), rgba(255, 107, 87, 0.88))",
-                  color: "common.white",
+                    "radial-gradient(circle at 30% 30%, rgba(94, 167, 255, 0.24), transparent 70%), var(--surface-soft)",
+                  color: "text.primary",
                   fontSize: "0.9rem",
                   fontWeight: 700,
                   letterSpacing: "0.14em",
@@ -67,7 +73,7 @@ export default function SiteHeader() {
                   Cameron Jiang
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  
+                  Software engineer
                 </Typography>
               </Box>
             </Stack>
@@ -84,7 +90,14 @@ export default function SiteHeader() {
                   color="inherit"
                   component="a"
                   href={item.href}
-                  sx={{ color: "text.secondary" }}
+                  sx={{
+                    color: "text.secondary",
+                    px: 1.5,
+                    "&:hover": {
+                      backgroundColor: "var(--surface-tint)",
+                      color: "text.primary",
+                    },
+                  }}
                 >
                   {item.label}
                 </Button>
@@ -94,7 +107,11 @@ export default function SiteHeader() {
             <IconButton
               color="inherit"
               onClick={toggleTheme}
-              sx={{ display: { xs: "none", sm: "inline-flex" } }}
+              sx={{
+                display: { xs: "none", sm: "inline-flex" },
+                border: "1px solid var(--surface-border)",
+                backgroundColor: "var(--surface-soft)",
+              }}
             >
               {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>

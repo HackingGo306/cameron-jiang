@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Reveal, ScrollBlock } from "../Motion/Reveal";
@@ -50,36 +49,30 @@ const littleCards = [
 
 export default function HeroSection() {
   return (
-    <Box component="section" sx={{ pt: { xs: 7, md: 10 }, pb: { xs: 6, md: 8 } }}>
+    <Box component="section" sx={{ pt: { xs: 7, md: 10 }, pb: { xs: 8, md: 11 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 4
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1.18fr) minmax(320px, 0.82fr)" },
+            gap: { xs: 4, md: 5, lg: 8 },
+            alignItems: "end",
           }}
         >
-          <Reveal x={-28} y={24} duration={0.72} delay={0.06} sx={{ position: 'sticky', top: 0, height: 'fit-content', width: '60%' }}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: { xs: 3, md: 4.75 },
-                border: "1px solid rgba(148, 163, 184, 0.16)",
-                backgroundColor: "rgba(15, 23, 42, 0.72)",
-                backdropFilter: "blur(20px)",
-              }}
-            >
-              <Stack spacing={3.5}>
-                <Chip
-                  label="Hi, I&apos;m Cameron."
-                  sx={{
-                    width: "fit-content",
-                    fontWeight: 600,
-                    backgroundColor: "rgba(94, 167, 255, 0.12)",
-                    color: "primary.main",
-                  }}
-                />
+          <Reveal x={-28} y={20} duration={0.72} delay={0.06}>
+            <Stack spacing={{ xs: 3.5, md: 4.25 }}>
+              <Chip
+                label="Hi, I'm Cameron."
+                sx={{
+                  width: "fit-content",
+                  fontWeight: 600,
+                  border: "1px solid var(--surface-border)",
+                  backgroundColor: "var(--surface-tint)",
+                  color: "primary.main",
+                }}
+              />
 
+              <Stack spacing={2.25}>
                 <Typography variant="h1" sx={{ fontSize: { xs: "3rem", md: "5rem" } }}>
                   I build project A, project B, project C, and other things
                 </Typography>
@@ -91,142 +84,170 @@ export default function HeroSection() {
                 >
                   I care about clarity, feel, and the details that make software memorable.
                 </Typography>
-
-                <Reveal delay={0.12}>
-                  <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      endIcon={<ArrowOutwardRoundedIcon />}
-                      component="a"
-                      href="#projects"
-                    >
-                      See selected work
-                    </Button>
-                    <Button variant="outlined" size="large" component="a" href="#about">
-                      Read a little about me
-                    </Button>
-                  </Stack>
-                </Reveal>
-
-                <Reveal delay={0.18}>
-                  <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                    {focusAreas.map((item) => (
-                      <Chip
-                        key={item}
-                        label={item}
-                        variant="outlined"
-                        sx={{
-                          backgroundColor: "rgba(15, 23, 42, 0.46)",
-                          borderColor: "rgba(148, 163, 184, 0.18)",
-                        }}
-                      />
-                    ))}
-                  </Stack>
-                </Reveal>
               </Stack>
-            </Paper>
+
+              <Reveal delay={0.12}>
+                <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    endIcon={<ArrowOutwardRoundedIcon />}
+                    component="a"
+                    href="#projects"
+                  >
+                    See selected work
+                  </Button>
+                  <Button variant="outlined" size="large" component="a" href="#about">
+                    Read a little about me
+                  </Button>
+                </Stack>
+              </Reveal>
+
+              <Reveal delay={0.18}>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  {focusAreas.map((item) => (
+                    <Chip
+                      key={item}
+                      label={item}
+                      variant="outlined"
+                      sx={{
+                        backgroundColor: "var(--surface-soft)",
+                        borderColor: "var(--surface-border)",
+                      }}
+                    />
+                  ))}
+                </Stack>
+              </Reveal>
+            </Stack>
           </Reveal>
 
-          <Stack spacing={2}>
-            <Reveal x={28} y={24} duration={0.76} delay={0.14}>
-              <Paper
-                elevation={0}
-                sx={{
-                  p: { xs: 3, md: 4 },
-                  border: "1px solid rgba(148, 163, 184, 0.16)",
-                  background:
-                    "linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(18, 28, 52, 0.82))",
-                  minHeight: 300,
-                }}
-              >
-                <Stack spacing={2.5}>
-                  <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.18em" }}>
-                    A few quick notes
-                  </Typography>
-
-                  <Stack spacing={2}>
-                    {quickNotes.map((item) => (
-                      <Box key={item.label}>
-                        <Typography
-                          variant="body2"
-                          sx={{ color: "text.secondary", textTransform: "uppercase", letterSpacing: "0.14em" }}
-                        >
-                          {item.label}
-                        </Typography>
-                        <Typography sx={{ mt: 0.6, fontSize: "1.04rem", lineHeight: 1.7 }}>
-                          {item.value}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Stack>
-
-                  <Reveal delay={0.18}>
-                    <Paper
-                      elevation={0}
-                      sx={{
-                        p: 2.5,
-                        borderRadius: 1,
-                        backgroundColor: "rgba(94, 167, 255, 0.08)",
-                        border: "1px solid rgba(148, 163, 184, 0.14)",
-                      }}
-                    >
-                      <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
-                        The short version
-                      </Typography>
-                      <Typography variant="h5" sx={{ mt: 0.5, fontWeight: 700 }}>
-                        Useful first. Memorable second.
-                      </Typography>
-                      <Typography sx={{ mt: 1.2, color: "text.secondary" }}>
-                        Both matter.
-                      </Typography>
-                    </Paper>
-                  </Reveal>
-                </Stack>
-              </Paper>
-            </Reveal>
-
+          <Reveal x={28} y={22} duration={0.76} delay={0.14} sx={{ height: "100%" }}>
             <Box
               sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "1fr", sm: "repeat(3, 1fr)" },
-                gap: 2,
+                position: "relative",
+                height: "100%",
+                minHeight: { lg: 420 },
+                p: { xs: 3, md: 4 },
+                borderRadius: { xs: "28px", md: "34px" },
+                border: "1px solid var(--surface-border)",
+                background:
+                  "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))",
+                backdropFilter: "blur(20px)",
+                overflow: "hidden",
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  right: "-18%",
+                  bottom: "-28%",
+                  width: "72%",
+                  aspectRatio: "1",
+                  borderRadius: "999px",
+                  background: "radial-gradient(circle, var(--page-glow-primary), transparent 72%)",
+                  filter: "blur(24px)",
+                  opacity: 0.95,
+                },
               }}
             >
-              {littleCards.map((card, index) => (
-                <ScrollBlock key={card.title} delay={0.08 * index} hover={false}>
-                  <Paper
-                    elevation={0}
+              <Stack spacing={3} sx={{ position: "relative" }}>
+                <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.18em" }}>
+                  A few quick notes
+                </Typography>
+
+                <Stack spacing={0}>
+                  {quickNotes.map((item, index) => (
+                    <Box
+                      key={item.label}
+                      sx={{
+                        py: 2.25,
+                        borderTop: "1px solid var(--section-divider)",
+                        borderBottom:
+                          index === quickNotes.length - 1 ? "1px solid var(--section-divider)" : "none",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary", textTransform: "uppercase", letterSpacing: "0.14em" }}
+                      >
+                        {item.label}
+                      </Typography>
+                      <Typography sx={{ mt: 0.9, fontSize: { xs: "1rem", md: "1.08rem" }, lineHeight: 1.7 }}>
+                        {item.value}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Stack>
+
+                <Box
+                  sx={{
+                    pt: 2.5,
+                    display: "grid",
+                    gap: 1,
+                  }}
+                >
+                  <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
+                    The short version
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                    Useful first. Memorable second.
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary", lineHeight: 1.8 }}>
+                    Both matter.
+                  </Typography>
+                </Box>
+              </Stack>
+            </Box>
+          </Reveal>
+        </Box>
+
+        <Box
+          sx={{
+            mt: { xs: 5, md: 6 },
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
+            borderTop: "1px solid var(--section-divider)",
+            borderBottom: "1px solid var(--section-divider)",
+          }}
+        >
+          {littleCards.map((card, index) => (
+            <ScrollBlock key={card.title} delay={0.08 * index} hover={false} sx={{ height: "100%" }}>
+              <Box
+                sx={{
+                  px: { xs: 0, md: 3 },
+                  py: { xs: 3, md: 3.5 },
+                  height: "100%",
+                  borderBottom: {
+                    xs: index < littleCards.length - 1 ? "1px solid var(--section-divider)" : "none",
+                    md: "none",
+                  },
+                  borderRight: {
+                    md: index < littleCards.length - 1 ? "1px solid var(--section-divider)" : "none",
+                  },
+                  background: "linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 72%)",
+                }}
+              >
+                <Stack spacing={1.3}>
+                  <Box
                     sx={{
-                      p: 2.5,
-                      border: "1px solid rgba(148, 163, 184, 0.16)",
-                      backgroundColor: "rgba(15, 23, 42, 0.72)",
+                      width: 42,
+                      height: 42,
+                      display: "grid",
+                      placeItems: "center",
+                      borderRadius: 3,
+                      border: "1px solid var(--surface-border)",
+                      backgroundColor: "var(--surface-tint)",
+                      color: "primary.main",
                     }}
                   >
-                    <Stack spacing={1.3}>
-                      <Box
-                        sx={{
-                          width: 40,
-                          height: 40,
-                          display: "grid",
-                          placeItems: "center",
-                          borderRadius: 3,
-                          backgroundColor: "rgba(94, 167, 255, 0.1)",
-                          color: "primary.main",
-                        }}
-                      >
-                        {card.icon}
-                      </Box>
-                      <Typography variant="h6">{card.title}</Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {card.text}
-                      </Typography>
-                    </Stack>
-                  </Paper>
-                </ScrollBlock>
-              ))}
-            </Box>
-          </Stack>
+                    {card.icon}
+                  </Box>
+                  <Typography variant="h6">{card.title}</Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 280, lineHeight: 1.8 }}>
+                    {card.text}
+                  </Typography>
+                </Stack>
+              </Box>
+            </ScrollBlock>
+          ))}
         </Box>
       </Container>
     </Box>

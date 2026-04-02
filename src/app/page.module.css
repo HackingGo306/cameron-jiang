@@ -1,36 +1,136 @@
 .page {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
-  background:
-    radial-gradient(circle at 12% 12%, rgba(255, 138, 104, 0.18), transparent 24%),
-    radial-gradient(circle at 84% 18%, rgba(94, 167, 255, 0.16), transparent 24%),
-    linear-gradient(180deg, #050816 0%, #081021 48%, #0b1328 100%);
 }
 
 .page::before {
   content: "";
   position: fixed;
-  inset: -10%;
+  inset: 0;
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 28% 32%, rgba(94, 167, 255, 0.12), transparent 20%),
-    radial-gradient(circle at 72% 68%, rgba(255, 255, 255, 0.06), transparent 22%);
+    radial-gradient(circle at 14% 16%, var(--page-glow-secondary), transparent 0 24%),
+    radial-gradient(circle at 82% 14%, var(--page-glow-primary), transparent 0 28%),
+    radial-gradient(circle at 54% 48%, var(--page-glow-soft), transparent 0 34%);
   filter: blur(28px);
 }
 
 .page::after {
   content: "";
   position: fixed;
-  right: -10rem;
-  top: 22%;
-  width: min(40rem, 56vw);
-  height: 40rem;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 100%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(20% - 1px),
+      var(--page-grid-line) calc(20% - 1px),
+      var(--page-grid-line) 20%
+    );
+  opacity: 0.42;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.notesSection {
+  position: relative;
+  padding: clamp(2.75rem, 7vw, 5.5rem) 0;
+}
+
+.notesHeader {
+  max-width: 44rem;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: rgb(94 167 255);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.notesTitle {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.notesText {
+  margin: 1.25rem 0 0;
+  max-width: 38rem;
+  color: var(--text-muted);
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+.notesSurface {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1rem, 4vw, 2rem) 0;
+  border-top: 1px solid var(--section-divider);
+  border-bottom: 1px solid var(--section-divider);
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 34%),
+    linear-gradient(180deg, var(--surface-soft), transparent 74%);
+  backdrop-filter: blur(18px);
+}
+
+.notesSurface::before,
+.notesSurface::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.notesSurface::before {
+  left: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--page-glow-primary), transparent);
+  opacity: 0.75;
+}
+
+.notesSurface::after {
+  right: -10%;
+  top: 12%;
+  width: min(26rem, 48vw);
+  aspect-ratio: 1;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(94, 167, 255, 0.18), transparent 68%);
-  filter: blur(56px);
+  background: radial-gradient(circle, var(--page-glow-secondary), transparent 72%);
+  filter: blur(36px);
+  opacity: 0.72;
+}
+
+.notesSurface > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .page::after {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent calc(50% - 1px),
+        var(--page-grid-line) calc(50% - 1px),
+        var(--page-grid-line) 50%
+      );
+  }
 }
