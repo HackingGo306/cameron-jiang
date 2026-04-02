@@ -3,6 +3,10 @@
   min-height: 100vh;
   overflow: clip;
   isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 138, 104, 0.18), transparent 24%),
+    radial-gradient(circle at 84% 18%, rgba(94, 167, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, #050816 0%, #081021 48%, #0b1328 100%);
 }
 
 .page::before {

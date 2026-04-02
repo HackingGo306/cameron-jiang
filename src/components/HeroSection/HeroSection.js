@@ -29,27 +29,9 @@ const quickNotes = [
   },
 ];
 
-const littleCards = [
-  {
-    title: "Clarity",
-    text: "Make the hard thing feel simple.",
-    icon: <CodeRoundedIcon fontSize="small" />,
-  },
-  {
-    title: "Warmth",
-    text: "Useful can still feel human.",
-    icon: <FavoriteBorderRoundedIcon fontSize="small" />,
-  },
-  {
-    title: "Range",
-    text: "Code, product, and design all matter.",
-    icon: <AutoAwesomeRoundedIcon fontSize="small" />,
-  },
-];
-
 export default function HeroSection() {
   return (
-    <Box component="section" sx={{ pt: { xs: 7, md: 10 }, pb: { xs: 8, md: 11 } }}>
+    <Box component="section" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 8, md: 11 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
@@ -61,19 +43,16 @@ export default function HeroSection() {
         >
           <Reveal x={-28} y={20} duration={0.72} delay={0.06}>
             <Stack spacing={{ xs: 3.5, md: 4.25 }}>
-              <Chip
-                label="Hi, I'm Cameron."
+              <Typography variant="h1" color="primary.main"
                 sx={{
-                  width: "fit-content",
-                  fontWeight: 600,
-                  border: "1px solid var(--surface-border)",
-                  backgroundColor: "var(--surface-tint)",
-                  color: "primary.main",
+                  fontSize: { xs: "3rem", md: "5rem" }
                 }}
-              />
+              >
+                Hi, I'm Cameron
+              </Typography>
 
               <Stack spacing={2.25}>
-                <Typography variant="h1" sx={{ fontSize: { xs: "3rem", md: "5rem" } }}>
+                <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "4rem" } }}>
                   I build project A, project B, project C, and other things
                 </Typography>
 
@@ -198,58 +177,7 @@ export default function HeroSection() {
             </Box>
           </Reveal>
         </Box>
-
-        <Box
-          sx={{
-            mt: { xs: 5, md: 6 },
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
-            borderTop: "1px solid var(--section-divider)",
-            borderBottom: "1px solid var(--section-divider)",
-          }}
-        >
-          {littleCards.map((card, index) => (
-            <ScrollBlock key={card.title} delay={0.08 * index} hover={false} sx={{ height: "100%" }}>
-              <Box
-                sx={{
-                  px: { xs: 0, md: 3 },
-                  py: { xs: 3, md: 3.5 },
-                  height: "100%",
-                  borderBottom: {
-                    xs: index < littleCards.length - 1 ? "1px solid var(--section-divider)" : "none",
-                    md: "none",
-                  },
-                  borderRight: {
-                    md: index < littleCards.length - 1 ? "1px solid var(--section-divider)" : "none",
-                  },
-                  background: "linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 72%)",
-                }}
-              >
-                <Stack spacing={1.3}>
-                  <Box
-                    sx={{
-                      width: 42,
-                      height: 42,
-                      display: "grid",
-                      placeItems: "center",
-                      borderRadius: 3,
-                      border: "1px solid var(--surface-border)",
-                      backgroundColor: "var(--surface-tint)",
-                      color: "primary.main",
-                    }}
-                  >
-                    {card.icon}
-                  </Box>
-                  <Typography variant="h6">{card.title}</Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 280, lineHeight: 1.8 }}>
-                    {card.text}
-                  </Typography>
-                </Stack>
-              </Box>
-            </ScrollBlock>
-          ))}
-        </Box>
-      </Container>
-    </Box>
+      </Container >
+    </Box >
   );
 }
