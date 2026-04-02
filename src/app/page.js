@@ -1,3 +1,4 @@
+import Scroll from "@/components/ScrollSection/Scroll";
 import AboutSection from "../components/AboutSection/AboutSection";
 import ContactCta from "../components/ContactCta/ContactCta";
 import HeroSection from "../components/HeroSection/HeroSection";
@@ -11,9 +12,10 @@ export default function Home() {
     <main className={styles.page}>
       <SiteHeader />
       <HeroSection />
+      <Scroll />
       <AboutSection />
       <ProjectShowcase />
-      <ImpactStrip />
+      {/* <ImpactStrip /> */}
       <ContactCta />
     </main>
   );

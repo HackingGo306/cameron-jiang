@@ -7,7 +7,11 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { Reveal } from "../Motion/Reveal";
+import { useTheme } from "../AppTheme/AppTheme";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -17,6 +21,8 @@ const navItems = [
 ];
 
 export default function SiteHeader() {
+  const { mode, toggleTheme } = useTheme();
+
   return (
     <AppBar
       position="sticky"
@@ -61,7 +67,7 @@ export default function SiteHeader() {
                   Cameron Jiang
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  software engineer
+                  
                 </Typography>
               </Box>
             </Stack>
@@ -85,14 +91,13 @@ export default function SiteHeader() {
               ))}
             </Stack>
 
-            <Button
-              variant="text"
-              component="a"
-              href="#contact"
+            <IconButton
+              color="inherit"
+              onClick={toggleTheme}
               sx={{ display: { xs: "none", sm: "inline-flex" } }}
             >
-              Say hi
-            </Button>
+              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
           </Toolbar>
         </Container>
       </Reveal>

@@ -54,13 +54,12 @@ export default function HeroSection() {
       <Container maxWidth="xl">
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1.1fr) minmax(320px, 0.9fr)" },
-            gap: { xs: 4, md: 5 },
-            alignItems: "stretch",
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 4
           }}
         >
-          <Reveal x={-28} y={24} duration={0.72} delay={0.06}>
+          <Reveal x={-28} y={24} duration={0.72} delay={0.06} sx={{ position: 'sticky', top: 0, height: 'fit-content', width: '60%' }}>
             <Paper
               elevation={0}
               sx={{
@@ -82,7 +81,7 @@ export default function HeroSection() {
                 />
 
                 <Typography variant="h1" sx={{ fontSize: { xs: "3rem", md: "5rem" } }}>
-                  I build thoughtful software for the web.
+                  I build project A, project B, project C, and other things
                 </Typography>
 
                 <Typography
@@ -202,14 +201,6 @@ export default function HeroSection() {
                       p: 2.5,
                       border: "1px solid rgba(148, 163, 184, 0.16)",
                       backgroundColor: "rgba(15, 23, 42, 0.72)",
-                      transform: {
-                        sm:
-                          index === 0
-                            ? "rotate(-1.5deg)"
-                            : index === 1
-                              ? "translateY(14px)"
-                              : "rotate(1.5deg)",
-                      },
                     }}
                   >
                     <Stack spacing={1.3}>
