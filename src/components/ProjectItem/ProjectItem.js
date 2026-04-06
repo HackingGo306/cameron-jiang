@@ -1,0 +1,73 @@
+import { Box, Button, Stack, Typography } from "@mui/material";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+
+export default function ProjectItem({ project }) {
+
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        overflow: "hidden",
+        p: { xs: 3, md: 3.5 },
+        borderRadius: { xs: "1rem", md: "1.5rem" },
+        border: "1px solid var(--surface-border)",
+        background: `radial-gradient(circle at top left, ${project.accent}, transparent 42%), linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))`,
+        backdropFilter: "blur(18px)",
+        minHeight: 320,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Stack spacing={2.25} sx={{ height: "100%" }}>
+
+        <Box sx={{ flexGrow: 1, width: '100%' }}>
+          <Typography variant="h4" sx={{ fontSize: { xs: "1.5rem", md: "2rem" }, lineHeight: 1.05 }}>
+            {project.title}
+          </Typography>
+        </Box>
+
+        <Stack direction="row" spacing={{ xs: 1, sm: 2, md: 2.5 }} useFlexGap flexWrap="wrap">
+          {project.tags.map((tag) => (
+            <Typography variant="caption" key={tag} fontStyle={'italic'}>
+              {tag}
+            </Typography>
+          ))}
+        </Stack>
+
+        <Typography sx={{ mt: 1.5, color: "text.primary", lineHeight: 1.8 }}>
+          {project.description}
+        </Typography>
+
+        <Box
+          sx={{
+            mt: "auto",
+            pt: 1,
+            display: "grid",
+            gap: 2,
+          }}
+        >
+          <Box>
+            <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em", lineHeight: 0 }}>
+              My role
+            </Typography>
+            <Typography sx={{ mt: 0.8, color: "text.secondary", lineHeight: 1.7 }}>
+              {project.note}
+            </Typography>
+          </Box>
+
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={1.25}>
+            <Button
+              variant="outlined"
+              endIcon={<ArrowOutwardRoundedIcon />}
+            >
+              See project
+            </Button>
+            <Button variant="text" component="a" href="#">
+              View code
+            </Button>
+          </Stack>
+        </Box>
+      </Stack>
+    </Box>
+  )
+}

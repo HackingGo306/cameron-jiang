@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Reveal, ScrollBlock } from "../Motion/Reveal";
 
-const projects = [
+export const projects = [
   {
     title: "Realtime Ops Dashboard",
     label: "selected project",

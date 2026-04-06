@@ -1,6 +1,5 @@
 "use client";
 
-import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import GroupWorkRoundedIcon from "@mui/icons-material/GroupWorkRounded";
 import PsychologyAltRoundedIcon from "@mui/icons-material/PsychologyAltRounded";
@@ -9,60 +8,49 @@ import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Reveal, ScrollBlock } from "../Motion/Reveal";
+import { Reveal } from "../Motion/Reveal";
 import { motion, useScroll, useTransform } from "motion/react"
 import { useEffect, useRef, useState } from "react";
+import { Icon } from "@mui/material";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Link from "next/link";
+import ProjectItem from "../ProjectItem/ProjectItem";
 
-const strengths = [
-  "frontend systems",
-  "design curiosity",
-  "product thinking",
-  "clear communication",
-  "small details",
-];
-
-const principles = [
+const projects = [
   {
-    title: "How I like to work",
-    text: "Ask early. Build fast. Refine later.",
-    icon: <PsychologyAltRoundedIcon />,
+    title: "MedSnap",
+    description: "An AI-powered medical report autocompletion tool made for streamlining repetitive notetaking.",
+    note: "As a fullstack developer, I handled API routing, user authentication, database security, and UI efficiency.",
+    tags: ["Next.js", "MariaDB", "OpenAI Integration", "Healthcare", "Data Processing", "MUI"],
+    accent: "rgba(15, 111, 255, 0.12)",
+    emphasis: true,
   },
   {
-    title: "What I value",
-    text: "Curiosity, taste, and technical clarity.",
-    icon: <GroupWorkRoundedIcon />,
+    title: "Realtime Ops Dashboard",
+    label: "selected project",
+    description: "A calmer way to track live system health and team workflows.",
+    note: "I liked turning noise into something readable.",
+    tags: ["Next.js", "MUI", "Data visualization", "Role-based UX"],
+    accent: "rgba(15, 111, 255, 0.12)",
+    emphasis: true,
   },
   {
-    title: "What I keep chasing",
-    text: "Work that feels useful and alive.",
-    icon: <FavoriteBorderRoundedIcon />,
+    title: "AI Research Workspace",
+    label: "experiment",
+    description: "A space for notes, experiments, and loose thinking.",
+    note: "I liked giving exploration some structure.",
+    tags: ["LLM workflow", "Prompt tooling", "Information design"],
+    accent: "rgba(255, 107, 87, 0.12)",
   },
   {
-    title: "What I keep chasing i",
-    text: "Work that feels useful and alive.",
-    icon: <FavoriteBorderRoundedIcon />,
+    title: "Developer Portfolio System",
+    label: "personal build",
+    description: "A portfolio that feels more personal than polished-corporate.",
+    note: "I liked shaping the tone as much as the UI.",
+    tags: ["Brand system", "Frontend architecture", "Responsive layout"],
+    accent: "rgba(15, 23, 42, 0.06)",
   },
-  {
-    title: "What I keep chasing ii",
-    text: "Work that feels useful and alive.",
-    icon: <FavoriteBorderRoundedIcon />,
-  },
-  {
-    title: "What I keep chasing iii",
-    text: "Work that feels useful and alive.",
-    icon: <FavoriteBorderRoundedIcon />,
-  },
-  {
-    title: "Wh at I keep chasing",
-    text: "Work that feels useful and alive.",
-    icon: <FavoriteBorderRoundedIcon />,
-  },
-  {
-    title: "What I keep ch asing",
-    text: "Work that feels useful and alive.",
-    icon: <FavoriteBorderRoundedIcon />,
-  },
-];
+]
 
 export default function AboutSection() {
 
@@ -72,7 +60,7 @@ export default function AboutSection() {
   const [stickyElementHeight, setStickyElementHeight] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["0% 0px", `100% ${stickyElementHeight}px`], // 75 is the height of the sticky icon
+    offset: ["0% 0px", `100% ${stickyElementHeight}px`],
   });
 
   useEffect(() => {
@@ -86,7 +74,7 @@ export default function AboutSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, scrollElementHeight - stickyElementHeight]);
 
   return (
-    <Box component="section" id="about" sx={{ py: { xs: 7, md: 10 } }}>
+    <Box component="section" id="about" sx={{ py: { xs: 4, md: 7 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
@@ -109,7 +97,7 @@ export default function AboutSection() {
             },
           }}
         >
-          <motion.div style={{ y, width: '50%', height: 'fit-content', paddingTop: '2rem' }} ref={stickyRef}>
+          <motion.div style={{ position: 'relative', y: y, width: '50%', height: 'fit-content', paddingTop: '4rem' }} ref={stickyRef}>
             <Reveal x={28} y={22} duration={0.76} delay={0.14}>
               <Box
                 sx={{
@@ -119,8 +107,7 @@ export default function AboutSection() {
                   p: { xs: 3, md: 4 },
                   borderRadius: { xs: "28px", md: "34px" },
                   border: "1px solid var(--surface-border)",
-                  background:
-                    "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))",
+                  // background: "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))",
                   backdropFilter: "blur(20px)",
                   overflow: "hidden",
                   "&::before": {
@@ -138,103 +125,46 @@ export default function AboutSection() {
                 }}
               >
                 <Stack spacing={3} sx={{ position: "relative" }}>
-                  <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.18em" }}>
-                    A few quick notes
+                  <Typography variant="h1" color="primary.main"
+                    sx={{
+                      fontSize: { xs: "2rem", md: "4rem" }
+                    }}
+                  >
+                    My Projects
                   </Typography>
 
                   <Stack spacing={0}>
-                    <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                      I care about building useful and delightful products.
+                    <Typography variant="h5" sx={{ fontWeight: 600 }} gutterBottom>
+                      I've been working on a range of projects over the years, from silly games to AI-powered tools.
                     </Typography>
                     <Typography sx={{ color: "text.secondary", lineHeight: 1.8 }}>
-                      I’ve been fortunate to work on a variety of projects, from small startups to large companies, and I’m always looking for new challenges and opportunities to learn.
-                    </Typography>
-                    <Typography>
-                      Here are some of the things I consider my strengths:
+                      My first exposure to programming, game development, has taught me to enjoy the process of programming.
+                      Now, having experience with AI, I'm even more fascinated by the impact that programming can have on the world.
                     </Typography>
                   </Stack>
-
-                  <Box
-                    sx={{
-                      pt: 2.5,
-                      display: "grid",
-                      gap: 1,
-                    }}
-                  >
+                  <Box sx={{ display: "grid", gap: 1, }}>
                     <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
-                      The short version
+                      My current goal
                     </Typography>
                     <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                      Useful first. Memorable second.
+                      Impactful and Accessible AI
                     </Typography>
-                    <Typography sx={{ color: "text.secondary", lineHeight: 1.8 }}>
-                      Both matter.
-                    </Typography>
+                    <Stack direction="row" spacing={3} alignItems="center" sx={{ mt: 1 }}>
+                      <Link href="https://github.com/HackingGo306" target="_blank" rel="noopener noreferrer">
+                        <GitHubIcon sx={{ fontSize: '2.5rem' }} />
+                      </Link>
+                    </Stack>
                   </Box>
                 </Stack>
               </Box>
             </Reveal>
           </motion.div>
 
-          <motion.div style={{ width: '40%' }} ref={ref}>
-            <Stack spacing={0} sx={{ position: "relative", zIndex: 1, borderTop: "1px solid var(--section-divider)" }}>
-              {principles.map((principle, index) => (
-                <ScrollBlock hover={false} key={index} delay={0.08 * index}>
-                  <Box
-                    sx={{
-                      py: { xs: 2.75, md: 3.2 },
-                      borderBottom: "1px solid var(--section-divider)",
-                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 82%)",
-                    }}
-                  >
-                    <Stack
-                      direction={{ xs: "column", sm: "row" }}
-                      spacing={2}
-                      alignItems={{ xs: "flex-start", sm: "center" }}
-                    >
-                      <Box
-                        sx={{
-                          width: 48,
-                          height: 48,
-                          display: "grid",
-                          placeItems: "center",
-                          borderRadius: 3,
-                          border: "1px solid var(--surface-border)",
-                          backgroundColor: "var(--surface-tint)",
-                          color: "primary.main",
-                          flexShrink: 0,
-                        }}
-                      >
-                        {principle.icon}
-                      </Box>
-                      <Box>
-                        <Typography variant="h6">{principle.title}</Typography>
-                        <Typography color="text.secondary" sx={{ mt: 1, lineHeight: 1.8 }}>
-                          {principle.text}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  </Box>
-                </ScrollBlock>
+          <motion.div style={{ width: '45%', height: 'max-content', paddingTop: '4rem' }} ref={ref}>
+            <Stack spacing={2.5}>
+              {projects.map((project, i) => (
+                <ProjectItem key={project.title + "_" + i} project={project} />
               ))}
-
-              <ScrollBlock hover={false} delay={0.26}>
-                <Box
-                  sx={{
-                    py: { xs: 3, md: 3.4 },
-                    borderBottom: "1px solid var(--section-divider)",
-                  }}
-                >
-                  <Stack spacing={1.5}>
-                    <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
-                      Beyond the usual portfolio language
-                    </Typography>
-                    <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
-                      Good technical work should still feel human.
-                    </Typography>
-                  </Stack>
-                </Box>
-              </ScrollBlock>
             </Stack>
           </motion.div>
         </Box>

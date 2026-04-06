@@ -31,7 +31,7 @@ const quickNotes = [
 
 export default function HeroSection() {
   return (
-    <Box component="section" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 8, md: 11 } }}>
+    <Box component="section" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 10, md: 13 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
