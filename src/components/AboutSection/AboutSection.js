@@ -74,7 +74,7 @@ export default function AboutSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, scrollElementHeight - stickyElementHeight]);
 
   return (
-    <Box component="section" id="about" sx={{ py: { xs: 4, md: 7 } }}>
+    <Box component="section" sx={{ py: { xs: 2, md: 5 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
@@ -97,7 +97,7 @@ export default function AboutSection() {
             },
           }}
         >
-          <motion.div style={{ position: 'relative', y: y, width: '50%', height: 'fit-content', paddingTop: '4rem' }} ref={stickyRef}>
+          <motion.div style={{ position: 'relative', y: y, width: '50%', height: 'fit-content', paddingTop: '7rem' }} ref={stickyRef} id="projects">
             <Reveal x={28} y={22} duration={0.76} delay={0.14}>
               <Box
                 sx={{
@@ -160,7 +160,7 @@ export default function AboutSection() {
             </Reveal>
           </motion.div>
 
-          <motion.div style={{ width: '45%', height: 'max-content', paddingTop: '4rem' }} ref={ref}>
+          <motion.div style={{ width: '45%', height: 'max-content', paddingTop: '7rem' }} ref={ref}>
             <Stack spacing={2.5}>
               {projects.map((project, i) => (
                 <ProjectItem key={project.title + "_" + i} project={project} />

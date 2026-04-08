@@ -6,7 +6,12 @@
   background:
     radial-gradient(circle at 12% 12%, rgba(255, 138, 104, 0.18), transparent 24%),
     radial-gradient(circle at 84% 18%, rgba(94, 167, 255, 0.16), transparent 24%),
-    linear-gradient(180deg, #050816 0%, #081021 48%, #0b1328 100%);
+    radial-gradient(circle at 50% 80%, rgba(255, 250, 244, 0.02), transparent 50%),
+    radial-gradient(circle at 50% 108%, rgba(255, 255, 255, 0.09), transparent 30%),
+    linear-gradient(180deg, #050816 0%, #081021 85%, #0a1142 100%);
+    /*
+    102c5c
+    */
 }
 
 .page::before {

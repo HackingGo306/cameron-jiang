@@ -17,9 +17,9 @@ import { useState } from "react";
 
 const navItems = [
   { label: "About", href: "#about" },
-  { label: "Work", href: "#projects" },
-  { label: "Notes", href: "#notes" },
+  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
+  { label: "Resume", href: "#resume" },
 ];
 
 export default function SiteHeader() {
@@ -31,7 +31,7 @@ export default function SiteHeader() {
     const previous = scrollY.getPrevious() ?? 0
     if (current > previous && current > 16) {
       setHidden(true)
-    } else if (current < 300){
+    } else if (current < previous) {
       setHidden(false)
     }
   });
@@ -51,15 +51,15 @@ export default function SiteHeader() {
           animate={{ y: hidden ? -100 : 0 }}
           transition={{ duration: 0.32, ease: "easeInOut" }}
         >
-          <Container maxWidth="xl" sx={{ py: { xs: 1.5, md: 2 } }}>
+          <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 } }}>
             <Toolbar
               disableGutters
               sx={{
                 minHeight: { xs: 64, md: 72 },
                 justifyContent: "space-between",
                 gap: 2,
-                px: { xs: 2.25, md: 3 },
-                borderRadius: 999,
+                px: { xs: 2, md: 3 },
+                borderRadius: '2rem',
                 border: "1px solid var(--surface-border)",
                 background: "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.03))",
               }}
@@ -105,7 +105,7 @@ export default function SiteHeader() {
                     component="a"
                     href={item.href}
                     sx={{
-                      color: "text.secondary",
+                      color: "text.primary",
                       px: 1.5,
                       "&:hover": {
                         backgroundColor: "var(--surface-tint)",
@@ -123,8 +123,6 @@ export default function SiteHeader() {
                 onClick={toggleTheme}
                 sx={{
                   display: { xs: "none", sm: "inline-flex" },
-                  border: "1px solid var(--surface-border)",
-                  backgroundColor: "var(--surface-soft)",
                 }}
               >
                 {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
