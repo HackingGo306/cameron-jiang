@@ -1,16 +1,13 @@
 "use client";
 
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
-import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
-import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Reveal, ScrollBlock } from "../Motion/Reveal";
+import { Reveal } from "../Motion/Reveal";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
@@ -29,9 +26,14 @@ export default function HeroSection() {
         >
           <Reveal x={-28} y={20} duration={0.72} delay={0.06}>
             <Stack spacing={{ xs: 3.5, md: 4.25 }}>
-              <Typography variant="h1" color="primary.main"
+              <Typography
+                variant="h1"
                 sx={{
-                  fontSize: { xs: "3rem", md: "5rem" }
+                  fontSize: { xs: "3rem", md: "5rem" },
+                  backgroundImage: "var(--gradient-hero)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
                 }}
               >
                 Hi, I'm Cameron
@@ -76,8 +78,9 @@ export default function HeroSection() {
                       label={item}
                       variant="outlined"
                       sx={{
-                        backgroundColor: "var(--surface-soft)",
-                        borderColor: "var(--surface-border)",
+                        backgroundColor: "var(--color-bg-surface-soft)",
+                        borderColor: "var(--color-border-subtle)",
+                        color: "text.secondary",
                       }}
                     />
                   ))}

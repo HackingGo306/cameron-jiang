@@ -16,7 +16,7 @@ export const projects = [
     description: "A calmer way to track live system health and team workflows.",
     note: "I liked turning noise into something readable.",
     tags: ["Next.js", "MUI", "Data visualization", "Role-based UX"],
-    accent: "rgba(15, 111, 255, 0.12)",
+    accent: "rgba(15, 111, 255, 0.16)",
     emphasis: true,
   },
   {
@@ -25,7 +25,7 @@ export const projects = [
     description: "A space for notes, experiments, and loose thinking.",
     note: "I liked giving exploration some structure.",
     tags: ["LLM workflow", "Prompt tooling", "Information design"],
-    accent: "rgba(255, 107, 87, 0.12)",
+    accent: "rgba(45, 212, 191, 0.14)",
   },
   {
     title: "Developer Portfolio System",
@@ -33,7 +33,7 @@ export const projects = [
     description: "A portfolio that feels more personal than polished-corporate.",
     note: "I liked shaping the tone as much as the UI.",
     tags: ["Brand system", "Frontend architecture", "Responsive layout"],
-    accent: "rgba(15, 23, 42, 0.06)",
+    accent: "rgba(249, 179, 80, 0.16)",
   },
 ];
 
@@ -75,8 +75,8 @@ export default function ProjectShowcase() {
                     overflow: "hidden",
                     p: { xs: 3, md: 3.5 },
                     borderRadius: { xs: "28px", md: "32px" },
-                    border: "1px solid var(--surface-border)",
-                    background: `radial-gradient(circle at top left, ${project.accent}, transparent 42%), linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))`,
+                    border: "1px solid var(--color-border-subtle)",
+                    background: `radial-gradient(circle at top left, ${project.accent}, transparent 42%), var(--gradient-panel)`,
                     backdropFilter: "blur(18px)",
                     minHeight: 320,
                     display: "flex",
@@ -95,8 +95,8 @@ export default function ProjectShowcase() {
                         label={project.label}
                         sx={{
                           width: "fit-content",
-                          backgroundColor: "var(--surface-soft)",
-                          border: "1px solid var(--surface-border)",
+                          backgroundColor: "var(--color-bg-surface-soft)",
+                          border: "1px solid var(--color-border-subtle)",
                           color: "text.primary",
                           fontWeight: 600,
                         }}
@@ -122,8 +122,8 @@ export default function ProjectShowcase() {
                           label={tag}
                           variant="outlined"
                           sx={{
-                            borderColor: "var(--surface-border)",
-                            backgroundColor: "rgba(255, 255, 255, 0.03)",
+                            borderColor: "var(--color-border-subtle)",
+                            backgroundColor: "var(--color-bg-surface-tint)",
                           }}
                         />
                       ))}
@@ -134,7 +134,7 @@ export default function ProjectShowcase() {
                         sx={{
                           mt: "auto",
                           pt: 2.5,
-                          borderTop: "1px solid var(--section-divider)",
+                          borderTop: "1px solid var(--color-divider)",
                           display: "grid",
                           gap: 2,
                         }}

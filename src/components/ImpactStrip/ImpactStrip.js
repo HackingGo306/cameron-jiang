@@ -44,8 +44,8 @@ export default function ImpactStrip() {
               elevation={0}
               sx={{
                 p: { xs: 3, md: 4 },
-                border: "1px solid rgba(148, 163, 184, 0.16)",
-                backgroundColor: "rgba(15, 23, 42, 0.72)",
+                border: "1px solid var(--color-border-subtle)",
+                background: "var(--gradient-panel-strong)",
                 height: "fit-content",
               }}
             >
@@ -78,9 +78,8 @@ export default function ImpactStrip() {
                     p: 3,
                     height: "100%",
                     borderRadius: 1,
-                    border: "1px solid rgba(148, 163, 184, 0.16)",
-                    background:
-                      "linear-gradient(180deg, rgba(18, 28, 52, 0.82), rgba(15, 23, 42, 0.76))",
+                    border: "1px solid var(--color-border-subtle)",
+                    background: "var(--gradient-panel)",
                   }}
                 >
                   <Stack spacing={1.75}>
@@ -91,7 +90,7 @@ export default function ImpactStrip() {
                         display: "grid",
                         placeItems: "center",
                         borderRadius: 3,
-                        backgroundColor: "rgba(94, 167, 255, 0.1)",
+                        backgroundColor: "var(--color-brand-soft)",
                         color: "primary.main",
                       }}
                     >

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion, useScroll, useTransform } from "motion/react"
-import { useRef } from "react"
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 function Item() {
   const ref = useRef(null);
@@ -46,7 +46,7 @@ function Item() {
         </figure>
       </div>
     </section >
-  )
+  );
 }
 
 export default function Scroll() {
@@ -54,7 +54,7 @@ export default function Scroll() {
     <>
       <Item />
     </>
-  )
+  );
 }
 
 /**
@@ -62,12 +62,12 @@ export default function Scroll() {
  */
 
 const itemContainer = {
-  height: 'fit-content',
+  height: "fit-content",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   position: "relative",
-}
+};
 
 const progressIconContainer = {
   position: "sticky",
@@ -76,34 +76,34 @@ const progressIconContainer = {
   height: 80,
   margin: 0,
   padding: 0,
-}
+};
 
 const processCircle = {
   strokeDashoffset: 0,
   strokeWidth: 5,
   fill: "none",
-}
+};
 
 const progressIcon = {
   ...processCircle,
   transform: "translateX(-100px) rotate(-90deg)",
-  stroke: "#ff0088",
-}
+  stroke: "var(--color-brand)",
+};
 
 const progressIconIndicator = {
   ...processCircle,
   strokeDashoffset: 0,
   strokeWidth: 5,
   fill: "none",
-}
+};
 
 const progressIconBg = {
   opacity: 0.2,
-}
+};
 
 const item = {
   width: 200,
   height: 1500,
-  border: "2px dotted #ff0088",
+  border: "2px dotted var(--color-brand)",
   position: "relative",
-}
+};

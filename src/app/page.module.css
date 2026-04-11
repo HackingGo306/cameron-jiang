@@ -3,15 +3,7 @@
   min-height: 100vh;
   overflow: clip;
   isolation: isolate;
-  background:
-    radial-gradient(circle at 12% 12%, rgba(255, 138, 104, 0.18), transparent 24%),
-    radial-gradient(circle at 84% 18%, rgba(94, 167, 255, 0.16), transparent 24%),
-    radial-gradient(circle at 50% 80%, rgba(255, 250, 244, 0.02), transparent 50%),
-    radial-gradient(circle at 50% 108%, rgba(77, 89, 255, 0.1), transparent 30%),
-    linear-gradient(180deg, #050816 0%, #081021 85%, #070d3d 100%);
-    /*
-    102c5c
-    */
+  background: var(--color-bg-canvas);
 }
 
 .page::before {
@@ -21,9 +13,9 @@
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 14% 16%, var(--page-glow-secondary), transparent 0 24%),
-    radial-gradient(circle at 82% 14%, var(--page-glow-primary), transparent 0 28%),
-    radial-gradient(circle at 54% 48%, var(--page-glow-soft), transparent 0 34%);
+    radial-gradient(circle at 14% 16%, var(--color-ambient-secondary), transparent 0 24%),
+    radial-gradient(circle at 82% 14%, var(--color-ambient-primary), transparent 0 28%),
+    radial-gradient(circle at 54% 48%, var(--color-ambient-tertiary), transparent 0 34%);
   filter: blur(28px);
 }
 
@@ -34,13 +26,13 @@
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 100%),
+    var(--gradient-page-overlay),
     repeating-linear-gradient(
       90deg,
       transparent 0,
       transparent calc(20% - 1px),
-      var(--page-grid-line) calc(20% - 1px),
-      var(--page-grid-line) 20%
+      var(--color-grid-line) calc(20% - 1px),
+      var(--color-grid-line) 20%
     );
   opacity: 0.42;
 }
@@ -62,84 +54,23 @@
 
 .eyebrow {
   margin: 0 0 1rem;
-  color: rgb(94 167 255);
+  color: var(--color-brand);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 0.78rem;
   font-weight: 700;
 }
 
-.notesTitle {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 3.35rem);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
-  text-wrap: balance;
-}
-
-.notesText {
-  margin: 1.25rem 0 0;
-  max-width: 38rem;
-  color: var(--text-muted);
-  font-size: 1.03rem;
-  line-height: 1.8;
-}
-
-.notesSurface {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(1rem, 4vw, 2rem) 0;
-  border-top: 1px solid var(--section-divider);
-  border-bottom: 1px solid var(--section-divider);
-  border-radius: 2rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 34%),
-    linear-gradient(180deg, var(--surface-soft), transparent 74%);
-  backdrop-filter: blur(18px);
-}
-
-.notesSurface::before,
-.notesSurface::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-
-.notesSurface::before {
-  left: clamp(1rem, 3vw, 2rem);
-  right: clamp(1rem, 3vw, 2rem);
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--page-glow-primary), transparent);
-  opacity: 0.75;
-}
-
-.notesSurface::after {
-  right: -10%;
-  top: 12%;
-  width: min(26rem, 48vw);
-  aspect-ratio: 1;
-  border-radius: 999px;
-  background: radial-gradient(circle, var(--page-glow-secondary), transparent 72%);
-  filter: blur(36px);
-  opacity: 0.72;
-}
-
-.notesSurface > * {
-  position: relative;
-  z-index: 1;
-}
-
 @media (max-width: 900px) {
   .page::after {
     background:
-      linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 100%),
+      var(--gradient-page-overlay),
       repeating-linear-gradient(
         90deg,
         transparent 0,
         transparent calc(50% - 1px),
-        var(--page-grid-line) calc(50% - 1px),
-        var(--page-grid-line) 50%
+        var(--color-grid-line) calc(50% - 1px),
+        var(--color-grid-line) 50%
       );
   }
 }

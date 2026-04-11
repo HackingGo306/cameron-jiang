@@ -9,6 +9,9 @@ body {
   margin: 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-geist-sans), Roboto, sans-serif;
 }
 
 a {
@@ -20,6 +23,55 @@ section[id] {
   scroll-margin-top: 7rem;
 }
 
+:root {
+  color-scheme: light;
+  --color-bg-canvas: #f3f7fc;
+  --color-bg-surface: rgba(255, 255, 255, 0.76);
+  --color-bg-surface-strong: rgba(255, 255, 255, 0.94);
+  --color-bg-surface-soft: rgba(245, 249, 252, 0.86);
+  --color-bg-surface-tint: rgba(15, 111, 255, 0.08);
+  --color-border-subtle: rgba(122, 145, 173, 0.22);
+  --color-divider: rgba(122, 145, 173, 0.16);
+  --color-text-primary: #0c1728;
+  --color-text-secondary: #566579;
+  --color-brand: #0f6fff;
+  --color-brand-strong: #0857c7;
+  --color-brand-soft: rgba(15, 111, 255, 0.16);
+  --color-ambient-primary: rgba(15, 111, 255, 0.2);
+  --color-ambient-secondary: rgba(45, 212, 191, 0.16);
+  --color-ambient-tertiary: rgba(249, 179, 80, 0.14);
+  --color-grid-line: rgba(12, 23, 40, 0.06);
+  --gradient-hero: linear-gradient(135deg, #0f6fff, #2dd4bf);
+  --gradient-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(240, 246, 252, 0.78));
+  --gradient-panel-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 243, 251, 0.88));
+  --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(12, 23, 40, 0.04) 100%);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg-canvas: #07111f;
+  --color-bg-surface: rgba(12, 22, 40, 0.8);
+  --color-bg-surface-strong: rgba(16, 29, 51, 0.94);
+  --color-bg-surface-soft: rgba(14, 26, 46, 0.82);
+  --color-bg-surface-tint: rgba(108, 182, 255, 0.12);
+  --color-border-subtle: rgba(134, 160, 190, 0.18);
+  --color-divider: rgba(134, 160, 190, 0.14);
+  --color-text-primary: #e7f0ff;
+  --color-text-secondary: #9fb4d0;
+  --color-brand: #6cb6ff;
+  --color-brand-strong: #2f88f8;
+  --color-brand-soft: rgba(108, 182, 255, 0.18);
+  --color-ambient-primary: rgba(108, 182, 255, 0.24);
+  --color-ambient-secondary: rgba(45, 212, 191, 0.18);
+  --color-ambient-tertiary: rgba(248, 178, 73, 0.12);
+  --color-grid-line: rgba(159, 180, 208, 0.08);
+  --gradient-hero: linear-gradient(135deg, #6cb6ff, #2dd4bf);
+  --gradient-panel: linear-gradient(180deg, rgba(16, 29, 51, 0.92), rgba(9, 17, 31, 0.84));
+  --gradient-panel-strong: linear-gradient(135deg, rgba(21, 37, 64, 0.94), rgba(10, 18, 33, 0.88));
+  --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(231, 240, 255, 0.04) 100%);
+}
+
 ::selection {
-  background: rgba(94, 167, 255, 0.28);
+  background: var(--color-brand-soft);
+  color: var(--color-text-primary);
 }

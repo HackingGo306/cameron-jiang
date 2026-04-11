@@ -10,8 +10,8 @@ export default function ProjectItem({ project }) {
         overflow: "hidden",
         p: { xs: 3, md: 3.5 },
         borderRadius: { xs: "1rem", md: "1.5rem" },
-        border: "1px solid var(--surface-border)",
-        background: `radial-gradient(circle at top left, ${project.accent}, transparent 42%), linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))`,
+        border: "1px solid var(--color-border-subtle)",
+        background: `radial-gradient(circle at top left, ${project.accent}, transparent 42%), var(--gradient-panel)`,
         backdropFilter: "blur(18px)",
         minHeight: 320,
         display: "flex",
@@ -28,7 +28,7 @@ export default function ProjectItem({ project }) {
 
         <Stack direction="row" spacing={{ xs: 1, sm: 2, md: 2.5 }} useFlexGap flexWrap="wrap">
           {project.tags.map((tag) => (
-            <Typography variant="caption" key={tag} fontStyle={'italic'}>
+            <Typography variant="caption" key={tag} fontStyle="italic" color="text.secondary">
               {tag}
             </Typography>
           ))}
@@ -60,7 +60,7 @@ export default function ProjectItem({ project }) {
               project.buttons?.map((button) => (
                 <Button
                   key={button.label}
-                  variant={button.emphasis?  "outlined" : "text"}
+                  variant={button.emphasis ? "outlined" : "text"}
                   endIcon={button.emphasis && <ArrowOutwardRoundedIcon />}
                   component="a"
                   href={button.href}
@@ -74,5 +74,5 @@ export default function ProjectItem({ project }) {
         </Box>
       </Stack>
     </Box>
-  )
+  );
 }

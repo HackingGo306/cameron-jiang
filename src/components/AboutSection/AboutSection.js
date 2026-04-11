@@ -1,14 +1,13 @@
 "use client";
 
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Reveal } from "../Motion/Reveal";
-import { motion, useScroll, useTransform } from "motion/react"
-import { use, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Button } from "@mui/material";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import ProjectItem from "../ProjectItem/ProjectItem";
 
 const projects = [
@@ -17,7 +16,7 @@ const projects = [
     description: "A research project analyzing the MIMIC-IV medical dataset to predict bone fracture malunion outcomes using machine learning techniques.",
     note: "I used Pandas and JMP Pro to clean and analyze the data and built predictive models using PyCaret. I also first-authored an abstract that was accepted for presentation in the ASMBR and the BMES 2025 conferences.",
     tags: ["Data Science", "Machine Learning", "Data Visualization", "Research", "Pandas"],
-    accent: "rgba(59, 134, 255, 0.12)",
+    accent: "rgba(15, 111, 255, 0.16)",
     buttons: [
       {
         label: "See abstract",
@@ -35,7 +34,7 @@ const projects = [
     description: "An AI-powered medical report autocompletion tool made for streamlining repetitive notetaking.",
     note: "As a fullstack developer, I handled API routing, user authentication, database security, and UI efficiency. I implemented the autocompletion feature using OpenAI's API.",
     tags: ["Next.js", "MariaDB", "OpenAI Integration", "LLM", "Data Processing", "MUI"],
-    accent: "rgba(0, 218, 58, 0.08)",
+    accent: "rgba(45, 212, 191, 0.14)",
     buttons: [
       {
         label: "Visit site",
@@ -49,7 +48,7 @@ const projects = [
     description: "Quadcopter using reinforcement learning (PPO) in Unity environment to recover after a single-rotor failure.",
     note: "I integrated Microsoft's AirSim with Unity and StableBaselines3, using Tensorboard for visualization. I worked on reward shaping and hyperparameter tuning to achieve stable learning and successful recovery behaviors.",
     tags: ["Reinforcement Learning", "Autonomous Systems", "StableBaselines3", "Research"],
-    accent: "rgba(255, 107, 87, 0.12)",
+    accent: "rgba(255, 141, 86, 0.16)",
     buttons: [
       {
         label: "View code",
@@ -63,7 +62,7 @@ const projects = [
     description: "A study website to increase student productivity",
     note: "I worked on the front-end using React, and helped implement Spotify Music API as well as study themes.",
     tags: ["React", "Spotify API", "Web Development", "UX Design", "Teamwork"],
-    accent: "rgba(0, 0, 0, 0.2)",
+    accent: "rgba(249, 179, 80, 0.16)",
     buttons: [
       {
         label: "Visit site",
@@ -114,7 +113,7 @@ export default function AboutSection() {
             width: "30%",
             aspectRatio: "1",
             borderRadius: "999px",
-            background: "radial-gradient(circle, var(--page-glow-primary), transparent 72%)",
+            background: "radial-gradient(circle, var(--color-ambient-primary), transparent 72%)",
             filter: "blur(28px)",
             opacity: 0.7,
             pointerEvents: "none",
@@ -124,9 +123,9 @@ export default function AboutSection() {
         <motion.div
           style={{
             // y,
-            width: '50%',
-            height: 'fit-content',
-            paddingTop: '7rem',
+            width: "50%",
+            height: "fit-content",
+            paddingTop: "7rem",
           }}
           id="projects"
           ref={stickyRef}
@@ -138,8 +137,8 @@ export default function AboutSection() {
               minHeight: { lg: 420 },
               p: { xs: 3, md: 4 },
               borderRadius: { xs: "28px", md: "34px" },
-              border: "1px solid var(--surface-border)",
-              // background: "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))",
+              border: "1px solid var(--color-border-subtle)",
+              background: "var(--gradient-panel-strong)",
               backdropFilter: "blur(20px)",
               overflow: "hidden",
               "&::before": {
@@ -150,16 +149,21 @@ export default function AboutSection() {
                 width: "72%",
                 aspectRatio: "1",
                 borderRadius: "999px",
-                background: "radial-gradient(circle, var(--page-glow-primary), transparent 72%)",
+                background: "radial-gradient(circle, var(--color-ambient-secondary), transparent 72%)",
                 filter: "blur(24px)",
                 opacity: 0.95,
               },
             }}
           >
             <Stack spacing={3} sx={{ position: "relative" }}>
-              <Typography variant="h1" color="primary.main"
+              <Typography
+                variant="h1"
                 sx={{
-                  fontSize: { xs: "2rem", md: "4rem" }
+                  fontSize: { xs: "2rem", md: "4rem" },
+                  backgroundImage: "var(--gradient-hero)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
                 }}
               >
                 My Projects
@@ -174,7 +178,7 @@ export default function AboutSection() {
                   Now, having experience with AI, I'm even more fascinated by the impact that programming can have on the world.
                 </Typography>
               </Stack>
-              <Box sx={{ display: "grid", gap: 1, }}>
+              <Box sx={{ display: "grid", gap: 1 }}>
                 <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
                   Check out my Github
                 </Typography>

@@ -28,11 +28,11 @@ export default function SiteHeader() {
   const [hidden, setHidden] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (current) => {
-    const previous = scrollY.getPrevious() ?? 0
+    const previous = scrollY.getPrevious() ?? 0;
     if (current > previous && current > 16) {
-      setHidden(true)
+      setHidden(true);
     } else if (current < previous) {
-      setHidden(false)
+      setHidden(false);
     }
   });
 
@@ -51,7 +51,7 @@ export default function SiteHeader() {
           animate={{ y: hidden ? -100 : 0 }}
           transition={{ duration: 0.32, ease: "easeInOut" }}
         >
-          <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 }, width: 'calc(100% - 4rem)' }}>
+          <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 }, width: "calc(100% - 4rem)" }}>
             <Toolbar
               disableGutters
               sx={{
@@ -59,9 +59,10 @@ export default function SiteHeader() {
                 justifyContent: "space-between",
                 gap: 2,
                 px: { xs: 2, md: 3 },
-                borderRadius: '2rem',
-                border: "1px solid var(--surface-border)",
-                background: "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.03))",
+                borderRadius: "2rem",
+                border: "1px solid var(--color-border-subtle)",
+                background: "var(--gradient-panel)",
+                backdropFilter: "blur(16px)",
               }}
             >
               <Stack direction="row" spacing={1.5} alignItems="center">
@@ -72,8 +73,9 @@ export default function SiteHeader() {
                     width: 44,
                     height: 44,
                     borderRadius: "999px",
-                    border: "1px solid var(--surface-border)",
-                    background: "radial-gradient(circle at 30% 30%, rgba(94, 167, 255, 0.24), transparent 70%), var(--surface-soft)",
+                    border: "1px solid var(--color-border-subtle)",
+                    background:
+                      "radial-gradient(circle at 30% 30%, var(--color-brand-soft), transparent 70%), var(--color-bg-surface-soft)",
                     color: "text.primary",
                     fontSize: "0.9rem",
                     fontWeight: 700,
@@ -108,7 +110,7 @@ export default function SiteHeader() {
                       color: "text.primary",
                       px: 1.5,
                       "&:hover": {
-                        backgroundColor: "var(--surface-tint)",
+                        backgroundColor: "var(--color-bg-surface-tint)",
                         color: "text.primary",
                       },
                     }}
@@ -123,6 +125,12 @@ export default function SiteHeader() {
                 onClick={toggleTheme}
                 sx={{
                   display: { xs: "none", sm: "inline-flex" },
+                  color: "text.primary",
+                  border: "1px solid var(--color-border-subtle)",
+                  backgroundColor: "var(--color-bg-surface-soft)",
+                  "&:hover": {
+                    backgroundColor: "var(--color-bg-surface-tint)",
+                  },
                 }}
               >
                 {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
