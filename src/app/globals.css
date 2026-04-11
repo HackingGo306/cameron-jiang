@@ -45,6 +45,8 @@ section[id] {
   --gradient-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(240, 246, 252, 0.78));
   --gradient-panel-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 243, 251, 0.88));
   --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(12, 23, 40, 0.04) 100%);
+  --mui-typography-primary: var(--color-text-primary);
+  --mui-typography-secondary: var(--color-text-secondary);
 }
 
 [data-theme="dark"] {
@@ -69,9 +71,20 @@ section[id] {
   --gradient-panel: linear-gradient(180deg, rgba(16, 29, 51, 0.92), rgba(9, 17, 31, 0.84));
   --gradient-panel-strong: linear-gradient(135deg, rgba(21, 37, 64, 0.94), rgba(10, 18, 33, 0.88));
   --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(231, 240, 255, 0.04) 100%);
+  --mui-typography-primary: var(--color-text-primary);
+  --mui-typography-secondary: var(--color-text-secondary);
 }
 
 ::selection {
   background: var(--color-brand-soft);
   color: var(--color-text-primary);
+}
+
+/* Apply typography colors */
+.MuiTypography-root {
+  color: var(--mui-typography-primary);
+}
+
+.MuiTypography-colorTextSecondary {
+  color: var(--mui-typography-secondary);
 }

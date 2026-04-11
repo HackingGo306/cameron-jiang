@@ -23,7 +23,6 @@ export default function AppTheme({ children }) {
   const theme = useMemo(
     () =>
       createTheme({
-        // cssVariables: true,
         palette: {
           mode,
           ...(mode === "light"
