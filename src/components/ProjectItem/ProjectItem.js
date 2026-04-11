@@ -56,15 +56,20 @@ export default function ProjectItem({ project }) {
           </Box>
 
           <Stack direction={{ xs: "column", sm: "row" }} spacing={1.25}>
-            <Button
-              variant="outlined"
-              endIcon={<ArrowOutwardRoundedIcon />}
-            >
-              See project
-            </Button>
-            <Button variant="text" component="a" href="#">
-              View code
-            </Button>
+            {
+              project.buttons?.map((button) => (
+                <Button
+                  key={button.label}
+                  variant={button.emphasis?  "outlined" : "text"}
+                  endIcon={button.emphasis && <ArrowOutwardRoundedIcon />}
+                  component="a"
+                  href={button.href}
+                  target="_blank"
+                >
+                  {button.label}
+                </Button>
+              ))
+            }
           </Stack>
         </Box>
       </Stack>

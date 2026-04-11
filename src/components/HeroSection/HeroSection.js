@@ -12,22 +12,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Reveal, ScrollBlock } from "../Motion/Reveal";
 
-const focusAreas = ["frontend", "systems thinking", "design curiosity", "small details"];
+const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
-const quickNotes = [
-  {
-    label: "currently into",
-    value: "warm interfaces",
-  },
-  {
-    label: "usually thinking about",
-    value: "clarity and pacing",
-  },
-  {
-    label: "kinds of projects I like",
-    value: "useful tools",
-  },
-];
 
 export default function HeroSection() {
   return (
@@ -61,7 +47,7 @@ export default function HeroSection() {
                   color="text.secondary"
                   sx={{ maxWidth: 760, fontSize: { xs: "1.05rem", md: "1.35rem" }, lineHeight: 1.6 }}
                 >
-                  I care about clarity, feel, and the details that make software memorable.
+                  I care about cohesiveness, accessibility, and impact in my work
                 </Typography>
               </Stack>
 
@@ -76,8 +62,8 @@ export default function HeroSection() {
                   >
                     See selected work
                   </Button>
-                  <Button variant="outlined" size="large" component="a" href="#about">
-                    Read a little about me
+                  <Button variant="outlined" size="large" component="a" href="#contact">
+                    Contact
                   </Button>
                 </Stack>
               </Reveal>
@@ -98,83 +84,6 @@ export default function HeroSection() {
                 </Stack>
               </Reveal>
             </Stack>
-          </Reveal>
-
-          <Reveal x={28} y={22} duration={0.76} delay={0.14} sx={{ height: "100%" }}>
-            <Box
-              sx={{
-                position: "relative",
-                height: "100%",
-                minHeight: { lg: 420 },
-                p: { xs: 3, md: 4 },
-                borderRadius: { xs: "28px", md: "34px" },
-                border: "1px solid var(--surface-border)",
-                background:
-                  "linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.02))",
-                backdropFilter: "blur(20px)",
-                overflow: "hidden",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  right: "-18%",
-                  bottom: "-28%",
-                  width: "72%",
-                  aspectRatio: "1",
-                  borderRadius: "999px",
-                  background: "radial-gradient(circle, var(--page-glow-primary), transparent 72%)",
-                  filter: "blur(24px)",
-                  opacity: 0.95,
-                },
-              }}
-            >
-              <Stack spacing={3} sx={{ position: "relative" }}>
-                <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.18em" }}>
-                  A few quick notes
-                </Typography>
-
-                <Stack spacing={0}>
-                  {quickNotes.map((item, index) => (
-                    <Box
-                      key={item.label}
-                      sx={{
-                        py: 2.25,
-                        borderTop: "1px solid var(--section-divider)",
-                        borderBottom:
-                          index === quickNotes.length - 1 ? "1px solid var(--section-divider)" : "none",
-                      }}
-                    >
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "text.secondary", textTransform: "uppercase", letterSpacing: "0.14em" }}
-                      >
-                        {item.label}
-                      </Typography>
-                      <Typography sx={{ mt: 0.9, fontSize: { xs: "1rem", md: "1.08rem" }, lineHeight: 1.7 }}>
-                        {item.value}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Stack>
-
-                <Box
-                  sx={{
-                    pt: 2.5,
-                    display: "grid",
-                    gap: 1,
-                  }}
-                >
-                  <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
-                    The short version
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700 }}>
-                    Useful first. Memorable second.
-                  </Typography>
-                  <Typography sx={{ color: "text.secondary", lineHeight: 1.8 }}>
-                    Both matter.
-                  </Typography>
-                </Box>
-              </Stack>
-            </Box>
           </Reveal>
         </Box>
       </Container >

@@ -1,5 +1,7 @@
 html {
   scroll-behavior: smooth;
+  position: absolute;
+  inset: 0;
 }
 
 body {

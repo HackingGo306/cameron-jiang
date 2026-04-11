@@ -51,7 +51,7 @@ export default function SiteHeader() {
           animate={{ y: hidden ? -100 : 0 }}
           transition={{ duration: 0.32, ease: "easeInOut" }}
         >
-          <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 } }}>
+          <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 }, width: 'calc(100% - 4rem)' }}>
             <Toolbar
               disableGutters
               sx={{

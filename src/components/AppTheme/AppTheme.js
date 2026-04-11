@@ -126,7 +126,7 @@ const darkTheme = createTheme({
     },
     text: {
       primary: "#f8fafc",
-      secondary: "#94a3b8",
+      secondary: "#cacaca",
     },
   },
   shape: {
