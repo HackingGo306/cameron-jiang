@@ -12,12 +12,11 @@ import { ArrowDownward } from "@mui/icons-material";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-// import * as d3 from "d3-force-3d";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
 const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
-function genRandomTree(N = 400, reverse = false) {
+function genRandomTree(N = 350, reverse = false) {
   const obj = {
     nodes: [...Array(N).keys()].map(i => ({ id: i })),
     links: [...Array(N).keys()]
@@ -39,6 +38,35 @@ export default function HeroSection() {
   const [graphWidth, setGraphWidth] = useState(0);
   const [fgInitialized, setFgInitialized] = useState(false);
   const data = useMemo(() => genRandomTree(), []);
+  const nodeObjects = new Map();
+
+  const createGlowTexture = useCallback((size = 128) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+
+    const ctx = canvas.getContext('2d');
+
+    const gradient = ctx.createRadialGradient(
+      size / 2, size / 2, 0,
+      size / 2, size / 2, size / 2
+    );
+
+    gradient.addColorStop(0, 'rgba(255,255,255,1)');
+    gradient.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+    gradient.addColorStop(0.4, 'rgba(255,255,255,0.4)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.minFilter = THREE.LinearFilter;
+
+    return texture;
+  }, [document]);
+
+  const glowTexture = useMemo(() => createGlowTexture(1024), [createGlowTexture]);
 
   useEffect(() => {
     setTextHeight(textRef.current?.scrollHeight || 0);
@@ -144,15 +172,14 @@ export default function HeroSection() {
           </Reveal>
           <Box sx={{
             position: 'absolute',
-            width: '65%',
-            height: (textHeight * 1.15),
-            transform: 'translateY(-5%) translateX(6.5%)',
+            width: '55%',
+            height: (textHeight) * 1.15,
+            transform: 'translateY(-7%)',
             right: 0,
             overflow: "hidden",
             display: "flex",
             justifyContent: "center",
-            display: {xs: "none", sm: "none", md: "block"},
-            // clipPath: "polygon(0 0, 2% 5%, 10% 10%, 12% 15%, 15% 25%, 17% 35%, 20% 50%, 17% 65%, 15% 75%, 12% 85%, 10% 90%, 2% 95%, 0 100%, 100% 100%, 100% 0)",
+            display: { xs: "none", sm: "none", md: "block" },
           }}
             ref={graphRef}
             onMouseDown={() => {
@@ -161,25 +188,79 @@ export default function HeroSection() {
             }}
           >
             <ForceGraph
-              width={graphWidth}
-              height={(textHeight) * 1.1}
+              width={(graphWidth)}
+              height={(textHeight) * 1.15}
               showNavInfo={false}
-              backgroundColor="rgba(0,0,0,0)"
+              backgroundColor="rgba(0, 0, 0, 0)"
               graphData={data}
               cooldownTicks={Infinity}
               cooldownTime={Infinity}
+              rendererConfig={{ alpha: true, antialias: true }}
               ref={fgRef}
               nodeColor={() => getComputedStyle(document.documentElement).getPropertyValue('--color-brand').trim()}
               nodeOpacity={0.9}
               linkColor={() => getComputedStyle(document.documentElement).getPropertyValue('--color-text-primary').trim()}
               linkWidth={0.8}
+              d3VelocityDecay={0.7}
               enableNodeDrag={false}
               enableNavigationControls={false}
+              linkHoverPrecision={10}
+              onLinkHover={(link) => {
+                console.log(link);
+                document.body.style.cursor = link ? "pointer" : "default";
+              }}
+              onNodeHover={(node) => {
+                nodeObjects.forEach(({ glowMaterial }) => {
+                  glowMaterial.opacity = 0;
+                });
+
+                if (node) {
+                  const obj = nodeObjects.get(node);
+                  if (obj) {
+                    obj.glowMaterial.opacity = 0.8; // 👈 glow on hover
+                  }
+                }
+              }}
+              nodeThreeObject={(node) => {
+                const group = new THREE.Group();
+
+                const sphere = new THREE.Mesh(
+                  new THREE.SphereGeometry(3),
+                  new THREE.MeshBasicMaterial({ color: node.color || 0x00aaff })
+                );
+
+                const glowMaterial = new THREE.SpriteMaterial({
+                  map: glowTexture, // preload this
+                  color: node.color || 0x00aaff,
+                  transparent: true,
+                  blending: THREE.AdditiveBlending,
+                  depthWrite: false,
+                  opacity: 0 // 👈 start hidden
+                });
+
+                const glow = new THREE.Sprite(glowMaterial);
+                glow.scale.set(20, 20, 1);
+
+                group.add(glow);
+                group.add(sphere);
+
+                // 👇 store reference for hover access
+                nodeObjects.set(node, { glow, glowMaterial });
+
+                return group;
+              }}
               onEngineTick={() => {
                 const fg = fgRef.current;
-                if (!fg || fgInitialized) return;
+                if (!fg) return;
+                if (fgInitialized) return;
                 setFgInitialized(true);
                 beginOrbit();
+
+                const scene = fg.scene();
+                const color = getComputedStyle(document.documentElement).getPropertyValue('--color-text-primary').trim();
+                const near = 100;
+                const far = 2000;
+                scene.fog = new THREE.Fog(color, near, far);
 
                 fg.d3Force('drift', () => {
                   const time = Date.now() * 0.001; // Get time in seconds
@@ -188,12 +269,6 @@ export default function HeroSection() {
                     node.vy += Math.cos(time + i * 1.1) * 0.2;
                     node.vz += Math.sin(time * 0.8 + i) * 0.2;
                   });
-
-                  const scene = fg.scene();
-                  const color = getComputedStyle(document.documentElement).getPropertyValue('--color-text-primary').trim();
-                  const near = 50;
-                  const far = 2000;
-                  scene.fog = new THREE.Fog(color, near, far);
                 });
               }}
             />
