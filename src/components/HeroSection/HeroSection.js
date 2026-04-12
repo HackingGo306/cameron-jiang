@@ -12,12 +12,12 @@ import { ArrowDownward } from "@mui/icons-material";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import * as d3 from "d3-force-3d";
+// import * as d3 from "d3-force-3d";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
 const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
-function genRandomTree(N = 300, reverse = false) {
+function genRandomTree(N = 400, reverse = false) {
   const obj = {
     nodes: [...Array(N).keys()].map(i => ({ id: i })),
     links: [...Array(N).keys()]
@@ -73,7 +73,6 @@ export default function HeroSection() {
           sx={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "center",
             gap: { xs: 4, md: 5, lg: 8 },
             height: "fit-content",
             width: '100%'
@@ -144,13 +143,16 @@ export default function HeroSection() {
             </Stack>
           </Reveal>
           <Box sx={{
-            width: '50%',
-            height: textHeight,
+            position: 'absolute',
+            width: '65%',
+            height: (textHeight * 1.15),
+            transform: 'translateY(-5%) translateX(6.5%)',
             right: 0,
             overflow: "hidden",
             display: "flex",
             justifyContent: "center",
-            display: {xs: "none", sm: "none", md: "block"}
+            display: {xs: "none", sm: "none", md: "block"},
+            // clipPath: "polygon(0 0, 2% 5%, 10% 10%, 12% 15%, 15% 25%, 17% 35%, 20% 50%, 17% 65%, 15% 75%, 12% 85%, 10% 90%, 2% 95%, 0 100%, 100% 100%, 100% 0)",
           }}
             ref={graphRef}
             onMouseDown={() => {
@@ -160,7 +162,7 @@ export default function HeroSection() {
           >
             <ForceGraph
               width={graphWidth}
-              height={textHeight}
+              height={(textHeight) * 1.1}
               showNavInfo={false}
               backgroundColor="rgba(0,0,0,0)"
               graphData={data}
