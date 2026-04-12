@@ -38,35 +38,6 @@ export default function HeroSection() {
   const [graphWidth, setGraphWidth] = useState(0);
   const [fgInitialized, setFgInitialized] = useState(false);
   const data = useMemo(() => genRandomTree(), []);
-  const nodeObjects = new Map();
-
-  const createGlowTexture = useCallback((size = 128) => {
-    const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-
-    const ctx = canvas.getContext('2d');
-
-    const gradient = ctx.createRadialGradient(
-      size / 2, size / 2, 0,
-      size / 2, size / 2, size / 2
-    );
-
-    gradient.addColorStop(0, 'rgba(255,255,255,1)');
-    gradient.addColorStop(0.2, 'rgba(255,255,255,0.8)');
-    gradient.addColorStop(0.4, 'rgba(255,255,255,0.4)');
-    gradient.addColorStop(1, 'rgba(255,255,255,0)');
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, size, size);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.minFilter = THREE.LinearFilter;
-
-    return texture;
-  }, [document]);
-
-  const glowTexture = useMemo(() => createGlowTexture(1024), [createGlowTexture]);
 
   useEffect(() => {
     setTextHeight(textRef.current?.scrollHeight || 0);
@@ -195,7 +166,6 @@ export default function HeroSection() {
               graphData={data}
               cooldownTicks={Infinity}
               cooldownTime={Infinity}
-              rendererConfig={{ alpha: true, antialias: true }}
               ref={fgRef}
               nodeColor={() => getComputedStyle(document.documentElement).getPropertyValue('--color-brand').trim()}
               nodeOpacity={0.9}
@@ -204,51 +174,6 @@ export default function HeroSection() {
               d3VelocityDecay={0.7}
               enableNodeDrag={false}
               enableNavigationControls={false}
-              linkHoverPrecision={10}
-              onLinkHover={(link) => {
-                console.log(link);
-                document.body.style.cursor = link ? "pointer" : "default";
-              }}
-              onNodeHover={(node) => {
-                nodeObjects.forEach(({ glowMaterial }) => {
-                  glowMaterial.opacity = 0;
-                });
-
-                if (node) {
-                  const obj = nodeObjects.get(node);
-                  if (obj) {
-                    obj.glowMaterial.opacity = 0.8; // 👈 glow on hover
-                  }
-                }
-              }}
-              nodeThreeObject={(node) => {
-                const group = new THREE.Group();
-
-                const sphere = new THREE.Mesh(
-                  new THREE.SphereGeometry(3),
-                  new THREE.MeshBasicMaterial({ color: node.color || 0x00aaff })
-                );
-
-                const glowMaterial = new THREE.SpriteMaterial({
-                  map: glowTexture, // preload this
-                  color: node.color || 0x00aaff,
-                  transparent: true,
-                  blending: THREE.AdditiveBlending,
-                  depthWrite: false,
-                  opacity: 0 // 👈 start hidden
-                });
-
-                const glow = new THREE.Sprite(glowMaterial);
-                glow.scale.set(20, 20, 1);
-
-                group.add(glow);
-                group.add(sphere);
-
-                // 👇 store reference for hover access
-                nodeObjects.set(node, { glow, glowMaterial });
-
-                return group;
-              }}
               onEngineTick={() => {
                 const fg = fgRef.current;
                 if (!fg) return;

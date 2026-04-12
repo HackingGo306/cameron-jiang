@@ -3,13 +3,19 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
 
 export default function AppTheme({ children }) {
-  const [mode, setMode] = useState("dark");
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [mode, setMode] = useState("light");
+
+  useEffect(() => {
+    setMode(prefersDarkMode ? "dark" : "light");
+  }, [prefersDarkMode]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode);
