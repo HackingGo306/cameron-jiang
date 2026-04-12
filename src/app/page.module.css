@@ -3,7 +3,7 @@
   min-height: 100vh;
   overflow: clip;
   isolation: isolate;
-  background: var(--color-bg-canvas);
+  background: radial-gradient(circle at 40% 55%, var(--color-ball-one) 0%, transparent 18%), radial-gradient(circle at 20% 75%, var(--color-ball-two) 0%, transparent 10%), var(--color-bg-canvas);
 }
 
 .page::before {
@@ -13,9 +13,9 @@
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 14% 16%, var(--color-ambient-secondary), transparent 0 24%),
-    radial-gradient(circle at 82% 14%, var(--color-ambient-primary), transparent 0 28%),
-    radial-gradient(circle at 54% 48%, var(--color-ambient-tertiary), transparent 0 34%);
+    radial-gradient(circle at 14% 16%, var(--color-ambient-secondary) 0%, transparent 34%),
+    radial-gradient(circle at 88% 104%, var(--color-ambient-primary) 0%, transparent 40%),
+    radial-gradient(circle at 74% 48%, var(--color-ambient-tertiary) 0%, transparent 24%);
   filter: blur(28px);
 }
 
@@ -25,31 +25,13 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    var(--gradient-page-overlay),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent calc(20% - 1px),
-      var(--color-grid-line) calc(20% - 1px),
-      var(--color-grid-line) 20%
-    );
+  background: var(--gradient-page-overlay);
   opacity: 0.42;
 }
 
 .page > * {
   position: relative;
   z-index: 1;
-}
-
-.notesSection {
-  position: relative;
-  padding: clamp(2.75rem, 7vw, 5.5rem) 0;
-}
-
-.notesHeader {
-  max-width: 44rem;
-  margin-bottom: clamp(1.75rem, 4vw, 3rem);
 }
 
 .eyebrow {

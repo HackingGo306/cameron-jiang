@@ -35,13 +35,16 @@ section[id] {
   --color-text-primary: #0c1728;
   --color-text-secondary: #566579;
   --color-brand: #0f6fff;
-  --color-brand-strong: #0857c7;
+  --color-brand-strong: #001aff;
+  --color-box-shadow: var(--color-border-subtle);
   --color-brand-soft: rgba(15, 111, 255, 0.16);
+  --color-ball-one: rgba(108, 182, 255, 0.12);
+  --color-ball-two: rgba(45, 212, 191, 0.12);
   --color-ambient-primary: rgba(15, 111, 255, 0.2);
   --color-ambient-secondary: rgba(45, 212, 191, 0.16);
   --color-ambient-tertiary: rgba(249, 179, 80, 0.14);
   --color-grid-line: rgba(12, 23, 40, 0.06);
-  --gradient-hero: linear-gradient(135deg, #0f6fff, #2dd4bf);
+  --gradient-hero: linear-gradient(135deg, #0066ff, #f825ff);
   --gradient-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(240, 246, 252, 0.78));
   --gradient-panel-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 243, 251, 0.88));
   --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(12, 23, 40, 0.04) 100%);
@@ -51,7 +54,7 @@ section[id] {
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --color-bg-canvas: #07111f;
+  --color-bg-canvas: #000112;
   --color-bg-surface: rgba(12, 22, 40, 0.8);
   --color-bg-surface-strong: rgba(16, 29, 51, 0.94);
   --color-bg-surface-soft: rgba(14, 26, 46, 0.82);
@@ -62,12 +65,15 @@ section[id] {
   --color-text-secondary: #9fb4d0;
   --color-brand: #6cb6ff;
   --color-brand-strong: #2f88f8;
+  --color-box-shadow: transparent;
   --color-brand-soft: rgba(108, 182, 255, 0.18);
+  --color-ball-one: rgba(108, 182, 255, 0.1);
+  --color-ball-two: rgba(45, 212, 191, 0.1);
   --color-ambient-primary: rgba(108, 182, 255, 0.24);
-  --color-ambient-secondary: rgba(45, 212, 191, 0.18);
-  --color-ambient-tertiary: rgba(248, 178, 73, 0.12);
+  --color-ambient-secondary: rgba(212, 45, 126, 0.18);
+  --color-ambient-tertiary: rgba(206, 81, 255, 0.11);
   --color-grid-line: rgba(159, 180, 208, 0.08);
-  --gradient-hero: linear-gradient(135deg, #6cb6ff, #2dd4bf);
+  --gradient-hero: linear-gradient(135deg, #5cadff, #e9b3ff);
   --gradient-panel: linear-gradient(180deg, rgba(16, 29, 51, 0.92), rgba(9, 17, 31, 0.84));
   --gradient-panel-strong: linear-gradient(135deg, rgba(21, 37, 64, 0.94), rgba(10, 18, 33, 0.88));
   --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(231, 240, 255, 0.04) 100%);

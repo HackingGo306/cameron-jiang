@@ -38,8 +38,8 @@ export default function AppTheme({ children }) {
                 paper: "#ffffff",
               },
               text: {
-                primary: "#0c1728",
-                secondary: "#566579",
+                primary: "#050b15",
+                secondary: "#3d4753",
               },
               divider: "rgba(122, 145, 173, 0.22)",
             }

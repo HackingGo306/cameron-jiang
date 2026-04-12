@@ -113,7 +113,7 @@ export default function AboutSection() {
             width: "30%",
             aspectRatio: "1",
             borderRadius: "999px",
-            background: "radial-gradient(circle, var(--color-ambient-primary), transparent 72%)",
+            background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
             filter: "blur(28px)",
             opacity: 0.7,
             pointerEvents: "none",
@@ -139,6 +139,7 @@ export default function AboutSection() {
               borderRadius: { xs: "28px", md: "34px" },
               border: "1px solid var(--color-border-subtle)",
               background: "var(--gradient-panel-strong)",
+              boxShadow: "0 4px 24px var(--color-box-shadow)",
               backdropFilter: "blur(20px)",
               overflow: "hidden",
               "&::before": {
@@ -149,7 +150,7 @@ export default function AboutSection() {
                 width: "72%",
                 aspectRatio: "1",
                 borderRadius: "999px",
-                background: "radial-gradient(circle, var(--color-ambient-secondary), transparent 72%)",
+                background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
                 filter: "blur(24px)",
                 opacity: 0.95,
               },
@@ -170,7 +171,7 @@ export default function AboutSection() {
               </Typography>
 
               <Stack spacing={0}>
-                <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
+                <Typography variant="h5" sx={{ fontWeight: 500, mb: 2 }}>
                   I've been working on a range of projects over the years, from silly games to AI-powered tools.
                 </Typography>
                 <Typography sx={{ color: "text.secondary", lineHeight: 1.8 }}>
@@ -193,7 +194,7 @@ export default function AboutSection() {
         </motion.div>
 
 
-        <div style={{ width: "45%", overflow: "hidden", paddingTop: "7rem" }} ref={scrollRef}>
+        <div style={{ width: "48%", paddingLeft: '1.5%', paddingRight: '1.5%', overflow: "hidden", paddingTop: "7rem" }} ref={scrollRef}>
           <motion.div style={{ y }}>
             <Stack spacing={2.5}>
               {projects.map((project, i) => (

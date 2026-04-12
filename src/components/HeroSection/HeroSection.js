@@ -8,13 +8,14 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "../Motion/Reveal";
+import { ArrowDownward } from "@mui/icons-material";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
 
 export default function HeroSection() {
   return (
-    <Box component="section" id="about" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 10, md: 13 } }}>
+    <Box component="section" id="about" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 7, md: 10 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
@@ -54,24 +55,24 @@ export default function HeroSection() {
               </Stack>
 
               <Reveal delay={0.12}>
-                <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+                <Stack direction={{ xs: "column", sm: "row" }} sx={{ mt: { xs: 0.5, md: 1 } }} spacing={1.5}>
                   <Button
                     variant="contained"
                     size="large"
-                    endIcon={<ArrowOutwardRoundedIcon />}
+                    endIcon={<ArrowDownward />}
                     component="a"
                     href="#projects"
                   >
                     See selected work
                   </Button>
-                  <Button variant="outlined" size="large" component="a" href="#contact">
+                  <Button variant="outlined" sx={{ border: "1px solid var(--color-brand-strong)" }} size="large" component="a" href="#contact">
                     Contact
                   </Button>
                 </Stack>
               </Reveal>
 
               <Reveal delay={0.18}>
-                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                <Stack direction="row" sx={{ mt: { xs: 1.5, md: 2.5 } }} spacing={1} useFlexGap flexWrap="wrap">
                   {focusAreas.map((item) => (
                     <Chip
                       key={item}

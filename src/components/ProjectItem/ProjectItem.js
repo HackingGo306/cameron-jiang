@@ -1,6 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
-
 export default function ProjectItem({ project }) {
 
   return (
@@ -16,6 +15,7 @@ export default function ProjectItem({ project }) {
         minHeight: 320,
         display: "flex",
         flexDirection: "column",
+        boxShadow: "0 4px 1rem var(--color-box-shadow)",
       }}
     >
       <Stack spacing={2.25} sx={{ height: "100%" }}>
@@ -28,7 +28,7 @@ export default function ProjectItem({ project }) {
 
         <Stack direction="row" spacing={{ xs: 1, sm: 2, md: 2.5 }} useFlexGap flexWrap="wrap">
           {project.tags.map((tag) => (
-            <Typography variant="caption" key={tag} fontStyle="italic" color="text.secondary">
+            <Typography variant="caption" key={tag} fontStyle="italic" color="text.primary">
               {tag}
             </Typography>
           ))}
@@ -47,7 +47,7 @@ export default function ProjectItem({ project }) {
           }}
         >
           <Box>
-            <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em", lineHeight: 0 }}>
+            <Typography variant="overline" sx={{ letterSpacing: "0.15em", lineHeight: 0, color: "var(--color-brand-strong)" }}>
               My role
             </Typography>
             <Typography sx={{ mt: 0.8, color: "text.secondary", lineHeight: 1.7 }}>
