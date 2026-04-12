@@ -9,23 +9,77 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "../Motion/Reveal";
 import { ArrowDownward } from "@mui/icons-material";
+import dynamic from "next/dynamic";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import * as THREE from "three";
+import * as d3 from "d3-force-3d";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
+const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
+function genRandomTree(N = 300, reverse = false) {
+  const obj = {
+    nodes: [...Array(N).keys()].map(i => ({ id: i })),
+    links: [...Array(N).keys()]
+      .filter(id => id)
+      .map(id => ({
+        [reverse ? 'target' : 'source']: id,
+        [reverse ? 'source' : 'target']: Math.round(Math.random() * (id - 1))
+      }))
+  };
+
+  return obj;
+}
 
 export default function HeroSection() {
+  const textRef = useRef(null);
+  const graphRef = useRef(null);
+  const fgRef = useRef(null);
+  const [textHeight, setTextHeight] = useState(0);
+  const [graphWidth, setGraphWidth] = useState(0);
+  const [fgInitialized, setFgInitialized] = useState(false);
+  const data = useMemo(() => genRandomTree(), []);
+
+  useEffect(() => {
+    setTextHeight(textRef.current?.scrollHeight || 0);
+  }, [textRef]);
+
+  useEffect(() => {
+    setGraphWidth(graphRef.current?.scrollWidth || 0);
+  }, [graphRef]);
+
+  const distance = 1200;
+  const beginOrbit = useCallback(() => {
+    if (!fgRef.current) return;
+    fgRef.current.cameraPosition({ z: distance });
+
+    let angle = 0;
+    const interval = setInterval(() => {
+      if (!fgRef.current) return;
+      fgRef.current.cameraPosition({
+        x: distance * Math.sin(angle),
+        z: distance * Math.cos(angle)
+      });
+      angle += Math.PI / 4800;
+    }, 10);
+
+    return () => clearInterval(interval);
+  }, [fgRef]);
+
   return (
     <Box component="section" id="about" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 7, md: 10 } }}>
       <Container maxWidth="xl">
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "minmax(0, 1.18fr) minmax(320px, 0.82fr)" },
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
             gap: { xs: 4, md: 5, lg: 8 },
-            alignItems: "end",
+            height: "fit-content",
+            width: '100%'
           }}
         >
-          <Reveal x={-28} y={20} duration={0.72} delay={0.06}>
+          <Reveal x={-28} y={20} duration={0.72} delay={0.06} sx={{ zIndex: 1, width: { xs: "100%", sm: "100%", md: "50%" }, position: "relative" }} ref={textRef}>
             <Stack spacing={{ xs: 3.5, md: 4.25 }}>
               <Typography
                 variant="h1"
@@ -89,6 +143,59 @@ export default function HeroSection() {
               </Reveal>
             </Stack>
           </Reveal>
+          <Box sx={{
+            width: '50%',
+            height: textHeight,
+            right: 0,
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            display: {xs: "none", sm: "none", md: "block"}
+          }}
+            ref={graphRef}
+            onMouseDown={() => {
+              if (!fgRef.current) return;
+              // Handle logic here
+            }}
+          >
+            <ForceGraph
+              width={graphWidth}
+              height={textHeight}
+              showNavInfo={false}
+              backgroundColor="rgba(0,0,0,0)"
+              graphData={data}
+              cooldownTicks={Infinity}
+              cooldownTime={Infinity}
+              ref={fgRef}
+              nodeColor={() => getComputedStyle(document.documentElement).getPropertyValue('--color-brand').trim()}
+              nodeOpacity={0.9}
+              linkColor={() => getComputedStyle(document.documentElement).getPropertyValue('--color-text-primary').trim()}
+              linkWidth={0.8}
+              enableNodeDrag={false}
+              enableNavigationControls={false}
+              onEngineTick={() => {
+                const fg = fgRef.current;
+                if (!fg || fgInitialized) return;
+                setFgInitialized(true);
+                beginOrbit();
+
+                fg.d3Force('drift', () => {
+                  const time = Date.now() * 0.001; // Get time in seconds
+                  data.nodes.forEach((node, i) => {
+                    node.vx += Math.sin(time + i) * 0.2;
+                    node.vy += Math.cos(time + i * 1.1) * 0.2;
+                    node.vz += Math.sin(time * 0.8 + i) * 0.2;
+                  });
+
+                  const scene = fg.scene();
+                  const color = getComputedStyle(document.documentElement).getPropertyValue('--color-text-primary').trim();
+                  const near = 50;
+                  const far = 2000;
+                  scene.fog = new THREE.Fog(color, near, far);
+                });
+              }}
+            />
+          </Box>
         </Box>
       </Container >
     </Box >

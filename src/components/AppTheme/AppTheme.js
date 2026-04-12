@@ -9,7 +9,7 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export default function AppTheme({ children }) {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode);
