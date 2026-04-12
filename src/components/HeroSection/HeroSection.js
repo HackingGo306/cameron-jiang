@@ -1,6 +1,5 @@
 "use client";
 
-import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
@@ -134,6 +133,11 @@ export default function HeroSection() {
                         backgroundColor: "var(--color-bg-surface-soft)",
                         borderColor: "var(--color-border-subtle)",
                         color: "text.secondary",
+                        transition: "border-color 0.5s ease, color 0.5s ease",
+                        ':hover': {
+                          borderColor: "var(--color-brand)",
+                          color: "var(--color-text-primary)"
+                        }
                       }}
                     />
                   ))}

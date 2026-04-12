@@ -1,4 +1,4 @@
-import AboutSection from "../components/AboutSection/AboutSection";
+import ProjectSection from "../components/ProjectSection/ProjectSection";
 import ContactCta from "../components/ContactCta/ContactCta";
 import HeroSection from "../components/HeroSection/HeroSection";
 import SiteHeader from "../components/SiteHeader/SiteHeader";
@@ -9,7 +9,7 @@ export default function Home() {
     <main className={styles.page}>
       <SiteHeader />
       <HeroSection />
-      <AboutSection />
+      <ProjectSection />
       <ContactCta />
     </main>
   );

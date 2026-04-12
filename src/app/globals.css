@@ -31,6 +31,7 @@ section[id] {
   --color-bg-surface-soft: rgba(245, 249, 252, 0.86);
   --color-bg-surface-tint: rgba(15, 111, 255, 0.08);
   --color-border-subtle: rgba(122, 145, 173, 0.22);
+  --color-bg-soft-card: linear-gradient(0deg, rgba(100, 100, 100, 0.05), transparent);
   --color-divider: rgba(122, 145, 173, 0.16);
   --color-text-primary: #0c1728;
   --color-text-secondary: #566579;
@@ -59,6 +60,7 @@ section[id] {
   --color-bg-surface-strong: rgba(16, 29, 51, 0.94);
   --color-bg-surface-soft: rgba(14, 26, 46, 0.82);
   --color-bg-surface-tint: rgba(108, 182, 255, 0.12);
+  --color-bg-soft-card: linear-gradient(0deg, rgba(255, 255, 255, 0.05), transparent);
   --color-border-subtle: rgba(134, 160, 190, 0.18);
   --color-divider: rgba(134, 160, 190, 0.14);
   --color-text-primary: #e7f0ff;

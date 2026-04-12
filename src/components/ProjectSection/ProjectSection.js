@@ -9,6 +9,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import ProjectItem from "../ProjectItem/ProjectItem";
+import Skills from "../Skills/Skills";
 
 const projects = [
   {
@@ -73,7 +74,7 @@ const projects = [
   },
 ]
 
-export default function AboutSection() {
+export default function ProjectSection() {
 
   const ref = useRef(null);
   const scrollRef = useRef(null);
@@ -114,7 +115,7 @@ export default function AboutSection() {
             aspectRatio: "1",
             borderRadius: "999px",
             background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
-            filter: "blur(28px)",
+            // filter: "blur(28px)",
             opacity: 0.7,
             pointerEvents: "none",
           },
@@ -122,7 +123,6 @@ export default function AboutSection() {
       >
         <motion.div
           style={{
-            // y,
             width: "50%",
             height: "fit-content",
             paddingTop: "7rem",
@@ -137,9 +137,9 @@ export default function AboutSection() {
               minHeight: { lg: 420 },
               p: { xs: 3, md: 4 },
               borderRadius: { xs: "28px", md: "34px" },
-              border: "1px solid var(--color-border-subtle)",
-              background: "var(--gradient-panel-strong)",
-              boxShadow: "0 4px 24px var(--color-box-shadow)",
+              // border: "1px solid var(--color-border-subtle)",
+              // background: "var(--gradient-panel-strong)",
+              // boxShadow: "0 4px 24px var(--color-box-shadow)",
               backdropFilter: "blur(20px)",
               overflow: "hidden",
               "&::before": {
@@ -150,7 +150,7 @@ export default function AboutSection() {
                 width: "72%",
                 aspectRatio: "1",
                 borderRadius: "999px",
-                background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
+                // background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
                 filter: "blur(24px)",
                 opacity: 0.95,
               },
@@ -194,13 +194,16 @@ export default function AboutSection() {
         </motion.div>
 
 
-        <div style={{ width: "48%", paddingLeft: '1.5%', paddingRight: '1.5%', overflow: "hidden", paddingTop: "7rem" }} ref={scrollRef}>
+        <div style={{ width: "48%", paddingLeft: '1.5%', paddingRight: '1.5%', paddingTop: "7rem" }} ref={scrollRef}>
           <motion.div style={{ y }}>
             <Stack spacing={2.5}>
               {projects.map((project, i) => (
                 <ProjectItem key={project.title + "_" + i} project={project} />
               ))}
             </Stack>
+            <Box sx={{ position: "absolute", paddingTop: "1rem", bottom: 0, right: 0, transform: "translateY(100%) translateY(2rem)", width: '216%', height: 'fit-content' }}>
+              <Skills></Skills>
+            </Box>
           </motion.div>
         </div>
       </Box>

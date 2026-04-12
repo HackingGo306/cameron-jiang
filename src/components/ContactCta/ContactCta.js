@@ -15,7 +15,7 @@ import SvgIcon from "@mui/material/SvgIcon";
 export default function ContactCta() {
 
   return (
-    <Reveal y={34} delay={0.12} duration={1.05}>
+    <Reveal y={34} delay={0.12} duration={1.05} sx={{ mt: { xs: 8, md: 10 } }}>
       <Box component="section" id="contact" sx={{
         pb: { xs: 8, md: 10 },
       }}>
@@ -61,7 +61,7 @@ export default function ContactCta() {
                         >
                           Email me
                         </Button>
-                        <Button variant="outlined" startIcon={<GitHubIcon />}  component="a" href="https://github.com/HackingGo306" target="_blank">
+                        <Button variant="outlined" startIcon={<GitHubIcon />} component="a" href="https://github.com/HackingGo306" target="_blank">
                           GitHub
                         </Button>
                         <Button

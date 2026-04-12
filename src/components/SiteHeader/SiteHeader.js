@@ -96,7 +96,7 @@ export default function SiteHeader() {
 
               <Stack
                 direction="row"
-                spacing={1}
+                spacing={{ xs: 1, sm: 2, md: 5 }}
                 alignItems="center"
                 sx={{ display: { xs: "none", md: "flex" } }}
               >
