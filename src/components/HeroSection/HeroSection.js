@@ -11,23 +11,11 @@ import { ArrowDownward } from "@mui/icons-material";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { genRandomTree } from "@/utils/utils";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
 const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
-function genRandomTree(N = 350, reverse = false) {
-  const obj = {
-    nodes: [...Array(N).keys()].map(i => ({ id: i })),
-    links: [...Array(N).keys()]
-      .filter(id => id)
-      .map(id => ({
-        [reverse ? 'target' : 'source']: id,
-        [reverse ? 'source' : 'target']: Math.round(Math.random() * (id - 1))
-      }))
-  };
-
-  return obj;
-}
 
 export default function HeroSection() {
   const textRef = useRef(null);
@@ -36,7 +24,7 @@ export default function HeroSection() {
   const [textHeight, setTextHeight] = useState(0);
   const [graphWidth, setGraphWidth] = useState(0);
   const [fgInitialized, setFgInitialized] = useState(false);
-  const data = useMemo(() => genRandomTree(), []);
+  const data = useMemo(() => genRandomTree(350), []);
 
   useEffect(() => {
     setTextHeight(textRef.current?.scrollHeight || 0);

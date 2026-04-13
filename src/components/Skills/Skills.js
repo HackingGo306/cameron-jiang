@@ -1,5 +1,6 @@
 "use client"
 
+import { DiscordIcon } from "@/utils/utils";
 import { Box, Stack, Typography } from "@mui/material";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
@@ -113,7 +114,7 @@ export default function Skills() {
     },
     {
       name: "Discord.js",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/discordjs/discordjs-original.svg" />
+      icon: <img width={56} height={56} src="djs_mono.png" />
     },
     {
       name: "Three.js",
@@ -178,11 +179,12 @@ export default function Skills() {
               <Stack direction="column" justifyContent="center" spacing={0.5}>
                 <Box sx={{
                   alignSelf: "center",
+                  padding: 0.5,
                   '& img': {
                     filter: 'grayscale(70%)',
                     transition: 'filter 0.1s ease',
                     ':hover': {
-                      filter: 'grayscale(0%) brightness(110%) drop-shadow(0 0 3px var(--color-brand-strong))',
+                      filter: 'grayscale(0%) brightness(110%) drop-shadow(0 0 2px var(--color-brand-strong))',
                     }
                   }
                 }}>

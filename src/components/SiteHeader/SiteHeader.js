@@ -44,100 +44,99 @@ export default function SiteHeader() {
         top: 0,
         backgroundColor: "transparent",
         boxShadow: "none",
-      }}
-    >
-      <Reveal y={-18} duration={0.7} amount={0.01}>
-        <motion.div
-          animate={{ y: hidden ? -100 : 0 }}
-          transition={{ duration: 0.32, ease: "easeInOut" }}
-        >
-          <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 }, width: "calc(100% - 4rem)" }}>
-            <Toolbar
-              disableGutters
-              sx={{
-                minHeight: { xs: 64, md: 72 },
-                justifyContent: "space-between",
-                gap: 2,
-                px: { xs: 2, md: 3 },
-                borderRadius: "2rem",
-                border: "1px solid var(--color-border-subtle)",
-                background: "linear-gradient(180deg, var(--color-divider) 0%, var(--color-bg-surface-tint) 100%)",
-              }}
-            >
-              <Stack direction="row" spacing={1.5} alignItems="center">
-                <Box
-                  sx={{
-                    display: "grid",
-                    placeItems: "center",
-                    width: 44,
-                    height: 44,
-                    borderRadius: "999px",
-                    border: "1px solid var(--color-border-subtle)",
-                    background:
-                      "radial-gradient(circle at 30% 30%, var(--color-brand-soft), transparent 70%), var(--color-bg-surface-soft)",
-                    color: "text.primary",
-                    fontSize: "0.9rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.14em",
-                  }}
-                >
-                  CJ
-                </Box>
-                <Box>
-                  <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.1 }}>
-                    Cameron Jiang
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Software engineer
-                  </Typography>
-                </Box>
-              </Stack>
-
-              <Stack
-                direction="row"
-                spacing={{ xs: 1, sm: 2, md: 5 }}
-                alignItems="center"
-                sx={{ display: { xs: "none", md: "flex" } }}
-              >
-                {navItems.map((item) => (
-                  <Button
-                    key={item.label}
-                    color="inherit"
-                    component="a"
-                    href={item.href}
-                    sx={{
-                      color: "text.primary",
-                      padding: 1.5,
-                      paddingX: 2,
-                      "&:hover": {
-                        backgroundColor: item.cursorType === "restricted" ? "transparent" : "var(--color-bg-surface-tint)",
-                        cursor: item.cursorType === "restricted" ? "not-allowed" : "pointer",
-                      },
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                ))}
-              </Stack>
-
-              <IconButton
-                color="inherit"
-                onClick={toggleTheme}
+      }}>
+      <motion.div
+        animate={{ y: hidden ? -100 : 0 }}
+        transition={{ duration: 0.32, ease: "easeInOut" }}
+      >
+        <Container maxWidth="xxl" sx={{ py: { xs: 1.5, md: 2 }, width: "calc(100% - 4rem)" }}>
+          <Toolbar
+            disableGutters
+            sx={{
+              minHeight: { xs: 64, md: 72 },
+              justifyContent: "space-between",
+              gap: 2,
+              px: { xs: 2, md: 3 },
+              borderRadius: "2rem",
+              border: "1px solid var(--color-border-subtle)",
+              background: "linear-gradient(180deg, var(--color-divider) 0%, var(--color-bg-surface-tint) 100%)",
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
+            }}
+          >
+            <Stack direction="row" spacing={1.5} alignItems="center">
+              <Box
                 sx={{
-                  display: { xs: "none", sm: "inline-flex" },
+                  display: "grid",
+                  placeItems: "center",
+                  width: 44,
+                  height: 44,
+                  borderRadius: "999px",
+                  border: "1px solid var(--color-border-subtle)",
+                  background:
+                    "radial-gradient(circle at 30% 30%, var(--color-brand-soft), transparent 70%), var(--color-bg-surface-soft)",
                   color: "text.primary",
-                  backgroundColor: "var(--color-bg-surface-soft)",
-                  "&:hover": {
-                    backgroundColor: "var(--color-bg-surface-tint)",
-                  },
+                  fontSize: "0.9rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.14em",
                 }}
               >
-                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-              </IconButton>
-            </Toolbar>
-          </Container>
-        </motion.div>
-      </Reveal>
-    </AppBar>
+                CJ
+              </Box>
+              <Box>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.1 }}>
+                  Cameron Jiang
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Software engineer
+                </Typography>
+              </Box>
+            </Stack>
+
+            <Stack
+              direction="row"
+              spacing={{ xs: 1, sm: 2, md: 5 }}
+              alignItems="center"
+              sx={{ display: { xs: "none", md: "flex" } }}
+            >
+              {navItems.map((item) => (
+                <Button
+                  key={item.label}
+                  color="inherit"
+                  component="a"
+                  href={item.href}
+                  sx={{
+                    color: "text.primary",
+                    padding: 1.5,
+                    paddingX: 2,
+                    "&:hover": {
+                      backgroundColor: item.cursorType === "restricted" ? "transparent" : "var(--color-bg-surface-tint)",
+                      cursor: item.cursorType === "restricted" ? "not-allowed" : "pointer",
+                    },
+                  }}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </Stack>
+
+            <IconButton
+              color="inherit"
+              onClick={toggleTheme}
+              sx={{
+                display: { xs: "none", sm: "inline-flex" },
+                color: "text.primary",
+                backgroundColor: "var(--color-bg-surface-soft)",
+                "&:hover": {
+                  backgroundColor: "var(--color-bg-surface-tint)",
+                },
+              }}
+            >
+              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+          </Toolbar>
+        </Container>
+      </motion.div >
+    </AppBar >
   );
 }
