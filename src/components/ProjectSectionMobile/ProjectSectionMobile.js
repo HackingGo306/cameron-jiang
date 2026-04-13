@@ -7,10 +7,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ProjectItem from "../ProjectItem/ProjectItem";
-import Skills from "../Skills/Skills";
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, scale } from "motion/react";
-import { useEffect } from "react";
+import SkillsParallax from "../SkillsParallax/SkillsParallax";
 
 const projects = [
   {
@@ -83,45 +80,6 @@ const projects = [
 ];
 
 export default function ProjectSectionMobile() {
-  // const stickyRef = useRef(null);
-  // const [stickyStyle, setStickyStyle] = useState({
-  //   background: "transparent",
-  //   boxShadow: "none",
-  //   backdropFilter: "none",
-  //   WebkitBackdropFilter: "none",
-  // });
-  // const [stickyTextStyle, setStickyTextStyle] = useState({
-
-  // });
-
-  // const { scrollYProgress } = useScroll({
-  //   target: stickyRef,
-  //   offset: ["start start", `end end`],
-  // });
-
-  // useMotionValueEvent(scrollYProgress, "change", (current) => {
-  //   if (current <= 0) {
-  //     setStickyStyle({
-  //       background: "linear-gradient(180deg, var(--color-bg-surface-soft) 10%, transparent 100%)",
-  //       backdropFilter: "blur(1px)",
-  //       WebkitBackdropFilter: "blur(1px)",
-  //     });
-  //     setStickyTextStyle({
-  //       fontSize: "1.75rem",
-  //     });
-  //   } else {
-  //     setStickyStyle({
-  //       background: "transparent",
-  //       boxShadow: "none",
-  //       backdropFilter: "none",
-  //       WebkitBackdropFilter: "none",
-  //     });
-  //     setStickyTextStyle({
-  //       fontSize: "2.6rem",
-  //     });
-  //   }
-  // });
-
   return (
     <Box
       component="section"
@@ -143,47 +101,28 @@ export default function ProjectSectionMobile() {
         },
       }}
     >
-      <Box
-        sx={{
-          zIndex: 3,
-          mb: 2,
-          // ...stickyStyle,
-
-          transition: "scale 0.2s ease",
-        }}
-        // ref={stickyRef}
-      >
-        <Box
+      <Container maxWidth="md">
+        <Typography
+          variant="h1"
           sx={{
-            px: 2,
-            py: 1.5,
+            fontSize: "2.6rem",
+            backgroundImage: 'var(--mobile-gradient-hero)',
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            textAlign: "center",
+            mb: 2,
           }}
         >
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: "2.6rem",
-              backgroundImage: 'var(--mobile-gradient-hero)',
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-              textAlign: "center",
-              // ...stickyTextStyle,
-
-              transition: "all 0.2s ease",
-            }}
-          >
-            My Projects
-          </Typography>
-        </Box>
-      </Box>
-      <Container maxWidth="md">
+          My Projects
+        </Typography>
         <Stack spacing={2.5}>
           <Box
             sx={{
               p: 2.5,
+              mb: 2.5,
               borderRadius: "1.75rem",
-              background: "var(--gradient-panel)",
+              background: "var(--color-bg-soft-card)",
               boxShadow: "0 18px 30px var(--color-box-shadow)",
             }}
           >
@@ -218,8 +157,7 @@ export default function ProjectSectionMobile() {
               <ProjectItem smallButtons={true} key={project.title + "_" + i} project={project} />
             ))}
           </Stack>
-
-          <Skills />
+          <SkillsParallax />
         </Stack>
       </Container>
     </Box>

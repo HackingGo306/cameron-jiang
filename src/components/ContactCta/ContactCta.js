@@ -51,11 +51,11 @@ export default function ContactCta() {
 
   return (
     <Reveal y={34} delay={0.12} duration={1.05}>
-      <Box component="section" id="contact" sx={{
+      <Box component="section" sx={{
         pb: { xs: 8, md: 10 },
         pt: { xs: 8, lg: 3, xl: 0 },
       }}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xxl">
           <ScrollBlock hover={false}>
             <Box
               sx={{
@@ -110,7 +110,8 @@ export default function ContactCta() {
                           Chat
                         </Button>
                         <Tooltip describeChild title="Currently unavailable">
-                          <Button variant="text" endIcon={<LaunchRoundedIcon />}>
+                          <Button variant="text" endIcon={<LaunchRoundedIcon />} id="contact">
+                            {/* Link down here so that the whole contact is scrolled into view */}
                             Resume
                           </Button>
                         </Tooltip>
@@ -128,7 +129,7 @@ export default function ContactCta() {
         sx={{
           position: 'absolute',
           width: '40%',
-          height: { md: '100%', lg: '130%', xl: '140%'},
+          height: { md: '100%', lg: '130%', xl: '140%' },
           transform: 'translateY(20%) translateX(25%)',
           right: 0,
           bottom: 0,

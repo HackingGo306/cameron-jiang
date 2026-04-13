@@ -104,7 +104,7 @@ export default function ProjectSection() {
   });
 
   return (
-    <Container maxWidth="xl" sx={{ position: "relative", height: scrollElementHeight }} ref={ref}>
+    <Container maxWidth="xxl" sx={{ position: "relative", height: scrollElementHeight }} ref={ref}>
       <Box
         sx={{
           position: "sticky",

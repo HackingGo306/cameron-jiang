@@ -6,6 +6,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { useState } from "react";
+import { skills } from "@/utils/utils";
 
 export default function Skills() {
 
@@ -22,113 +23,6 @@ export default function Skills() {
     fixedWidth: "6rem", // Set a fixed width for each slide
     gap: '1rem', // Gap between slides
   });
-
-  const skills = [
-    {
-      name: 'Github',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />
-    },
-    {
-      name: 'React',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" />
-    },
-    {
-      name: 'Next.js',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" />
-    },
-    {
-      name: "JavaScript",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" />
-    },
-    {
-      name: 'Node.js',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" />
-    },
-    {
-      name: "HTML",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" />
-    },
-    {
-      name: "CSS",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" />
-    },
-    {
-      name: 'Java',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" />
-    },
-    {
-      name: 'Python',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" />
-    },
-    {
-      name: 'TensorFlow',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg" />
-    },
-    {
-      name: 'PyTorch',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" />
-    },
-    {
-      name: 'MySQL',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" />
-    },
-    {
-      name: 'MariaDB',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" />
-    },
-    {
-      name: 'Redis',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" />
-    },
-    {
-      name: "PHP",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" />
-    },
-    {
-      name: 'Linux',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" />
-    },
-    {
-      name: 'C++',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" />
-    },
-    {
-      name: 'C#',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" />
-    },
-    {
-      name: 'Unity',
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg" />
-    },
-    {
-      name: "Blender",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg" />
-    },
-    {
-      name: "MUI",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg" />
-    },
-    {
-      name: "Motion",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" />
-    },
-    {
-      name: "Discord.js",
-      icon: <img width={56} height={56} src="djs_mono.png" />
-    },
-    {
-      name: "Three.js",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg" />
-    },
-    {
-      name: "Visual Studio",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/visualstudio/visualstudio-original.svg" />
-    },
-    {
-      name: "VS Code",
-      icon: <img width={56} height={56} src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" />
-    }
-  ]
 
   return (
     <Box sx={{
