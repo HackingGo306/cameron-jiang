@@ -65,7 +65,7 @@ export default function SiteHeader() {
         transition={{ duration: 0.32, ease: "easeInOut" }}
       >
         <Container
-          maxWidth="xl"
+          maxWidth="xxl"
           sx={{
             py: { xs: 1, md: 2 },
             px: { xs: 1.5, sm: 2, md: 3 },
@@ -209,7 +209,7 @@ export default function SiteHeader() {
             </Stack>
           </Toolbar>
 
-          <Collapse in={menuOpen} unmountOnExit>
+          <Collapse in={menuOpen} sx={{position: "absolute", right: '1rem'}} unmountOnExit>
             <Box
               sx={{
                 mt: 1,

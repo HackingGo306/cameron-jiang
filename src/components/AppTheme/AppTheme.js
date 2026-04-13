@@ -40,6 +40,16 @@ export default function AppTheme({ children }) {
   const theme = useMemo(
     () =>
       createTheme({
+        breakpoints: {
+          values: {
+            xs: 0,
+            sm: 500,
+            md: 900,
+            lg: 1150,
+            xl: 1375,
+            xxl: 1536,
+          },
+        },
         palette: {
           mode,
           ...(mode === "light"

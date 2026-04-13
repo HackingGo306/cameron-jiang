@@ -14,18 +14,27 @@ import { useRef, useCallback, useMemo, useState } from "react";
 import { Tooltip } from "@mui/material";
 import { DiscordIcon } from "@/utils/utils";
 import { genRandomTree } from "@/utils/utils";
+import { useMediaQuery, useTheme } from "@mui/material";
 const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
 
 export default function ContactCta() {
-
+  const theme = useTheme();
   const fgRef = useRef(null);
   const parentRef = useRef(null);
-  const distance = 500;
   const data = useMemo(() => genRandomTree(), []);
   const [fgInitialized, setFgInitialized] = useState(false);
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const distance = useMemo(() => {
+    if (isMediumScreen) return 700;
+    if (isLargeScreen) return 550;
+    return 500;
+  }, [isLargeScreen, isMediumScreen, parentRef]);
+
   const beginOrbit = useCallback(() => {
     if (!fgRef.current) return;
     fgRef.current.cameraPosition({ z: distance });
+    console.log("Starting orbit with distance:", distance);
 
     let angle = 0;
     const interval = setInterval(() => {
@@ -38,12 +47,13 @@ export default function ContactCta() {
     }, 10);
 
     return () => clearInterval(interval);
-  }, [fgRef]);
+  }, [fgRef, distance]);
 
   return (
     <Reveal y={34} delay={0.12} duration={1.05}>
       <Box component="section" id="contact" sx={{
         pb: { xs: 8, md: 10 },
+        pt: { xs: 8, lg: 3, xl: 0 },
       }}>
         <Container maxWidth="xl">
           <ScrollBlock hover={false}>
@@ -51,7 +61,6 @@ export default function ContactCta() {
               sx={{
                 p: { xs: 3, md: 5 },
                 borderRadius: '2rem',
-                // border: "1px solid var(--color-border-subtle)",
                 boxShadow: "0 24px 24px var(--color-box-shadow)",
                 background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%)',
               }}
@@ -69,7 +78,7 @@ export default function ContactCta() {
                     <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.2em" }}>
                       Contact
                     </Typography>
-                    <Typography variant="h2" sx={{ fontSize: { xs: "2.2rem", md: "3.2rem" } }}>
+                    <Typography variant="h2" sx={{ fontSize: '3.2rem' }}>
                       Like what you see? <span style={{ backgroundImage: "linear-gradient(to right, var(--color-brand), var(--color-brand-strong))", backgroundClip: 'text', color: 'transparent' }}>Say Hi.</span>
                     </Typography>
                     <Typography sx={{ color: "text.secondary", lineHeight: 1.8, fontSize: "1.05rem" }}>
@@ -119,7 +128,7 @@ export default function ContactCta() {
         sx={{
           position: 'absolute',
           width: '40%',
-          height: '140%',
+          height: { md: '100%', lg: '130%', xl: '140%'},
           transform: 'translateY(20%) translateX(25%)',
           right: 0,
           bottom: 0,

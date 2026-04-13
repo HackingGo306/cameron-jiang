@@ -9,22 +9,31 @@ import Typography from "@mui/material/Typography";
 import { Reveal } from "../Motion/Reveal";
 import { ArrowDownward } from "@mui/icons-material";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { use, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { genRandomTree } from "@/utils/utils";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
 const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
 
 export default function HeroSection() {
+  const theme = useTheme();
   const textRef = useRef(null);
   const graphRef = useRef(null);
   const fgRef = useRef(null);
   const [textHeight, setTextHeight] = useState(0);
   const [graphWidth, setGraphWidth] = useState(0);
+  const [graphHeight, setGraphHeight] = useState(0);
   const [fgInitialized, setFgInitialized] = useState(false);
-  const data = useMemo(() => genRandomTree(350), []);
+
+  const heroRef = useRef(null);
+  const chipsRef = useRef(null);
+  const [mobileHeroMinHeight, setMobileHeroMinHeight] = useState(0);
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('xl'));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const data = useMemo(() => genRandomTree(isLargeScreen ? 350 : 300), [isLargeScreen]);
 
   useEffect(() => {
     setTextHeight(textRef.current?.scrollHeight || 0);
@@ -32,29 +41,49 @@ export default function HeroSection() {
 
   useEffect(() => {
     setGraphWidth(graphRef.current?.scrollWidth || 0);
-  }, [graphRef]);
+    setGraphHeight(graphRef.current?.scrollHeight || 0);
+  }, [graphRef, textHeight]);
 
-  const distance = 1200;
+  useEffect(() => {
+    if (!heroRef.current || !chipsRef.current) return;
+    setMobileHeroMinHeight(heroRef.current.scrollHeight - chipsRef.current.scrollHeight);
+  }, [heroRef, chipsRef]);
+
+  const distance = useMemo(() => {
+    if (isMediumScreen) return 600 * (graphHeight * 2 / graphWidth);
+    return isLargeScreen ? 1200 : Math.pow(10, 6) / Math.pow(Math.min(graphWidth, graphHeight), 1.03);
+  }, [isLargeScreen, isMediumScreen, graphWidth, graphHeight]);
+
   const beginOrbit = useCallback(() => {
     if (!fgRef.current) return;
     fgRef.current.cameraPosition({ z: distance });
 
     let angle = 0;
-    const interval = setInterval(() => {
-      if (!fgRef.current) return;
-      fgRef.current.cameraPosition({
-        x: distance * Math.sin(angle),
-        z: distance * Math.cos(angle)
-      });
-      angle += Math.PI / 4800;
-    }, 10);
+    if (!isMediumScreen) {
+      const interval = setInterval(() => {
+        if (!fgRef.current) return;
+        fgRef.current.cameraPosition({
+          x: distance * Math.sin(angle),
+          z: distance * Math.cos(angle)
+        });
+        angle += Math.PI / 4800;
+      }, 10);
 
-    return () => clearInterval(interval);
-  }, [fgRef]);
+      return () => clearInterval(interval);
+    }
+  }, [fgRef, distance]);
 
   return (
-    <Box component="section" id="about" sx={{ pt: { xs: 3, md: 5 }, pb: { xs: 7, md: 10 } }}>
-      <Container maxWidth="xl">
+    <Box component="section" id="about" sx={{
+      pt: { xs: 1, sm: 3, md: 2, xl: 5 },
+      pb: { xs: 7, md: 10 },
+      px: { xs: 1, sm: 'unset'},
+      minHeight: { xs: 'calc(100vh - 6rem)', sm: 'unset' },
+      // height: { xs: `calc(100vh - 6rem)`, sm: 'unset' },
+      // minHeight: { xs: `${mobileHeroMinHeight}px`, sm: 'unset' },
+      // overflow: { xs: 'hidden', sm: 'unset' },
+    }}>
+      <Container maxWidth="xxl">
         <Box
           sx={{
             display: "flex",
@@ -63,38 +92,43 @@ export default function HeroSection() {
             height: "fit-content",
             width: '100%'
           }}
+          ref={heroRef}
         >
-          <Reveal x={-28} y={20} duration={0.72} delay={0.06} sx={{ zIndex: 1, width: { xs: "100%", sm: "100%", md: "50%" }, position: "relative" }} ref={textRef}>
-            <Stack spacing={{ xs: 3.5, md: 4.25 }}>
+          <Reveal x={-28} y={20} duration={0.72} delay={0.06} sx={{ zIndex: 1, width: { xs: "100%", sm: "100%", md: "65%", lg: "55%", xl: "50%" }, position: "relative" }} ref={textRef}>
+            <Stack spacing={{ xs: 3.5, md: 4, lg: 4.25 }}>
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: "3rem", md: "5rem" },
+                  fontSize: { xs: "4rem", md: "4.5rem", lg: "5rem" },
                   backgroundImage: "var(--gradient-hero)",
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
+                  textAlign: { xs: "center", sm: "left" }
                 }}
               >
                 Hi, I'm Cameron
               </Typography>
 
               <Stack spacing={2.25}>
-                <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "4rem" } }}>
+                <Typography variant="h2" sx={{
+                  fontSize: { xs: "2rem", md: "3.25rem", xl: "4rem" },
+                  textAlign: { xs: "center", sm: "left" }
+                }}>
                   I build scalable platforms, integrate AI, and turn abstract ideas into reality
                 </Typography>
 
                 <Typography
                   variant="h5"
                   color="text.secondary"
-                  sx={{ maxWidth: 760, fontSize: { xs: "1.05rem", md: "1.35rem" }, lineHeight: 1.6 }}
+                  sx={{ maxWidth: 760, fontSize: { xs: "1.05rem", md: "1.35rem", xl: "1.5rem" }, lineHeight: 1.6 }}
                 >
                   I care about cohesiveness, accessibility, and impact in my work
                 </Typography>
               </Stack>
 
               <Reveal delay={0.12}>
-                <Stack direction={{ xs: "column", sm: "row" }} sx={{ mt: { xs: 0.5, md: 1 } }} spacing={1.5}>
+                <Stack direction={{ xs: "column", sm: "row" }} sx={{ mt: { xs: 0, xl: 1 } }} spacing={1.5}>
                   <Button
                     variant="contained"
                     size="large"
@@ -110,8 +144,8 @@ export default function HeroSection() {
                 </Stack>
               </Reveal>
 
-              <Reveal delay={0.18}>
-                <Stack direction="row" sx={{ mt: { xs: 1.5, md: 2.5 } }} spacing={1} useFlexGap flexWrap="wrap">
+              <Reveal delay={0.18} ref={chipsRef}>
+                <Stack direction="row" sx={{ mt: { xs: 2.5, sm: 0.5, xl: 2.5 } }} spacing={1} useFlexGap flexWrap="wrap">
                   {focusAreas.map((item) => (
                     <Chip
                       key={item}
@@ -135,9 +169,9 @@ export default function HeroSection() {
           </Reveal>
           <Box sx={{
             position: 'absolute',
-            width: '55%',
-            height: (textHeight) * 1.15,
-            transform: 'translateY(-7%)',
+            width: { md: '70%', lg: '50%', xl: '55%' },
+            height: { md: textHeight * 1.25, lg: textHeight * 1.15 },
+            transform: { md: "translateX(40%) translateY(-10%)", lg: "translateY(-15%)", xl: "translateY(-7%)" },
             right: 0,
             overflow: "hidden",
             display: "flex",
@@ -145,14 +179,10 @@ export default function HeroSection() {
             display: { xs: "none", sm: "none", md: "block" },
           }}
             ref={graphRef}
-            onMouseDown={() => {
-              if (!fgRef.current) return;
-              // Handle logic here
-            }}
           >
             <ForceGraph
               width={(graphWidth)}
-              height={(textHeight) * 1.15}
+              height={(graphHeight)}
               showNavInfo={false}
               backgroundColor="rgba(0, 0, 0, 0)"
               graphData={data}
