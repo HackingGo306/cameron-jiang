@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import ProjectItem from "../ProjectItem/ProjectItem";
 import Skills from "../Skills/Skills";
@@ -94,7 +94,14 @@ export default function ProjectSection() {
     setStickyElementHeight(stickyRef.current?.scrollHeight || 0);
   }, [stickyRef]);
 
+
   const y = useTransform(scrollYProgress, [0, 1], [0, (-scrollElementHeight + stickyElementHeight)]);
+  const [gradientRotate, setGradientRotate] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const gradientRotate = latest * 100;
+    setGradientRotate(gradientRotate);
+  });
 
   return (
     <Container maxWidth="xl" sx={{ position: "relative", height: scrollElementHeight }} ref={ref}>
@@ -115,7 +122,6 @@ export default function ProjectSection() {
             aspectRatio: "1",
             borderRadius: "999px",
             background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
-            // filter: "blur(28px)",
             opacity: 0.7,
             pointerEvents: "none",
           },
@@ -137,9 +143,6 @@ export default function ProjectSection() {
               minHeight: { lg: 420 },
               p: { xs: 3, md: 4 },
               borderRadius: { xs: "28px", md: "34px" },
-              // border: "1px solid var(--color-border-subtle)",
-              // background: "var(--gradient-panel-strong)",
-              // boxShadow: "0 4px 24px var(--color-box-shadow)",
               backdropFilter: "blur(20px)",
               overflow: "hidden",
               "&::before": {
@@ -150,7 +153,6 @@ export default function ProjectSection() {
                 width: "72%",
                 aspectRatio: "1",
                 borderRadius: "999px",
-                // background: "radial-gradient(circle, var(--color-ambient-tertiary), transparent 72%)",
                 filter: "blur(24px)",
                 opacity: 0.95,
               },
@@ -161,7 +163,10 @@ export default function ProjectSection() {
                 variant="h1"
                 sx={{
                   fontSize: { xs: "2rem", md: "4rem" },
-                  backgroundImage: "var(--gradient-hero)",
+                  backgroundImage: 'linear-gradient(135deg, var(--color-gradient-hero-one), var(--color-gradient-hero-two), var(--color-gradient-hero-one), var(--color-gradient-hero-two), var(--color-gradient-hero-one), var(--color-gradient-hero-two), var(--color-brand))',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: '200% 100%',
+                  backgroundPosition: `${gradientRotate}% 0%`,
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
@@ -202,7 +207,7 @@ export default function ProjectSection() {
               ))}
             </Stack>
             <Box sx={{ position: "absolute", paddingTop: "1rem", bottom: 0, right: 0, transform: "translateY(100%) translateY(2rem)", width: '216%', height: 'fit-content' }}>
-              <Skills></Skills>
+              <Skills />
             </Box>
           </motion.div>
         </div>

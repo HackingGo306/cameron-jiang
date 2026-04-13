@@ -4,13 +4,11 @@ import { Box, Stack, Typography } from "@mui/material";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/dist/css/splide.min.css";
-
-import { IoLogoJavascript } from "react-icons/io5";
-import { FaHtml5 } from "react-icons/fa6";
+import { useState } from "react";
 
 export default function Skills() {
 
-  const splideOptions = {
+  const [splideOptions, setSplideOptions] = useState({
     type: "loop", // Loop back to the beginning when reaching the end
     autoScroll: {
       pauseOnHover: false, // Do not pause scrolling when hovering over the carousel
@@ -22,7 +20,7 @@ export default function Skills() {
     pagination: false, // Hide pagination dots
     fixedWidth: "6rem", // Set a fixed width for each slide
     gap: '1rem', // Gap between slides
-  };
+  });
 
   const skills = [
     {
@@ -150,13 +148,43 @@ export default function Skills() {
           My Skills:
         </Typography>
       </Box>
-      <Box sx={{ flexGrow: 1, position: 'relative', border: '1px solid transparent', borderRadius: '2rem', paddingY: 1, overflow: 'hidden' }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          position: 'relative',
+          border: '1px solid transparent',
+          borderRadius: '2rem',
+          paddingY: 1,
+          overflow: 'hidden',
+        }}
+        onMouseEnter={() => setSplideOptions((prev) => ({
+          ...prev,
+          autoScroll: {
+            ...prev.autoScroll,
+            speed: 0.75, // Slow down scrolling on hover
+          },
+        }))}
+        onMouseLeave={() => setSplideOptions((prev) => ({
+          ...prev,
+          autoScroll: {
+            ...prev.autoScroll,
+            speed: 1.5, // Restore original speed when not hovering
+          },
+        }))}
+      >
         <Splide options={splideOptions} extensions={{ AutoScroll }}>
           {skills.map((skill) => (
             <SplideSlide key={skill.name}>
               <Stack direction="column" justifyContent="center" spacing={0.5}>
                 <Box sx={{
                   alignSelf: "center",
+                  '& img': {
+                    filter: 'grayscale(70%)',
+                    transition: 'filter 0.1s ease',
+                    ':hover': {
+                      filter: 'grayscale(0%) brightness(110%) drop-shadow(0 0 3px var(--color-brand-strong))',
+                    }
+                  }
                 }}>
                   {skill.icon}
                 </Box>

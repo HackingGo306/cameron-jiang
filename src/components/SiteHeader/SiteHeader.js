@@ -19,7 +19,7 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
-  { label: "Resume", href: "#resume" },
+  { label: "Resume", href: "#resume", cursorType: "restricted" },
 ];
 
 export default function SiteHeader() {
@@ -61,8 +61,7 @@ export default function SiteHeader() {
                 px: { xs: 2, md: 3 },
                 borderRadius: "2rem",
                 border: "1px solid var(--color-border-subtle)",
-                background: "var(--gradient-panel)",
-                backdropFilter: "blur(16px)",
+                background: "linear-gradient(180deg, var(--color-divider) 0%, var(--color-bg-surface-tint) 100%)",
               }}
             >
               <Stack direction="row" spacing={1.5} alignItems="center">
@@ -108,10 +107,11 @@ export default function SiteHeader() {
                     href={item.href}
                     sx={{
                       color: "text.primary",
-                      px: 1.5,
+                      padding: 1.5,
+                      paddingX: 2,
                       "&:hover": {
-                        backgroundColor: "var(--color-bg-surface-tint)",
-                        color: "text.primary",
+                        backgroundColor: item.cursorType === "restricted" ? "transparent" : "var(--color-bg-surface-tint)",
+                        cursor: item.cursorType === "restricted" ? "not-allowed" : "pointer",
                       },
                     }}
                   >
@@ -126,7 +126,6 @@ export default function SiteHeader() {
                 sx={{
                   display: { xs: "none", sm: "inline-flex" },
                   color: "text.primary",
-                  border: "1px solid var(--color-border-subtle)",
                   backgroundColor: "var(--color-bg-surface-soft)",
                   "&:hover": {
                     backgroundColor: "var(--color-bg-surface-tint)",

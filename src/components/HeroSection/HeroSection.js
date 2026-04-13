@@ -93,7 +93,7 @@ export default function HeroSection() {
 
               <Stack spacing={2.25}>
                 <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "4rem" } }}>
-                  I build project A, project B, project C, and other things
+                  I build scalable platforms, integrate AI, and turn abstract ideas into reality
                 </Typography>
 
                 <Typography
