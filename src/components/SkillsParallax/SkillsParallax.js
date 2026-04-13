@@ -26,7 +26,7 @@ function Parallax({ children, baseVelocity = 5 }) {
     clamp: false
   });
 
-  const x = useTransform(baseX, (v) => `${wrap(-25, -75, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(0, -50, v)}%`);
 
   const directionFactor = useRef(1);
   useAnimationFrame((t, delta) => {
@@ -72,19 +72,15 @@ export default function SkillsParallax() {
       >
         My Skills
       </Typography>
-      {[0, 7, 14].map((index) => (
-        <Parallax key={index} baseVelocity={10 * (2 * (index - 2 * Math.floor(index / 2)) - 1)} children={
-          skills.slice(index, index + 7).map((skill) => (
+      {[0, 12].map((index) => (
+        <Parallax key={index} baseVelocity={5 * ((index / 6) - 1)} children={
+          skills.slice(index, index + 12).map((skill) => (
             <Stack direction="column" justifyContent="center" spacing={0.5}>
               <Box sx={{
                 alignSelf: "center",
                 padding: 0.5,
                 '& img': {
                   filter: 'grayscale(70%)',
-                  transition: 'filter 0.1s ease',
-                  ':hover': {
-                    filter: 'grayscale(0%) brightness(110%) drop-shadow(0 0 2px var(--color-brand-strong))',
-                  }
                 }
               }}>
                 {skill.icon}

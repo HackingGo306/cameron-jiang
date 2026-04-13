@@ -1,4 +1,6 @@
 .parallax {
+  width: 100vw;
+  transform: translateX(-3rem);
   overflow: hidden;
   line-height: 0.8;
   margin: 0;
