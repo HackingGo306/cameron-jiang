@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Cameron Jiang | Software Engineer",
   description:
-    "A personal portfolio showcasing software projects, engineering strengths, and product-minded development work.",
+    "Hi, I’m Cameron, a CS student focused on AI and creative tech. Explore my projects, ideas, and ways to get in touch.",
 };
 
 export default function RootLayout({ children }) {

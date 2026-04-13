@@ -10,12 +10,22 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export default function AppTheme({ children }) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [mode, setMode] = useState("light");
+  const [storedTheme, setStoredTheme] = useState(prefersDarkMode ? "dark" : "light");
 
   useEffect(() => {
-    setMode(prefersDarkMode ? "dark" : "light");
+    if (sessionStorage.getItem("theme") && (sessionStorage.getItem("theme") === "light" || sessionStorage.getItem("theme") === "dark")) {
+      setStoredTheme(sessionStorage.getItem("theme"));
+    }
+    else {
+      setStoredTheme(prefersDarkMode ? "dark" : "light");
+    }
   }, [prefersDarkMode]);
+
+  useEffect(() => {
+    setMode(storedTheme);
+  }, [storedTheme]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", mode);
@@ -24,6 +34,7 @@ export default function AppTheme({ children }) {
 
   const toggleTheme = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    sessionStorage.setItem("theme", mode === "light" ? "dark" : "light");
   };
 
   const theme = useMemo(
