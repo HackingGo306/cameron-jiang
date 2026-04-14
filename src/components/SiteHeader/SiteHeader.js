@@ -94,21 +94,13 @@ export default function SiteHeader() {
             >
               <Box
                 sx={{
-                  display: "grid",
-                  placeItems: "center",
                   width: { xs: 40, md: 44 },
                   height: { xs: 40, md: 44 },
-                  borderRadius: "999px",
-                  border: "1px solid var(--color-border-subtle)",
-                  background:
-                    "radial-gradient(circle at 30% 30%, var(--color-brand-soft), transparent 70%), var(--color-bg-surface-soft)",
-                  color: "text.primary",
-                  fontSize: "0.9rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.14em",
+                  borderRadius: "8px",
+                  overflow: "hidden",
                 }}
               >
-                CJ
+                <img src="logo.png" width="100%" alt="logo" />
               </Box>
               <Box sx={{ minWidth: 0 }}>
                 <Typography
@@ -209,7 +201,7 @@ export default function SiteHeader() {
             </Stack>
           </Toolbar>
 
-          <Collapse in={menuOpen} sx={{position: "absolute", right: '1rem'}} unmountOnExit>
+          <Collapse in={menuOpen} sx={{ position: "absolute", right: '1rem' }} unmountOnExit>
             <Box
               sx={{
                 mt: 1,
