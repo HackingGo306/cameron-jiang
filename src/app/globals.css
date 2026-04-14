@@ -1,8 +1,131 @@
+:root {
+  color-scheme: light;
+  --color-bg-canvas: #f3f7fc;
+  --color-bg-surface: rgba(255, 255, 255, 0.76);
+  --color-bg-surface-strong: rgba(255, 255, 255, 0.94);
+  --color-bg-surface-soft: rgba(245, 249, 252, 0.86);
+  --color-bg-surface-tint: rgba(15, 111, 255, 0.08);
+  --color-border-subtle: rgba(122, 145, 173, 0.22);
+  --color-bg-soft-card: linear-gradient(
+    0deg,
+    rgba(100, 100, 100, 0.05),
+    transparent
+  );
+  --color-divider: rgba(122, 145, 173, 0.16);
+  --color-text-primary: #0c1728;
+  --color-text-secondary: #566579;
+  --color-brand: #0f6fff;
+  --color-brand-strong: #001aff;
+  --color-box-shadow: var(--color-border-subtle);
+  --color-brand-soft: rgba(15, 111, 255, 0.16);
+  --color-ball-one: rgba(108, 182, 255, 0.12);
+  --color-ball-two: rgba(45, 212, 191, 0.12);
+  --color-ambient-primary: rgba(15, 111, 255, 0.2);
+  --color-ambient-secondary: rgba(45, 212, 191, 0.16);
+  --color-ambient-tertiary: rgba(249, 179, 80, 0.14);
+  --color-grid-line: rgba(12, 23, 40, 0.06);
+  --gradient-hero: linear-gradient(135deg, #0066ff, #f825ff);
+  --color-gradient-hero-one: #0066ff;
+  --color-gradient-hero-two: #f825ff;
+  --mobile-gradient-hero: linear-gradient(45deg, #0800ff 0%, #00113d 100%);
+  --gradient-panel: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(240, 246, 252, 0.78)
+  );
+  --gradient-panel-strong: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(236, 243, 251, 0.88)
+  );
+  --gradient-page-overlay: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(12, 23, 40, 0.04) 100%
+  );
+  --mui-typography-primary: var(--color-text-primary);
+  --mui-typography-secondary: var(--color-text-secondary);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg-canvas: #000112;
+  --color-bg-surface: rgba(12, 22, 40, 0.8);
+  --color-bg-surface-strong: rgba(16, 29, 51, 0.94);
+  --color-bg-surface-soft: rgba(14, 26, 46, 0.82);
+  --color-bg-surface-tint: rgba(108, 182, 255, 0.12);
+  --color-bg-soft-card: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  --color-border-subtle: rgba(134, 160, 190, 0.18);
+  --color-divider: rgba(134, 160, 190, 0.14);
+  --color-text-primary: #e7f0ff;
+  --color-text-secondary: #9fb4d0;
+  --color-brand: #6cb6ff;
+  --color-brand-strong: #2f88f8;
+  --color-box-shadow: transparent;
+  --color-brand-soft: rgba(108, 182, 255, 0.18);
+  --color-ball-one: rgba(108, 182, 255, 0.1);
+  --color-ball-two: rgba(45, 212, 191, 0.1);
+  --color-ambient-primary: rgba(108, 182, 255, 0.24);
+  --color-ambient-secondary: rgba(212, 45, 126, 0.18);
+  --color-ambient-tertiary: rgba(206, 81, 255, 0.11);
+  --color-grid-line: rgba(159, 180, 208, 0.08);
+  --gradient-hero: linear-gradient(135deg, #5cadff, #e9b3ff);
+  --color-gradient-hero-one: #5cadff;
+  --color-gradient-hero-two: #e9b3ff;
+  --mobile-gradient-hero: linear-gradient(225deg, #ffffff, #72b1ff);
+  --gradient-panel: linear-gradient(
+    180deg,
+    rgba(16, 29, 51, 0.92),
+    rgba(9, 17, 31, 0.84)
+  );
+  --gradient-panel-strong: linear-gradient(
+    135deg,
+    rgba(21, 37, 64, 0.94),
+    rgba(10, 18, 33, 0.88)
+  );
+  --gradient-page-overlay: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(231, 240, 255, 0.04) 100%
+  );
+  --mui-typography-primary: var(--color-text-primary);
+  --mui-typography-secondary: var(--color-text-secondary);
+}
+
+::selection {
+  background: var(--color-brand-soft);
+  color: var(--color-text-primary);
+}
+
+/* Apply typography colors */
+.MuiTypography-root {
+  color: var(--mui-typography-primary);
+}
+
+.MuiTypography-colorTextSecondary {
+  color: var(--mui-typography-secondary);
+}
+
 html {
   scroll-behavior: smooth;
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 40% 55%, var(--color-ball-one) 0%, transparent 18%), radial-gradient(circle at 20% 75%, var(--color-ball-two) 0%, transparent 10%), var(--color-bg-canvas);
+  background:
+    radial-gradient(
+      circle at 40% 55%,
+      var(--color-ball-one) 0%,
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 20% 75%,
+      var(--color-ball-two) 0%,
+      transparent 10%
+    ),
+    var(--color-bg-canvas);
 }
 
 html::before {
@@ -13,9 +136,21 @@ html::before {
   pointer-events: none;
   transition: background 0.4s ease;
   background:
-    radial-gradient(circle at 14% 16%, var(--color-ambient-secondary) 0%, transparent 34%),
-    radial-gradient(circle at 88% 104%, var(--color-ambient-primary) 0%, transparent 40%),
-    radial-gradient(circle at 74% 48%, var(--color-ambient-tertiary) 0%, transparent 24%);
+    radial-gradient(
+      circle at 14% 16%,
+      var(--color-ambient-secondary) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 104%,
+      var(--color-ambient-primary) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 74% 48%,
+      var(--color-ambient-tertiary) 0%,
+      transparent 24%
+    );
   filter: blur(28px);
 }
 
@@ -46,84 +181,4 @@ a {
 
 section[id] {
   scroll-margin-top: 7rem;
-}
-
-:root {
-  color-scheme: light;
-  --color-bg-canvas: #f3f7fc;
-  --color-bg-surface: rgba(255, 255, 255, 0.76);
-  --color-bg-surface-strong: rgba(255, 255, 255, 0.94);
-  --color-bg-surface-soft: rgba(245, 249, 252, 0.86);
-  --color-bg-surface-tint: rgba(15, 111, 255, 0.08);
-  --color-border-subtle: rgba(122, 145, 173, 0.22);
-  --color-bg-soft-card: linear-gradient(0deg, rgba(100, 100, 100, 0.05), transparent);
-  --color-divider: rgba(122, 145, 173, 0.16);
-  --color-text-primary: #0c1728;
-  --color-text-secondary: #566579;
-  --color-brand: #0f6fff;
-  --color-brand-strong: #001aff;
-  --color-box-shadow: var(--color-border-subtle);
-  --color-brand-soft: rgba(15, 111, 255, 0.16);
-  --color-ball-one: rgba(108, 182, 255, 0.12);
-  --color-ball-two: rgba(45, 212, 191, 0.12);
-  --color-ambient-primary: rgba(15, 111, 255, 0.2);
-  --color-ambient-secondary: rgba(45, 212, 191, 0.16);
-  --color-ambient-tertiary: rgba(249, 179, 80, 0.14);
-  --color-grid-line: rgba(12, 23, 40, 0.06);
-  --gradient-hero: linear-gradient(135deg, #0066ff, #f825ff);
-  --color-gradient-hero-one: #0066ff;
-  --color-gradient-hero-two: #f825ff;
-  --mobile-gradient-hero: linear-gradient(45deg, #0800ff 0%, #00113d 100%);
-  --gradient-panel: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(240, 246, 252, 0.78));
-  --gradient-panel-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 243, 251, 0.88));
-  --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(12, 23, 40, 0.04) 100%);
-  --mui-typography-primary: var(--color-text-primary);
-  --mui-typography-secondary: var(--color-text-secondary);
-}
-
-[data-theme="dark"] {
-  color-scheme: dark;
-  --color-bg-canvas: #000112;
-  --color-bg-surface: rgba(12, 22, 40, 0.8);
-  --color-bg-surface-strong: rgba(16, 29, 51, 0.94);
-  --color-bg-surface-soft: rgba(14, 26, 46, 0.82);
-  --color-bg-surface-tint: rgba(108, 182, 255, 0.12);
-  --color-bg-soft-card: linear-gradient(0deg, rgba(255, 255, 255, 0.05), transparent);
-  --color-border-subtle: rgba(134, 160, 190, 0.18);
-  --color-divider: rgba(134, 160, 190, 0.14);
-  --color-text-primary: #e7f0ff;
-  --color-text-secondary: #9fb4d0;
-  --color-brand: #6cb6ff;
-  --color-brand-strong: #2f88f8;
-  --color-box-shadow: transparent;
-  --color-brand-soft: rgba(108, 182, 255, 0.18);
-  --color-ball-one: rgba(108, 182, 255, 0.1);
-  --color-ball-two: rgba(45, 212, 191, 0.1);
-  --color-ambient-primary: rgba(108, 182, 255, 0.24);
-  --color-ambient-secondary: rgba(212, 45, 126, 0.18);
-  --color-ambient-tertiary: rgba(206, 81, 255, 0.11);
-  --color-grid-line: rgba(159, 180, 208, 0.08);
-  --gradient-hero: linear-gradient(135deg, #5cadff, #e9b3ff);
-  --color-gradient-hero-one: #5cadff;
-  --color-gradient-hero-two: #e9b3ff;
-  --mobile-gradient-hero: linear-gradient(225deg, #ffffff, #72b1ff);
-  --gradient-panel: linear-gradient(180deg, rgba(16, 29, 51, 0.92), rgba(9, 17, 31, 0.84));
-  --gradient-panel-strong: linear-gradient(135deg, rgba(21, 37, 64, 0.94), rgba(10, 18, 33, 0.88));
-  --gradient-page-overlay: linear-gradient(180deg, transparent 0%, rgba(231, 240, 255, 0.04) 100%);
-  --mui-typography-primary: var(--color-text-primary);
-  --mui-typography-secondary: var(--color-text-secondary);
-}
-
-::selection {
-  background: var(--color-brand-soft);
-  color: var(--color-text-primary);
-}
-
-/* Apply typography colors */
-.MuiTypography-root {
-  color: var(--mui-typography-primary);
-}
-
-.MuiTypography-colorTextSecondary {
-  color: var(--mui-typography-secondary);
 }

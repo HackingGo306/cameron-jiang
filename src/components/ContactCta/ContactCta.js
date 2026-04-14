@@ -23,6 +23,7 @@ export default function ContactCta() {
   const parentRef = useRef(null);
   const data = useMemo(() => genRandomTree(), []);
   const [fgInitialized, setFgInitialized] = useState(false);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('lg'));
   const distance = useMemo(() => {
@@ -89,8 +90,8 @@ export default function ContactCta() {
                       <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
                         <Button
                           variant="contained"
-                          color="primary"
                           startIcon={<EmailRoundedIcon />}
+                          color="primary"
                           component="a"
                           href="mailto:cameronjiang.dev@gmail.com"
                         >
@@ -109,12 +110,18 @@ export default function ContactCta() {
                         >
                           Chat
                         </Button>
-                        <Tooltip describeChild title="Currently unavailable">
-                          <Button variant="text" endIcon={<LaunchRoundedIcon />} id="contact">
-                            {/* Link down here so that the whole contact is scrolled into view */}
-                            Resume
-                          </Button>
-                        </Tooltip>
+                        {
+                          isSmallScreen ?
+                          <Button variant="text" endIcon={<LaunchRoundedIcon />} id="contact" disabled>
+                            Resume (Soon)
+                          </Button> :
+                          <Tooltip describeChild title="Currently unavailable">
+                            <Button variant="text" endIcon={<LaunchRoundedIcon />} id="contact">
+                              {/* Link down here so that the whole contact is scrolled into view */}
+                              Resume
+                            </Button>
+                          </Tooltip>
+                        }
                       </Stack>
                     </Reveal>
                   </Stack>
