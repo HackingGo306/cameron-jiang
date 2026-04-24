@@ -15,6 +15,7 @@ import { Tooltip } from "@mui/material";
 import { DiscordIcon } from "@/utils/utils";
 import { genRandomTree } from "@/utils/utils";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { LinkedIn } from "@mui/icons-material";
 const ForceGraph = dynamic(() => import("react-force-graph-3d"), { ssr: false });
 
 export default function ContactCta() {
@@ -103,12 +104,12 @@ export default function ContactCta() {
                         <Button
                           variant="outlined"
                           color="primary"
-                          startIcon={<DiscordIcon />}
+                          startIcon={<LinkedIn />}
                           component="a"
-                          href="https://discord.com/users/1021463631285731349"
+                          href="https://linkedin.com/in/cameron-jiang"
                           target="_blank"
                         >
-                          Chat
+                          LinkedIn
                         </Button>
                         {
                           isSmallScreen ?
