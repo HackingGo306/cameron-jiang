@@ -18,6 +18,7 @@ const projects = [
       "I used Pandas and JMP Pro to clean and analyze the data and built predictive models using PyCaret. I also first-authored an abstract that was accepted for presentation in the ASMBR and the BMES 2025 conferences.",
     tags: ["Data Science", "Machine Learning", "Data Visualization", "Research", "Pandas"],
     accent: "rgba(15, 111, 255, 0.16)",
+    color: "#5cadff",
     buttons: [
       {
         label: "See abstract",
@@ -38,11 +39,33 @@ const projects = [
       "As a fullstack developer, I handled API routing, user authentication, database security, and UI efficiency. I implemented the autocompletion feature using OpenAI's API.",
     tags: ["Next.js", "MariaDB", "OpenAI Integration", "LLM", "Data Processing", "MUI"],
     accent: "rgba(45, 212, 191, 0.14)",
+    color: "#2dd4bf",
     buttons: [
       {
         label: "Visit site",
         emphasis: true,
         href: "https://medsnap.cameron-jiang.com",
+      },
+    ],
+  },
+  {
+    title: "PatchSight",
+    description:
+      "An experimental AI-powered visual debugging system that uses Playwright screenshots and multimodal vision models to identify layout issues in rendered web interfaces.",
+    note:
+      "I built the MVP workflow for screenshot capture, structured visual feedback, iterative patch generation, and a human-in-the-loop dashboard for reviewing scores, feedback cards, iteration history, and applied file diffs before changes are committed.",
+    tags: ["AI Tooling", "Playwright", "Vision Models", "Frontend", "Human-in-the-loop"],
+    accent: "rgba(168, 85, 247, 0.16)",
+    color: "#a855f7",
+    buttons: [
+      {
+        label: "View code",
+        emphasis: true,
+        href: "https://github.com/HackingGo306/PatchSight",
+      },
+      {
+        label: "LinkedIn post",
+        href: "https://www.linkedin.com/posts/cameron-jiang_fixing-ui-bugs-with-ai-can-feel-frustrating-ugcPost-7459728081767804928-UsaK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEmIVWUB2JRUhqKM8ejpXKsDnJPoua8UR-E",
       },
     ],
   },
@@ -54,6 +77,7 @@ const projects = [
       "I integrated Microsoft's AirSim with Unity and StableBaselines3, using Tensorboard for visualization. I worked on reward shaping and hyperparameter tuning to achieve stable learning and successful recovery behaviors.",
     tags: ["Reinforcement Learning", "Autonomous Systems", "StableBaselines3", "Research"],
     accent: "rgba(255, 141, 86, 0.16)",
+    color: "#ff8d56",
     buttons: [
       {
         label: "View code",
@@ -69,6 +93,7 @@ const projects = [
       "I worked on the front-end using React, and helped implement Spotify Music API as well as study themes.",
     tags: ["React", "Spotify API", "Web Development", "UX Design", "Teamwork"],
     accent: "rgba(249, 179, 80, 0.16)",
+    color: "#f9b350",
     buttons: [
       {
         label: "Visit site",
@@ -101,7 +126,7 @@ export default function ProjectSectionMobile() {
         },
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ position: "relative" }}>
         <Typography
           variant="h1"
           sx={{
@@ -119,11 +144,9 @@ export default function ProjectSectionMobile() {
         <Stack spacing={2.5}>
           <Box
             sx={{
-              p: 2.5,
+              position: "relative",
+              p: 0,
               mb: 2.5,
-              borderRadius: "1.75rem",
-              background: "var(--color-bg-soft-card)",
-              boxShadow: "0 18px 30px var(--color-box-shadow)",
             }}
           >
             <Stack spacing={2.25}>

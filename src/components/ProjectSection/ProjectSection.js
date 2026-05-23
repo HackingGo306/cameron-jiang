@@ -18,6 +18,7 @@ const projects = [
     note: "I used Pandas and JMP Pro to clean and analyze the data and built predictive models using PyCaret. I also first-authored an abstract that was accepted for presentation in the ASMBR and the BMES 2025 conferences.",
     tags: ["Data Science", "Machine Learning", "Data Visualization", "Research", "Pandas"],
     accent: "rgba(15, 111, 255, 0.16)",
+    color: "#5cadff",
     buttons: [
       {
         label: "See abstract",
@@ -31,11 +32,31 @@ const projects = [
     ]
   },
   {
+    title: "PatchSight",
+    description: "An experimental AI-powered visual debugging system that uses Playwright screenshots and multimodal vision models to identify layout issues in rendered web interfaces.",
+    note: "I built the MVP workflow for screenshot capture, structured visual feedback, iterative patch generation, and a human-in-the-loop dashboard for reviewing scores, feedback cards, iteration history, and applied file diffs before changes are committed.",
+    tags: ["AI Tooling", "Playwright", "Vision Models", "Frontend", "Human-in-the-loop"],
+    accent: "rgba(168, 85, 247, 0.16)",
+    color: "#a855f7",
+    buttons: [
+      {
+        label: "View code",
+        emphasis: true,
+        href: "https://github.com/HackingGo306/PatchSight",
+      },
+      {
+        label: "LinkedIn post",
+        href: "https://www.linkedin.com/posts/cameron-jiang_fixing-ui-bugs-with-ai-can-feel-frustrating-ugcPost-7459728081767804928-UsaK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEmIVWUB2JRUhqKM8ejpXKsDnJPoua8UR-E",
+      }
+    ]
+  },
+  {
     title: "MedSnap",
     description: "An AI-powered medical report autocompletion tool made for streamlining repetitive notetaking.",
     note: "As a fullstack developer, I handled API routing, user authentication, database security, and UI efficiency. I implemented the autocompletion feature using OpenAI's API.",
     tags: ["Next.js", "MariaDB", "OpenAI Integration", "LLM", "Data Processing", "MUI"],
     accent: "rgba(45, 212, 191, 0.14)",
+    color: "#2dd4bf",
     buttons: [
       {
         label: "Visit site",
@@ -50,6 +71,7 @@ const projects = [
     note: "I integrated Microsoft's AirSim with Unity and StableBaselines3, using Tensorboard for visualization. I worked on reward shaping and hyperparameter tuning to achieve stable learning and successful recovery behaviors.",
     tags: ["Reinforcement Learning", "Autonomous Systems", "StableBaselines3", "Research"],
     accent: "rgba(255, 141, 86, 0.16)",
+    color: "#ff8d56",
     buttons: [
       {
         label: "View code",
@@ -64,6 +86,7 @@ const projects = [
     note: "I worked on the front-end using React, and helped implement Spotify Music API as well as study themes.",
     tags: ["React", "Spotify API", "Web Development", "UX Design", "Teamwork"],
     accent: "rgba(249, 179, 80, 0.16)",
+    color: "#f9b350",
     buttons: [
       {
         label: "Visit site",
@@ -104,7 +127,7 @@ export default function ProjectSection() {
   });
 
   return (
-    <Container maxWidth="xxl" sx={{ position: "relative", height: scrollElementHeight }} ref={ref}>
+    <Container maxWidth="xxl" sx={{ position: "relative", height: scrollElementHeight || "auto" }} ref={ref}>
       <Box
         sx={{
           position: "sticky",
@@ -113,6 +136,7 @@ export default function ProjectSection() {
           top: 0,
           flexDirection: "row",
           justifyContent: 'space-between',
+          gap: { md: 4, xl: 6 },
           "&::before": {
             content: '""',
             position: "absolute",
@@ -129,7 +153,7 @@ export default function ProjectSection() {
       >
         <motion.div
           style={{
-            width: "50%",
+            width: "46%",
             height: "fit-content",
             paddingTop: "7rem",
           }}
@@ -141,28 +165,16 @@ export default function ProjectSection() {
               position: "relative",
               height: "100%",
               minHeight: { lg: 420 },
-              p: { xs: 3, md: 4 },
-              borderRadius: { xs: "28px", md: "34px" },
-              backdropFilter: "blur(20px)",
-              overflow: "hidden",
-              "&::before": {
-                content: '""',
-                position: "absolute",
-                right: "-18%",
-                bottom: "-28%",
-                width: "72%",
-                aspectRatio: "1",
-                borderRadius: "999px",
-                filter: "blur(24px)",
-                opacity: 0.95,
-              },
+              py: { md: 1 },
+              pr: { md: 3 },
             }}
           >
             <Stack spacing={3} sx={{ position: "relative" }}>
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: "2rem", md: "4rem" },
+                  fontSize: { xs: "2rem", md: "4.1rem" },
+                  lineHeight: 0.95,
                   backgroundImage: 'linear-gradient(135deg, var(--color-gradient-hero-one), var(--color-gradient-hero-two), var(--color-gradient-hero-one), var(--color-gradient-hero-two), var(--color-gradient-hero-one), var(--color-gradient-hero-two), var(--color-brand))',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: '200% 100%',
@@ -175,8 +187,8 @@ export default function ProjectSection() {
                 My Projects
               </Typography>
 
-              <Stack spacing={0}>
-                <Typography variant="h5" sx={{ fontWeight: 500, mb: 2 }}>
+              <Stack spacing={2}>
+                <Typography variant="h5" sx={{ fontWeight: 500, lineHeight: 1.25 }}>
                   I've been working on a range of projects over the years, from silly games to AI-powered tools.
                 </Typography>
                 <Typography sx={{ color: "text.secondary", lineHeight: 1.8 }}>
@@ -185,9 +197,6 @@ export default function ProjectSection() {
                 </Typography>
               </Stack>
               <Box sx={{ display: "grid", gap: 1 }}>
-                <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.12em" }}>
-                  Check out my Github
-                </Typography>
                 <Stack direction="row" spacing={3} alignItems="center">
                   <Button variant="outlined" startIcon={<GitHubIcon />} component="a" href="https://github.com/HackingGo306" target="_blank">
                     GitHub
@@ -199,18 +208,27 @@ export default function ProjectSection() {
         </motion.div>
 
 
-        <div style={{ width: "48%", paddingLeft: '1.5%', paddingRight: '1.5%', paddingTop: "7rem" }} ref={scrollRef}>
+        <Box sx={{ width: "51%", px: "1%", pt: "7rem" }} ref={scrollRef}>
           <motion.div style={{ y }}>
-            <Stack spacing={2.5}>
+            <Stack spacing={3}>
               {projects.map((project, i) => (
                 <ProjectItem key={project.title + "_" + i} project={project} />
               ))}
             </Stack>
-            <Box sx={{ position: "absolute", paddingTop: "1rem", bottom: 0, right: 0, transform: "translateY(100%) translateY(2rem)", width: '216%', height: 'fit-content' }}>
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                transform: "translateY(100%) translateY(2.25rem)",
+                width: "202%",
+                height: "fit-content",
+              }}
+            >
               <Skills />
             </Box>
           </motion.div>
-        </div>
+        </Box>
       </Box>
     </Container>
   );

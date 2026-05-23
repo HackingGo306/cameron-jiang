@@ -1,6 +1,5 @@
 "use client"
 
-import { DiscordIcon } from "@/utils/utils";
 import { Box, Stack, Typography } from "@mui/material";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
@@ -20,37 +19,68 @@ export default function Skills() {
     },
     arrows: false, // Hide navigation arrows
     pagination: false, // Hide pagination dots
-    fixedWidth: "6rem", // Set a fixed width for each slide
+    fixedWidth: "5.75rem", // Set a fixed width for each slide
     gap: '1rem', // Gap between slides
   });
 
   return (
     <Box sx={{
       width: "100%",
-      height: "100%",
-      borderRadius: "1.5rem",
+      minHeight: 150,
+      borderRadius: "1.35rem",
       display: "flex",
       alignItems: "center",
-      padding: 4,
+      p: { md: 3 },
       flexDirection: "row",
-      justifyContent: "space-between",
-      gap: 6,
+      gap: { md: 2.5, lg: 3 },
       border: "1px solid var(--color-border-subtle)",
       overflow: "hidden",
+      background: `
+        radial-gradient(circle at 10% 20%, var(--color-ambient-secondary), transparent 32%),
+        linear-gradient(145deg, var(--color-bg-surface-strong), var(--color-bg-surface-soft))
+      `,
+      boxShadow: "0 18px 42px rgba(0, 0, 0, 0.1)",
+      backdropFilter: "blur(16px)",
     }}>
-      <Box sx={{ minWidth: 'fit-content' }}>
-        <Typography variant="h4">
-          My Skills:
+      <Box
+        sx={{
+          width: { md: 140, lg: 150 },
+          flex: "0 0 auto",
+          display: "grid",
+          gap: 1.25,
+        }}
+      >
+        <Box
+          aria-hidden="true"
+          sx={{
+            width: 46,
+            height: 2,
+            borderRadius: "999px",
+            background: "linear-gradient(90deg, var(--color-brand), transparent)",
+          }}
+        />
+        <Typography
+          variant="h4"
+          sx={{
+            fontSize: { md: "1.7rem", lg: "1.95rem" },
+            lineHeight: 1,
+            fontWeight: 500,
+          }}
+        >
+          My Skills
         </Typography>
       </Box>
       <Box
         sx={{
           flexGrow: 1,
+          minWidth: 0,
           position: 'relative',
-          border: '1px solid transparent',
-          borderRadius: '2rem',
-          paddingY: 1,
+          py: 1,
           overflow: 'hidden',
+          "& .splide__track": {
+            maskImage: "linear-gradient(90deg, transparent 0, black 34px, black calc(100% - 34px), transparent 100%)",
+            WebkitMaskImage: "linear-gradient(90deg, transparent 0, black 34px, black calc(100% - 34px), transparent 100%)",
+          },
         }}
         onMouseEnter={() => setSplideOptions((prev) => ({
           ...prev,
@@ -73,7 +103,10 @@ export default function Skills() {
               <Stack direction="column" justifyContent="center" spacing={0.5}>
                 <Box sx={{
                   alignSelf: "center",
-                  padding: 0.5,
+                  p: 0.5,
+                  height: 66,
+                  display: "grid",
+                  placeItems: "center",
                   '& img': {
                     filter: 'grayscale(70%)',
                     transition: 'filter 0.1s ease',
