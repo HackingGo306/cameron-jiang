@@ -174,7 +174,6 @@ export default function HeroSection() {
             transform: { md: "translateX(40%) translateY(-10%)", lg: "translateY(-15%)", xl: "translateY(-7%)" },
             right: 0,
             overflow: "hidden",
-            display: "flex",
             justifyContent: "center",
             display: { xs: "none", sm: "none", md: "block" },
           }}
