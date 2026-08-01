@@ -6,31 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test --grep @a11y"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@fontsource/roboto": "^5.2.10",
-    "@motionone/utils": "^10.18.0",
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
-    "@splidejs/react-splide": "^0.7.12",
-    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
     "@types/react": "^19.2.14",
     "motion": "^12.38.0",
     "next": "16.2.1",
-    "picomatch": "^4.0.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-force-graph-3d": "^1.29.1",
-    "react-icons": "^5.6.0",
+    "three": "^0.183.2",
     "typescript": "^6.0.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.1",
     "babel-plugin-react-compiler": "^1.0.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.2.1",
     "wrangler": "^4.0.0"
   },
   "engines": {

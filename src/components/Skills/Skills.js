@@ -1,138 +1,128 @@
-"use client"
+"use client";
 
-import { Box, Stack, Typography } from "@mui/material";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import "@splidejs/splide/dist/css/splide.min.css";
-import { useState } from "react";
-import { skills } from "@/utils/utils";
+/* eslint-disable @next/next/no-img-element -- SVG skill marks stay unoptimized and retain their native CDN format. */
+
+import { useEffect, useRef, useState } from "react";
+
+import { skills } from "@/data/skills";
+
+import styles from "./Skills.module.css";
+
+const midpoint = Math.ceil(skills.length / 2);
+const skillRows = [skills.slice(0, midpoint), skills.slice(midpoint)];
+
+function SkillList({ clone = false, items, row }) {
+  return (
+    <ul
+      aria-hidden={clone ? "true" : undefined}
+      aria-label={clone ? undefined : `Skills row ${row} of ${skillRows.length}`}
+      className={`${styles.skillList} ${clone ? styles.clone : ""}`}
+    >
+      {items.map((skill) => (
+        <li className={styles.skillItem} key={`${clone ? "clone-" : ""}${skill.name}`}>
+          <div className={styles.skillCard}>
+            <img
+              alt=""
+              aria-hidden="true"
+              className={styles.skillIcon}
+              data-invert-on-dark={skill.invertOnDark ? "" : undefined}
+              decoding="async"
+              draggable="false"
+              height="44"
+              loading="lazy"
+              src={skill.iconSrc}
+              width="44"
+            />
+            <span className={styles.skillName}>{skill.name}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Skills() {
+  const sectionRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
+  const [isPageVisible, setIsPageVisible] = useState(true);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
 
-  const [splideOptions, setSplideOptions] = useState({
-    type: "loop", // Loop back to the beginning when reaching the end
-    autoScroll: {
-      pauseOnHover: false, // Do not pause scrolling when hovering over the carousel
-      pauseOnFocus: false, // Do not pause scrolling when the carousel is focused
-      rewind: true, // Rewind to start when the end is reached
-      speed: 1.5, // Scrolling speed
-    },
-    arrows: false, // Hide navigation arrows
-    pagination: false, // Hide pagination dots
-    fixedWidth: "5.75rem", // Set a fixed width for each slide
-    gap: '1rem', // Gap between slides
-  });
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0 },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const updatePageVisibility = () => setIsPageVisible(!document.hidden);
+
+    updatePageVisibility();
+    document.addEventListener("visibilitychange", updatePageVisibility);
+
+    return () => document.removeEventListener("visibilitychange", updatePageVisibility);
+  }, []);
+
+  const isPaused = isManuallyPaused || !isInView || !isPageVisible;
 
   return (
-    <Box sx={{
-      width: "100%",
-      minHeight: 150,
-      borderRadius: "1.35rem",
-      display: "flex",
-      alignItems: "center",
-      p: { md: 3 },
-      flexDirection: "row",
-      gap: { md: 2.5, lg: 3 },
-      border: "1px solid var(--color-border-subtle)",
-      overflow: "hidden",
-      background: `
-        radial-gradient(circle at 10% 20%, var(--color-ambient-secondary), transparent 32%),
-        linear-gradient(145deg, var(--color-bg-surface-strong), var(--color-bg-surface-soft))
-      `,
-      boxShadow: "0 18px 42px rgba(0, 0, 0, 0.1)",
-      backdropFilter: "blur(16px)",
-    }}>
-      <Box
-        sx={{
-          width: { md: 140, lg: 150 },
-          flex: "0 0 auto",
-          display: "grid",
-          gap: 1.25,
-        }}
-      >
-        <Box
-          aria-hidden="true"
-          sx={{
-            width: 46,
-            height: 2,
-            borderRadius: "999px",
-            background: "linear-gradient(90deg, var(--color-brand), transparent)",
-          }}
-        />
-        <Typography
-          variant="h4"
-          sx={{
-            fontSize: { md: "1.7rem", lg: "1.95rem" },
-            lineHeight: 1,
-            fontWeight: 500,
-          }}
+    <section
+      aria-labelledby="skills-heading"
+      className={styles.section}
+      data-paused={isPaused}
+      id="skills"
+      ref={sectionRef}
+    >
+      <div className={styles.intro}>
+        <div className={styles.headingGroup}>
+          <span aria-hidden="true" className={styles.accent} />
+          <h2 className={styles.heading} id="skills-heading">
+            My Skills
+          </h2>
+        </div>
+
+        <button
+          aria-label={isManuallyPaused ? "Play skills animation" : "Pause skills animation"}
+          className={styles.pauseButton}
+          onClick={() => setIsManuallyPaused((paused) => !paused)}
+          type="button"
         >
-          My Skills
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          flexGrow: 1,
-          minWidth: 0,
-          position: 'relative',
-          py: 1,
-          overflow: 'hidden',
-          "& .splide__track": {
-            maskImage: "linear-gradient(90deg, transparent 0, black 34px, black calc(100% - 34px), transparent 100%)",
-            WebkitMaskImage: "linear-gradient(90deg, transparent 0, black 34px, black calc(100% - 34px), transparent 100%)",
-          },
-        }}
-        onMouseEnter={() => setSplideOptions((prev) => ({
-          ...prev,
-          autoScroll: {
-            ...prev.autoScroll,
-            speed: 0.75, // Slow down scrolling on hover
-          },
-        }))}
-        onMouseLeave={() => setSplideOptions((prev) => ({
-          ...prev,
-          autoScroll: {
-            ...prev.autoScroll,
-            speed: 1.5, // Restore original speed when not hovering
-          },
-        }))}
+          <span aria-hidden="true" className={styles.buttonIcon}>
+            {isManuallyPaused ? "▶" : "Ⅱ"}
+          </span>
+          {isManuallyPaused ? "Play" : "Pause"}
+        </button>
+      </div>
+
+      <div
+        aria-label="Skills list"
+        className={styles.railsViewport}
+        role="region"
+        tabIndex={0}
       >
-        <Splide options={splideOptions} extensions={{ AutoScroll }}>
-          {skills.map((skill) => (
-            <SplideSlide key={skill.name}>
-              <Stack direction="column" justifyContent="center" spacing={0.5}>
-                <Box sx={{
-                  alignSelf: "center",
-                  p: 0.5,
-                  height: 66,
-                  display: "grid",
-                  placeItems: "center",
-                  '& img': {
-                    filter: 'grayscale(70%)',
-                    transition: 'filter 0.1s ease',
-                    ':hover': {
-                      filter: 'grayscale(0%) brightness(110%) drop-shadow(0 0 2px var(--color-brand-strong))',
-                    }
-                  }
-                }}>
-                  {skill.icon}
-                </Box>
-                <Box
-                  sx={{
-                    py: 1,
-                    borderRadius: "999px",
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    {skill.name}
-                  </Typography>
-                </Box>
-              </Stack>
-            </SplideSlide>
+        <div className={styles.rails}>
+          {skillRows.map((row, index) => (
+            <div className={styles.rail} key={`row-${index + 1}`}>
+              <div
+                className={`${styles.track} ${index === 0 ? styles.trackForward : styles.trackReverse}`}
+              >
+                <SkillList items={row} row={index + 1} />
+                <SkillList clone items={row} row={index + 1} />
+              </div>
+            </div>
           ))}
-        </Splide>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -1,0 +1,142 @@
+.section {
+  position: relative;
+  padding-block: clamp(5.5rem, 16vw, 7rem);
+}
+
+.section::before {
+  position: absolute;
+  top: 3rem;
+  left: -28%;
+  width: min(92vw, 35rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-ambient-tertiary), transparent 70%);
+  content: "";
+  filter: blur(8px);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  width: min(calc(100% - 2rem), var(--content-max));
+  margin-inline: auto;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(3rem, 7vw, 3.75rem);
+  align-items: start;
+}
+
+.intro {
+  display: grid;
+  max-width: 47.5rem;
+  justify-items: start;
+  gap: clamp(1.5rem, 4vw, 2rem);
+}
+
+.intro h2 {
+  width: fit-content;
+  margin: 0;
+  color: transparent;
+  background-image: var(--gradient-hero);
+  background-clip: text;
+  font-size: clamp(2.75rem, 7vw, 5.75rem);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.introCopy {
+  display: grid;
+  max-width: 42rem;
+  gap: 0.95rem;
+}
+
+.introCopy p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.introCopy .lede {
+  color: var(--color-text-primary);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.projects {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2rem);
+  min-width: 0;
+}
+
+@media (min-width: 500px) {
+  .section::before {
+    left: -16%;
+    width: min(62vw, 35rem);
+  }
+
+  .container {
+    width: min(calc(100% - 3rem), var(--content-max));
+  }
+}
+
+@media (min-width: 900px) {
+  .section {
+    padding-block: 8rem;
+  }
+
+  .introCopy p:not(.lede) {
+    font-size: 1.05rem;
+  }
+
+  .projects {
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1150px) {
+  .section {
+    padding-block: 9rem;
+  }
+
+  .section::before {
+    top: 8rem;
+    left: 4%;
+    width: 34vw;
+  }
+
+  .container {
+    width: min(calc(100% - 4rem), var(--content-max));
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    column-gap: clamp(3rem, 6vw, 5.6rem);
+  }
+
+  .intro {
+    position: sticky;
+    top: 7.5rem;
+    align-self: start;
+  }
+}
+
+@media (min-width: 1150px) and (max-height: 680px) {
+  .intro {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .intro h2 {
+    color: CanvasText;
+    background-image: none;
+  }
+}

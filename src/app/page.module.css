@@ -1,60 +1,9 @@
 .page {
   position: relative;
   min-height: 100vh;
-  overflow: clip;
   isolation: isolate;
-  transition: background 0.4s ease;
-  background: radial-gradient(circle at 40% 55%, var(--color-ball-one) 0%, transparent 18%), radial-gradient(circle at 20% 75%, var(--color-ball-two) 0%, transparent 10%), var(--color-bg-canvas);
 }
 
-.page::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  transition: background 0.4s ease;
-  background:
-    radial-gradient(circle at 14% 16%, var(--color-ambient-secondary) 0%, transparent 34%),
-    radial-gradient(circle at 88% 104%, var(--color-ambient-primary) 0%, transparent 40%),
-    radial-gradient(circle at 74% 48%, var(--color-ambient-tertiary) 0%, transparent 24%);
-  filter: blur(28px);
-}
-
-.page::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: var(--gradient-page-overlay);
-  opacity: 0.42;
-}
-
-.page > * {
-  position: relative;
-  z-index: 1;
-}
-
-.eyebrow {
-  margin: 0 0 1rem;
-  color: var(--color-brand);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-@media (max-width: 900px) {
-  .page::after {
-    background:
-      var(--gradient-page-overlay),
-      repeating-linear-gradient(
-        90deg,
-        transparent 0,
-        transparent calc(50% - 1px),
-        var(--color-grid-line) calc(50% - 1px),
-        var(--color-grid-line) 50%
-      );
-  }
+.page:focus {
+  outline: none;
 }

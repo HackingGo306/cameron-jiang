@@ -1,0 +1,68 @@
+.footer {
+  padding-bottom: 1.25rem;
+}
+
+.container {
+  width: min(calc(100% - 2rem), var(--content-max));
+  margin-inline: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--signature-footer-divider);
+  color: var(--signature-footer-text);
+}
+
+.content p {
+  margin: 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+}
+
+.content nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.content a {
+  border-radius: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 580;
+  letter-spacing: 0.01em;
+  transition: color 160ms ease;
+}
+
+@media (hover: hover) {
+  .content a:hover {
+    color: var(--color-brand);
+  }
+}
+
+@media (min-width: 500px) {
+  .container {
+    width: min(calc(100% - 3rem), var(--content-max));
+  }
+
+  .content {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .footer {
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1150px) {
+  .container {
+    width: min(calc(100% - 4rem), var(--content-max));
+  }
+}

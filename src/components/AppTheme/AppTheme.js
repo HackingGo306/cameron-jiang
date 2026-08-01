@@ -1,154 +1,173 @@
 "use client";
 
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { createContext, useContext, useState, useEffect, useMemo } from "react";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { ThemeProvider, createTheme, useColorScheme } from "@mui/material/styles";
+import {
+  COLOR_SCHEME_STORAGE_KEY,
+  MODE_STORAGE_KEY,
+} from "@/theme/colorScheme";
 
-const ThemeContext = createContext();
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 500,
+      md: 900,
+      lg: 1150,
+      xl: 1375,
+      xxl: 1536,
+    },
+  },
+  cssVariables: {
+    colorSchemeSelector: "data-mui-color-scheme",
+  },
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: {
+          main: "#0b63d1",
+          light: "#4b94ec",
+          dark: "#074b9f",
+          contrastText: "#ffffff",
+        },
+        background: {
+          default: "#f3f7fc",
+          paper: "#ffffff",
+        },
+        text: {
+          primary: "#0c1728",
+          secondary: "#4a5a70",
+        },
+        divider: "rgba(89, 112, 140, 0.24)",
+      },
+    },
+    dark: {
+      palette: {
+        primary: {
+          main: "#77bdff",
+          light: "#acd9ff",
+          dark: "#398dde",
+          contrastText: "#07111f",
+        },
+        background: {
+          default: "#000112",
+          paper: "#0f1b30",
+        },
+        text: {
+          primary: "#e7f0ff",
+          secondary: "#a9bdd8",
+        },
+        divider: "rgba(151, 177, 208, 0.2)",
+      },
+    },
+  },
+  shape: {
+    borderRadius: 18,
+  },
+  typography: {
+    fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+    button: {
+      fontWeight: 650,
+      letterSpacing: "0.01em",
+      textTransform: "none",
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          color: "var(--color-text-primary)",
+          backgroundColor: "var(--color-bg-canvas)",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none",
+        },
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focusVisible": {
+            outline: "3px solid var(--color-focus-ring)",
+            outlineOffset: 3,
+          },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          minHeight: 44,
+          borderRadius: 999,
+          paddingInline: 20,
+        },
+        contained: {
+          boxShadow: "0 12px 28px var(--color-brand-soft)",
+          "&:hover": {
+            boxShadow: "0 14px 34px var(--color-brand-soft)",
+          },
+        },
+        outlined: {
+          borderColor: "var(--color-border-subtle)",
+          backgroundColor: "var(--color-bg-surface-soft)",
+          "&:hover": {
+            borderColor: "var(--color-brand)",
+            backgroundColor: "var(--color-bg-surface-tint)",
+          },
+        },
+        text: {
+          "&:hover": {
+            backgroundColor: "var(--color-bg-surface-tint)",
+          },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        outlined: {
+          borderColor: "var(--color-border-subtle)",
+        },
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          border: "1px solid var(--color-border-subtle)",
+          backgroundColor: "var(--color-bg-surface-strong)",
+          color: "var(--color-text-primary)",
+          boxShadow: "var(--shadow-card)",
+        },
+      },
+    },
+  },
+});
 
-export const useTheme = () => useContext(ThemeContext);
+export function usePortfolioColorScheme() {
+  const { mode, systemMode, setMode } = useColorScheme();
+  const resolvedMode = mode === "system" ? systemMode : mode;
+  const activeMode = resolvedMode || "light";
+
+  return {
+    mode: activeMode,
+    toggleTheme: () => setMode(activeMode === "dark" ? "light" : "dark"),
+  };
+}
 
 export default function AppTheme({ children }) {
-  let prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState("light");
-  const [storedTheme, setStoredTheme] = useState(prefersDarkMode ? "dark" : "light");
-
-  useEffect(() => {
-    if (sessionStorage.getItem("theme") && (sessionStorage.getItem("theme") === "light" || sessionStorage.getItem("theme") === "dark")) {
-      setStoredTheme(sessionStorage.getItem("theme"));
-    }
-    else {
-      setStoredTheme(prefersDarkMode ? "dark" : "light");
-    }
-  }, [prefersDarkMode]);
-
-  useEffect(() => {
-    setMode(storedTheme);
-  }, [storedTheme]);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", mode);
-    document.documentElement.setAttribute("data-mui-color-scheme", mode);
-  }, [mode]);
-
-  const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-    sessionStorage.setItem("theme", mode === "light" ? "dark" : "light");
-  };
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        breakpoints: {
-          values: {
-            xs: 0,
-            sm: 500,
-            md: 900,
-            lg: 1150,
-            xl: 1375,
-            xxl: 1536,
-          },
-        },
-        palette: {
-          mode,
-          ...(mode === "light"
-            ? {
-              primary: {
-                main: "#0f6fff",
-                light: "#5ea2ff",
-                dark: "#0857c7",
-                contrastText: "#f8fbff",
-              },
-              background: {
-                default: "#f3f7fc",
-                paper: "#ffffff",
-              },
-              text: {
-                primary: "#050b15",
-                secondary: "#3d4753",
-              },
-              divider: "rgba(122, 145, 173, 0.22)",
-            }
-            : {
-              primary: {
-                main: "#6cb6ff",
-                light: "#a6d6ff",
-                dark: "#2f88f8",
-                contrastText: "#07111f",
-              },
-              background: {
-                default: "#07111f",
-                paper: "#0f1b30",
-              },
-              text: {
-                primary: "#e7f0ff",
-                secondary: "#9fb4d0",
-              },
-              divider: "rgba(134, 160, 190, 0.18)",
-            }),
-        },
-        shape: {
-          borderRadius: 18,
-        },
-        typography: {
-          fontFamily: "var(--font-geist-sans), Roboto, sans-serif",
-          button: {
-            fontWeight: 600,
-            letterSpacing: "0.01em",
-            textTransform: "none",
-          },
-        },
-        components: {
-          MuiPaper: {
-            styleOverrides: {
-              root: {
-                backgroundImage: "none",
-              },
-            },
-          },
-          MuiButton: {
-            styleOverrides: {
-              root: {
-                borderRadius: 999,
-                paddingInline: 18,
-              },
-              contained: {
-                boxShadow: "none",
-              },
-              outlined: {
-                borderColor: "var(--color-border-subtle)",
-                backgroundColor: "var(--color-bg-surface-soft)",
-                "&:hover": {
-                  borderColor: "var(--color-brand)",
-                  backgroundColor: "var(--color-bg-surface-tint)",
-                },
-              },
-              text: {
-                "&:hover": {
-                  backgroundColor: "var(--color-bg-surface-tint)",
-                },
-              },
-            },
-          },
-          MuiChip: {
-            styleOverrides: {
-              outlined: {
-                borderColor: "var(--color-border-subtle)",
-              },
-            },
-          },
-        },
-      }),
-    [mode]
-  );
-
   return (
-    <ThemeContext.Provider value={{ mode, toggleTheme }}>
-      <ThemeProvider theme={theme} key={mode}>
-        <CssBaseline enableColorScheme />
-        {children}
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <ThemeProvider
+      theme={theme}
+      defaultMode="system"
+      modeStorageKey={MODE_STORAGE_KEY}
+      colorSchemeStorageKey={COLOR_SCHEME_STORAGE_KEY}
+      disableTransitionOnChange
+    >
+      <CssBaseline enableColorScheme />
+      {children}
+    </ThemeProvider>
   );
 }
