@@ -20,7 +20,7 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
-  { label: "Resume", href: "#resume", cursorType: "restricted" },
+  { label: "Resume", href: "/resume" },
 ];
 
 export default function SiteHeader() {
@@ -53,6 +53,10 @@ export default function SiteHeader() {
   return (
     <AppBar
       position="sticky"
+      onFocusCapture={() => setHidden(false)}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") setMenuOpen(false);
+      }}
       color="transparent"
       sx={{
         top: 0,
@@ -92,16 +96,6 @@ export default function SiteHeader() {
               alignItems="center"
               sx={{ minWidth: 0 }}
             >
-              <Box
-                sx={{
-                  width: { xs: 40, md: 44 },
-                  height: { xs: 40, md: 44 },
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                }}
-              >
-                <img src="logo.png" width="100%" alt="logo" />
-              </Box>
               <Box sx={{ minWidth: 0 }}>
                 <Typography
                   variant="subtitle1"
@@ -143,21 +137,12 @@ export default function SiteHeader() {
                   color="inherit"
                   component="a"
                   href={item.href}
-                  onClick={(event) => {
-                    if (item.cursorType === "restricted") {
-                      event.preventDefault();
-                    }
-                  }}
                   sx={{
                     color: "text.primary",
                     padding: 1.5,
                     paddingX: 2,
                     "&:hover": {
-                      backgroundColor:
-                        item.cursorType === "restricted"
-                          ? "transparent"
-                          : "var(--color-bg-surface-tint)",
-                      cursor: item.cursorType === "restricted" ? "not-allowed" : "pointer",
+                      backgroundColor: "var(--color-bg-surface-tint)",
                     },
                   }}
                 >
@@ -170,6 +155,7 @@ export default function SiteHeader() {
               <IconButton
                 color="inherit"
                 onClick={toggleTheme}
+                aria-label={`Switch to ${mode === "dark" ? "light" : "dark"} theme`}
                 sx={{
                   color: "text.primary",
                   backgroundColor: "var(--color-bg-surface-soft)",
@@ -195,13 +181,14 @@ export default function SiteHeader() {
                 }}
                 aria-label="Toggle navigation menu"
                 aria-expanded={menuOpen}
+                aria-controls={menuOpen ? "mobile-navigation" : undefined}
               >
                 <MenuRoundedIcon />
               </IconButton>
             </Stack>
           </Toolbar>
 
-          <Collapse in={menuOpen} sx={{ position: "absolute", right: '1rem' }} unmountOnExit>
+          <Collapse id="mobile-navigation" in={menuOpen} sx={{ position: "absolute", right: '1rem' }} unmountOnExit>
             <Box
               sx={{
                 mt: 1,
@@ -222,33 +209,19 @@ export default function SiteHeader() {
                     href={item.href}
                     color="inherit"
                     fullWidth
-                    onClick={(event) => {
-                      if (item.cursorType === "restricted") {
-                        event.preventDefault();
-                        return;
-                      }
-
-                      setMenuOpen(false);
-                    }}
+                    onClick={() => setMenuOpen(false)}
                     sx={{
                       justifyContent: "flex-start",
                       px: 1.5,
                       py: 1.25,
-                      color:
-                        item.cursorType === "restricted"
-                          ? "text.secondary"
-                          : "text.primary",
+                      color: "text.primary",
                       backgroundColor: "var(--color-bg-surface-soft)",
                       "&:hover": {
-                        backgroundColor:
-                          item.cursorType === "restricted"
-                            ? "var(--color-bg-surface-soft)"
-                            : "var(--color-bg-surface-tint)",
+                        backgroundColor: "var(--color-bg-surface-tint)",
                       },
                     }}
                   >
                     {item.label}
-                    {item.cursorType === "restricted" ? " (Soon)" : ""}
                   </Button>
                 ))}
               </Stack>

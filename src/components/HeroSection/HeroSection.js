@@ -71,7 +71,7 @@ export default function HeroSection() {
 
       return () => clearInterval(interval);
     }
-  }, [fgRef, distance]);
+  }, [distance, isMediumScreen]);
 
   return (
     <Box component="section" id="about" sx={{
@@ -99,7 +99,7 @@ export default function HeroSection() {
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: "4rem", md: "4.5rem", lg: "5rem" },
+                  fontSize: { xs: "clamp(2.8rem, 12vw, 4rem)", md: "4.5rem", lg: "5rem" },
                   backgroundImage: "var(--gradient-hero)",
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
@@ -107,7 +107,7 @@ export default function HeroSection() {
                   textAlign: { xs: "center", sm: "left" }
                 }}
               >
-                Hi, I'm Cameron
+                Hi, I&apos;m Cameron
               </Typography>
 
               <Stack spacing={2.25}>
@@ -169,6 +169,7 @@ export default function HeroSection() {
           </Reveal>
           <Box sx={{
             position: 'absolute',
+            pointerEvents: 'none',
             width: { md: '70%', lg: '50%', xl: '55%' },
             height: { md: textHeight * 1.25, lg: textHeight * 1.15 },
             transform: { md: "translateX(40%) translateY(-10%)", lg: "translateY(-15%)", xl: "translateY(-7%)" },

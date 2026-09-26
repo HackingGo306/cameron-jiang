@@ -16,6 +16,8 @@
   --color-text-secondary: #566579;
   --color-brand: #0f6fff;
   --color-brand-strong: #001aff;
+  --color-on-brand: #f8fbff;
+  --color-focus-ring: #0857c7;
   --color-box-shadow: var(--color-border-subtle);
   --color-brand-soft: rgba(15, 111, 255, 0.16);
   --color-ball-one: rgba(108, 182, 255, 0.12);
@@ -45,6 +47,7 @@
   );
   --mui-typography-primary: var(--color-text-primary);
   --mui-typography-secondary: var(--color-text-secondary);
+  --content-max: 1536px;
 }
 
 [data-theme="dark"] {
@@ -65,6 +68,8 @@
   --color-text-secondary: #9fb4d0;
   --color-brand: #6cb6ff;
   --color-brand-strong: #2f88f8;
+  --color-on-brand: #07111f;
+  --color-focus-ring: #a6d6ff;
   --color-box-shadow: transparent;
   --color-brand-soft: rgba(108, 182, 255, 0.18);
   --color-ball-one: rgba(108, 182, 255, 0.1);
@@ -112,8 +117,7 @@
 
 html {
   scroll-behavior: smooth;
-  position: absolute;
-  inset: 0;
+  min-height: 100%;
   background:
     radial-gradient(
       circle at 40% 55%,
@@ -179,6 +183,78 @@ a {
   text-decoration: none;
 }
 
+.portfolio-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 680;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-align: center;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.portfolio-button--primary {
+  color: var(--color-on-brand);
+  background: var(--color-brand);
+  box-shadow: 0 12px 28px var(--color-brand-soft);
+}
+
+.portfolio-button--secondary {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+  background: var(--color-bg-surface-soft);
+}
+
+.portfolio-button:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.portfolio-button svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+
+@media (hover: hover) {
+  .portfolio-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .portfolio-button--primary:hover {
+    background: var(--color-brand-strong);
+    box-shadow: 0 14px 34px var(--color-brand-soft);
+  }
+
+  .portfolio-button--secondary:hover {
+    border-color: var(--color-brand);
+    background: var(--color-bg-surface-tint);
+  }
+}
+
 section[id] {
   scroll-margin-top: 7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .portfolio-button {
+    transition: none;
+    transform: none;
+  }
 }

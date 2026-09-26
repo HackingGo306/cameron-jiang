@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import { Reveal, ScrollBlock } from "../Motion/Reveal";
 import dynamic from "next/dynamic";
 import { useRef, useCallback, useMemo, useState } from "react";
-import { Tooltip } from "@mui/material";
 import { DiscordIcon } from "@/utils/utils";
 import { genRandomTree } from "@/utils/utils";
 import { useMediaQuery, useTheme } from "@mui/material";
@@ -24,14 +23,13 @@ export default function ContactCta() {
   const parentRef = useRef(null);
   const data = useMemo(() => genRandomTree(), []);
   const [fgInitialized, setFgInitialized] = useState(false);
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('lg'));
   const distance = useMemo(() => {
     if (isMediumScreen) return 700;
     if (isLargeScreen) return 550;
     return 500;
-  }, [isLargeScreen, isMediumScreen, parentRef]);
+  }, [isLargeScreen, isMediumScreen]);
 
   const beginOrbit = useCallback(() => {
     if (!fgRef.current) return;
@@ -53,7 +51,7 @@ export default function ContactCta() {
 
   return (
     <Reveal y={34} delay={0.12} duration={1.05}>
-      <Box component="section" sx={{
+      <Box component="section" id="contact" sx={{
         pb: { xs: 8, md: 10 },
         pt: { xs: 8, lg: 3, xl: 0 },
       }}>
@@ -77,10 +75,7 @@ export default function ContactCta() {
               >
                 <Reveal y={22}>
                   <Stack spacing={3} sx={{ maxWidth: 760 }}>
-                    <Typography variant="overline" color="primary.main" sx={{ letterSpacing: "0.2em" }}>
-                      Contact
-                    </Typography>
-                    <Typography variant="h2" sx={{ fontSize: '3.2rem' }}>
+                    <Typography variant="h2" sx={{ fontSize: { xs: "2.4rem", sm: "3.2rem" } }}>
                       Like what you see? <span style={{ backgroundImage: "linear-gradient(to right, var(--color-brand), var(--color-brand-strong))", backgroundClip: 'text', color: 'transparent' }}>Say Hi.</span>
                     </Typography>
                     <Typography sx={{ color: "text.secondary", lineHeight: 1.8, fontSize: "1.05rem" }}>
@@ -88,7 +83,7 @@ export default function ContactCta() {
                     </Typography>
 
                     <Reveal delay={0.12}>
-                      <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+                      <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} useFlexGap flexWrap="wrap">
                         <Button
                           variant="contained"
                           startIcon={<EmailRoundedIcon />}
@@ -111,18 +106,14 @@ export default function ContactCta() {
                         >
                           LinkedIn
                         </Button>
-                        {
-                          isSmallScreen ?
-                          <Button variant="text" endIcon={<LaunchRoundedIcon />} id="contact" disabled>
-                            Resume (Soon)
-                          </Button> :
-                          <Tooltip describeChild title="Currently unavailable">
-                            <Button variant="text" endIcon={<LaunchRoundedIcon />} id="contact">
-                              {/* Link down here so that the whole contact is scrolled into view */}
-                              Resume
-                            </Button>
-                          </Tooltip>
-                        }
+                        <Button
+                          variant="text"
+                          endIcon={<LaunchRoundedIcon />}
+                          component="a"
+                          href="/resume"
+                        >
+                          Resume
+                        </Button>
                       </Stack>
                     </Reveal>
                   </Stack>
@@ -136,6 +127,7 @@ export default function ContactCta() {
         ref={parentRef}
         sx={{
           position: 'absolute',
+          pointerEvents: 'none',
           width: '40%',
           height: { md: '100%', lg: '130%', xl: '140%' },
           transform: 'translateY(20%) translateX(25%)',
