@@ -17,9 +17,9 @@ import { useEffect, useState } from "react";
 import { useTheme } from "../AppTheme/AppTheme";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
   { label: "Resume", href: "/resume" },
 ];
 

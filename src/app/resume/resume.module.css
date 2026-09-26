@@ -1,0 +1,48 @@
+.resume {
+  width: min(calc(100% - 2rem), 64rem);
+  margin: clamp(1.5rem, 4vw, 3rem) auto;
+  color: var(--color-text-primary);
+}
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--color-brand);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heading h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.help { margin: 1.5rem 0 1rem; color: var(--color-text-secondary); line-height: 1.6; }
+
+.viewer {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 1rem;
+  background: var(--color-bg-surface-strong);
+  box-shadow: 0 20px 54px rgb(0 0 0 / 8%);
+}
+
+.legacy { margin: 1.25rem 0 0; color: var(--color-text-secondary); }
+.legacy a { text-decoration: underline; text-underline-offset: 0.25em; }
+.legacy a:hover { color: var(--color-brand); }
+.resume a:focus-visible, .viewer:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 4px; }
