@@ -27,6 +27,27 @@
 /** @type {Project[]} */
 export const projects = [
   {
+    title: "Panda Non-Prehensile Sorter",
+    description:
+      "A robotic arm trained with reinforcement learning to push moving packages from a conveyor into color-coded bins without grasping them.",
+    contribution:
+      "I built the MuJoCo simulation and PPO training pipeline with JAX, including curriculum learning, reward shaping, and parallel physics workers with C++ acceleration. I also created an interactive browser demo that runs the trained policy and physics locally with Three.js rendering.",
+    tags: ["Robotics", "Reinforcement Learning", "MuJoCo", "JAX", "C++", "Three.js"],
+    accent: "rgba(21, 148, 130, 0.2)",
+    color: "#167f72",
+    links: [
+      {
+        label: "Try demo",
+        href: "https://panda.cameronjiang.dev",
+        primary: true,
+      },
+      {
+        label: "LinkedIn post",
+        href: "https://lnkd.in/p/g6vt9gNv",
+      }
+    ],
+  },
+  {
     title: "Bone Fracture Malunion Research",
     description:
       "A research project analyzing the MIMIC-IV medical dataset to predict bone fracture malunion outcomes using machine learning techniques.",
