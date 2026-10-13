@@ -20,7 +20,7 @@ const navItems = [
   { label: "About", href: "/#about" },
   { label: "Projects", href: "/#projects" },
   { label: "Contact", href: "/#contact" },
-  { label: "Resume", href: "/resume" },
+  { label: "Resume", href: "/resume", newTab: true },
 ];
 
 export default function SiteHeader() {
@@ -137,6 +137,8 @@ export default function SiteHeader() {
                   color="inherit"
                   component="a"
                   href={item.href}
+                  target={item.newTab ? "_blank" : undefined}
+                  rel={item.newTab ? "noopener noreferrer" : undefined}
                   sx={{
                     color: "text.primary",
                     padding: 1.5,
@@ -207,6 +209,8 @@ export default function SiteHeader() {
                     key={item.label}
                     component="a"
                     href={item.href}
+                    target={item.newTab ? "_blank" : undefined}
+                    rel={item.newTab ? "noopener noreferrer" : undefined}
                     color="inherit"
                     fullWidth
                     onClick={() => setMenuOpen(false)}

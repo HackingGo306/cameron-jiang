@@ -111,6 +111,8 @@ export default function ContactCta() {
                           endIcon={<LaunchRoundedIcon />}
                           component="a"
                           href="/resume"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Resume
                         </Button>
