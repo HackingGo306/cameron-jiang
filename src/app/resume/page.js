@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader/SiteHeader";
 import pageStyles from "../page.module.css";
 import styles from "./resume.module.css";
@@ -35,9 +34,6 @@ export default function ResumePage() {
           src="/Resume.pdf#view=FitH"
           title="Cameron Jiang’s resume PDF"
         />
-        <p className={styles.legacy}>
-          <Link href="/resume/legacy">View the legacy text resume</Link>
-        </p>
       </main>
     </div>
   );
