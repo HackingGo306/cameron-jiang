@@ -7,12 +7,12 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Reveal } from "../Motion/Reveal";
-import { ArrowDownward } from "@mui/icons-material";
+import { ArrowDownward, LinkedIn } from "@mui/icons-material";
 import dynamic from "next/dynamic";
 import { use, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { genRandomTree } from "@/utils/utils";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Icon, IconButton, useMediaQuery, useTheme } from "@mui/material";
 
 const focusAreas = ["Artificial Intelligence", "Systems Thinking", "Fullstack Development", "Data Science", "Research"];
 
@@ -77,7 +77,7 @@ export default function HeroSection() {
     <Box component="section" id="about" sx={{
       pt: { xs: 1, sm: 3, md: 2, xl: 5 },
       pb: { xs: 7, md: 10 },
-      px: { xs: 1, sm: 'unset'},
+      px: { xs: 1, sm: 'unset' },
       minHeight: { xs: 'calc(100vh - 6rem)', sm: 'unset' },
       // height: { xs: `calc(100vh - 6rem)`, sm: 'unset' },
       // minHeight: { xs: `${mobileHeroMinHeight}px`, sm: 'unset' },
@@ -140,6 +140,17 @@ export default function HeroSection() {
                   </Button>
                   <Button variant="outlined" sx={{ border: "1px solid var(--color-brand-strong)" }} size="large" component="a" href="#contact">
                     Contact
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{ border: "1px solid var(--color-brand-strong)" }}
+                    color="primary"
+                    startIcon={<LinkedIn />}
+                    component="a"
+                    href="https://linkedin.com/in/cameron-jiang"
+                    target="_blank"
+                  >
+                    LinkedIn
                   </Button>
                 </Stack>
               </Reveal>
